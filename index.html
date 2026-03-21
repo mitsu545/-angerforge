@@ -1,137 +1,27 @@
 <!DOCTYPE html>
+
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <meta name="apple-mobile-web-app-title" content="不動の心">
 <meta name="theme-color" content="#060610">
 <title>ANGERFORGE</title>
-</head>
-<body style="margin:0;background:#060610">
-<div id="root"></div>
-<script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-<script type="text/babel">
-
-// ▼▼▼ 追加した1行 ▼▼▼
-const { useState, useEffect, useCallback } = React;
-
-// ═══════════════════════════════════════════════
-//  ANGERFORGE v7 — 永続化・ショップUI修正 完全版
-// ═══════════════════════════════════════════════
-
-const FB_PRAISES = [
-  "お前、今日も勝った。","感情より知性が勝った瞬間。","不動の心、また一段強くなった。",
-  "衝動をいなした。それがワタベの強さ。","6秒やり過ごした。十分すごい。",
-  "今日の判断、5年後の自分が誇る。","静かに強い。それが本物。",
-  "電車ごときに不動の心は揺るがない。","修羅場で動じなかった男。",
-  "今日の我慢、スペアリブ1本分の価値がある。","感情じゃなく実力で返す。プロだ。",
-  "今日の怒り、のちに名曲になる。","あの相手、モンスターカードにしてやれ。",
-  "雑魚に反応しなかった。それが余裕。","外部環境に左右されない心、今日も育った。",
-  "勝った！","お前の勝ちだ。完全に。","今日の辛抱が、明日の余裕を作る。",
-  "今日もデータが増えた。それが成長の証明書。","怒りは燃料。今日も正しく使った。",
-];
-
-const FB_LOSES = [
-  "信頼の修復に3ヶ月かかる","自分のエネルギーを無駄消費する",
-  "相手じゃなく自分が一番損する","「感情的な人」と一生記憶される",
-  "後から後悔する言動が出る","職場での評価が静かに下がる",
-  "怒った側が損をする世界の法則","冷静な人との差がさらに開く",
-];
-
-const FB_IMGS = [
-  "https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=400&h=600&fit=crop",
-  "https://images.unsplash.com/photo-1601979031925-424e53b6caaa?w=400&h=600&fit=crop",
-  "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=400&h=600&fit=crop",
-  "https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?w=400&h=600&fit=crop",
-];
-
-const INIT_SHOP = [
-  { id:1, name:"コーヒー☕",    pts:100    },
-  { id:2, name:"ケーキ🍰",     pts:600    },
-  { id:3, name:"スペアリブ🍖", pts:800    },
-  { id:4, name:"外ランチ🍜",   pts:1200   },
-  { id:5, name:"新しい植木🌱", pts:2000   },
-  { id:6, name:"旅行✈️",       pts:100000 },
-];
-
-const TIME_OPTS    = ["朝","昼","夕方","夜","深夜"];
-const ACTION_OPTS  = ["無言で耐えた","愛想笑いした","少し反論した","その場を離れた"];
-const MONSTER_OPTS = ["暴君","ゾンビ","妖怪","機械","害虫","自然災害","その他"];
-const SCALE_OPTS   = ["巨大（組織）","等身大（個人）","極小（ネット）"];
-const COLOR_OPTS   = ["爆発の赤🔴","冷え切った青🔵","ドロドロの紫🟣","虚無の白⚪","漆黒⚫"];
-const END_OPTS     = ["社会的に破滅","改心して謝罪","ギャグ化して消滅","完全に無力化"];
-
-const BREATH = [
-  { label:"鼻から吸う",   dur:2, scale:1.2  },
-  { label:"もう一口",     dur:1, scale:1.45 },
-  { label:"ゆっくり吐く", dur:6, scale:0.75 },
-];
-
-const SAMPLE = [
-  { id:1, time:"朝", place:"満員電車", fact:"横入りされた", action:"無言で耐えた",
-    monsterType:"害虫", skill:"突進技「割り込み」", weakness:"上司にはペコペコ",
-    scale:"等身大（個人）", color:"爆発の赤🔴", intensity:70, sound:"ガラスが割れる音",
-    fantasy:"顔面にパイを投げる", quote:"二度と話しかけんな",
-    ending:"ギャグ化して消滅", title:"品川駅・横入りおじさん討伐戦",
-    reacted:false, date:new Date(Date.now()-86400000) },
-];
-
-const calcPts  = l => l.reacted ? 0 : Math.round(l.intensity / 10) * 10;
-const totalPts = logs => logs.reduce((s,l) => s + calcPts(l), 0);
-const todayWins = logs => {
-  const t = new Date(); t.setHours(0,0,0,0);
-  return logs.filter(l => { const d=new Date(l.date); d.setHours(0,0,0,0); return d.getTime()===t.getTime()&&!l.reacted; }).length;
-};
-const ago = d => { const n=Math.floor((Date.now()-new Date(d))/86400000); return n===0?"今日":n===1?"昨日":`${n}日前`; };
-const rnd = arr => arr[Math.floor(Math.random()*arr.length)];
-const s3  = arr => { const a=[...arr],r=[]; for(let i=0;i<Math.min(3,a.length);i++){const j=Math.floor(Math.random()*(a.length-i));r.push(a.splice(j,1)[0]);} return r; };
-const esc = str => `"${(str||"").replace(/"/g,'""').replace(/\r?\n/g,' ')}"`;
-
-async function fetchSheet(id, name) {
-  if (!id) return null;
-  try {
-    const r = await fetch(`https://docs.google.com/spreadsheets/d/${id}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(name)}`);
-    if (!r.ok) return null;
-    return (await r.text()).split("\n").map(l=>l.replace(/^"|"$/g,"").trim()).filter(Boolean);
-  } catch { return null; }
-}
-
-// ── localStorage 永続化カスタムフック
-function useStickyState(defaultValue, key, reviver = null) {
-  const [value, setValue] = useState(() => {
-    const saved = window.localStorage.getItem(key);
-    if (saved !== null) {
-      try {
-        const parsed = JSON.parse(saved);
-        return reviver ? reviver(parsed) : parsed;
-      } catch { return defaultValue; }
-    }
-    return defaultValue;
-  });
-  useEffect(() => {
-    window.localStorage.setItem(key, JSON.stringify(value));
-  }, [key, value]);
-  return [value, setValue];
-}
-
-// ──── CSS ────
-const CSS = `
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700&family=Bebas+Neue&family=DM+Mono:wght@400;500&display=swap');
-*{margin:0;padding:0;box-sizing:border-box}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@400;500&family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 :root{
   --bg:#060610;--s1:#0c0c1a;--s2:#131324;--s3:#1a1a30;--br:#222240;
   --tx:#dde0ff;--mu:#505078;--red:#ff3a3a;--rlo:rgba(255,58,58,.1);
   --blu:#5599ff;--blo:rgba(85,153,255,.1);--gld:#ffbe2e;--grn:#2ecc84;--ora:#ff7a2e;
   --fn:'Noto Sans JP',sans-serif;--fb:'Bebas Neue',cursive;--fm:'DM Mono',monospace;
 }
-html,body,#root{height:100%;overflow:hidden}
-.app{background:var(--bg);color:var(--tx);font-family:var(--fn);height:100vh;max-width:430px;margin:0 auto;display:flex;flex-direction:column;overflow:hidden;position:relative}
+html,body{height:100%;overflow:hidden;background:var(--bg)}
+.app{background:var(--bg);color:var(--tx);font-family:var(--fn);height:100dvh;max-width:430px;margin:0 auto;display:flex;flex-direction:column;overflow:hidden;position:relative}
 ::-webkit-scrollbar{width:2px}::-webkit-scrollbar-thumb{background:var(--br)}
-
 /* HDR */
 .hdr{display:flex;justify-content:space-between;align-items:center;padding:11px 16px;border-bottom:1px solid var(--br);background:var(--s1);flex-shrink:0}
 .logo{font-family:var(--fb);font-size:18px;letter-spacing:2px;color:var(--gld)}
@@ -139,17 +29,18 @@ html,body,#root{height:100%;overflow:hidden}
 .badge{font-family:var(--fm);font-size:11px;border-radius:20px;padding:3px 10px;border:1px solid}
 .badge.gold{color:var(--gld);background:rgba(255,190,46,.08);border-color:rgba(255,190,46,.2)}
 .badge.grn{color:var(--grn);background:rgba(46,204,132,.06);border-color:rgba(46,204,132,.18)}
-
 /* NAV */
 .nav{display:flex;background:var(--s1);border-top:1px solid var(--br);flex-shrink:0}
 .nb{flex:1;padding:7px 2px 8px;background:none;border:none;color:var(--mu);font-family:var(--fn);font-size:8px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;transition:color .2s}
 .nb.act{color:var(--blu)}
-.nb svg{width:14px;height:14px;stroke-width:2;fill:none;stroke:currentColor}
+.nb svg{width:14px;height:14px}
 .scr{flex:1;overflow-y:auto;overflow-x:hidden}
-
+/* SCREENS */
+.screen{display:none;height:100%}
+.screen.active{display:flex;flex-direction:column}
 /* HOME */
-.home{min-height:100%;display:flex;flex-direction:column;align-items:center;padding:28px 20px 20px;gap:24px}
-.pbtn{width:172px;height:172px;border-radius:50%;border:none;cursor:pointer;background:conic-gradient(from 200deg,#6b0000,#cc2200,#ff5500,#cc2200,#6b0000);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;animation:hbp 3s ease-in-out infinite;transition:transform .15s}
+.home-inner{flex:1;display:flex;flex-direction:column;align-items:center;padding:28px 20px 20px;gap:24px;overflow-y:auto}
+.pbtn{width:172px;height:172px;border-radius:50%;border:none;cursor:pointer;background:conic-gradient(from 200deg,#6b0000,#cc2200,#ff5500,#cc2200,#6b0000);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;animation:hbp 3s ease-in-out infinite;transition:transform .15s;box-shadow:0 0 80px rgba(255,50,50,.2)}
 .pbtn:active{transform:scale(.9)}
 @keyframes hbp{0%,100%{box-shadow:0 0 80px rgba(255,50,50,.2)}50%{box-shadow:0 0 120px rgba(255,50,50,.36)}}
 .pb-main{font-family:var(--fb);font-size:28px;letter-spacing:3px;color:#fff;line-height:1}
@@ -162,9 +53,8 @@ html,body,#root{height:100%;overflow:hidden}
 .hsc{flex:1;background:var(--s1);border:1px solid var(--br);border-radius:10px;padding:10px 6px;text-align:center;min-width:0}
 .hscv{font-family:var(--fb);font-size:26px;letter-spacing:1px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .hscl{font-size:8px;color:var(--mu);margin-top:2px}
-
 /* EMERGENCY */
-.emrg{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100%;padding:36px 22px;gap:28px;text-align:center}
+.emrg-inner{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:36px 22px;gap:28px;text-align:center}
 .cnt-num{font-family:var(--fb);font-size:130px;letter-spacing:4px;line-height:1;color:var(--red);animation:flk 1s ease-in-out infinite}
 @keyframes flk{0%,100%{opacity:1}50%{opacity:.6}}
 .cnt-bar-wrap{width:200px;height:3px;background:var(--s2);border-radius:2px;overflow:hidden}
@@ -179,55 +69,45 @@ html,body,#root{height:100%;overflow:hidden}
 .bcd{width:36px;height:3px;background:var(--br);border-radius:2px;transition:background .4s}
 .bcd.done{background:var(--blu)}
 .skip-link{background:none;border:none;color:var(--mu);font-size:11px;cursor:pointer;font-family:var(--fn);text-decoration:underline}
-
 /* REWARD */
-.rew-wrap{display:flex;flex-direction:column;min-height:100%}
 .rew-img-zone{width:100%;height:250px;overflow:hidden;flex-shrink:0;background:var(--s2);position:relative}
 .rew-img{width:100%;height:100%;object-fit:cover;display:block}
-.rew-fallback{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:80px}
+.rew-fallback{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:80px;background:var(--s1)}
 .rew-overlay{position:absolute;bottom:0;left:0;right:0;padding:12px 18px;background:linear-gradient(transparent,rgba(6,6,16,.96))}
 .rew-crown{font-family:var(--fb);font-size:13px;letter-spacing:3px;color:var(--gld)}
-.praise-zone{padding:16px 18px 12px;flex:1}
+.praise-zone{padding:16px 18px 12px;flex:1;overflow-y:auto}
 .praise-txt{font-size:20px;font-weight:700;line-height:1.65;margin-bottom:10px}
 .praise-pts{display:inline-flex;align-items:center;gap:6px;background:rgba(255,190,46,.08);border:1px solid rgba(255,190,46,.25);border-radius:20px;padding:4px 12px;font-family:var(--fm);font-size:12px;color:var(--gld)}
-.rew-acts{display:flex;gap:7px;padding:0 18px 20px}
-
+.rew-acts{display:flex;gap:7px;padding:10px 18px 18px;flex-shrink:0}
 /* FORM */
 .shdr{padding:13px 18px 10px;border-bottom:1px solid var(--br);flex-shrink:0}
 .shdr h2{font-size:16px;font-weight:700}
 .shdr p{font-size:11px;color:var(--mu);margin-top:2px}
-.scon{padding:14px 18px;display:flex;flex-direction:column;gap:14px}
+.scon{padding:14px 18px;display:flex;flex-direction:column;gap:14px;flex:1;overflow-y:auto}
 .cat-hdr{background:var(--s2);border:1px solid var(--br);border-radius:8px;padding:9px 13px;font-size:10px;font-weight:700;letter-spacing:1px;color:var(--mu);text-transform:uppercase}
-.sec{font-size:9px;font-weight:700;letter-spacing:2px;color:var(--mu);text-transform:uppercase;margin-bottom:6px;display:flex;align-items:center;gap:5px}
-.hint{font-size:10px;color:rgba(80,80,122,.6);letter-spacing:0;text-transform:none;font-weight:400}
+.sec-lbl{font-size:9px;font-weight:700;letter-spacing:2px;color:var(--mu);text-transform:uppercase;margin-bottom:6px}
 .g2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:5px}
 .g3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}
 .g4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px}
 .g5{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:5px}
-.ti{padding:7px 4px;text-align:center;background:var(--s1);border:1px solid var(--br);border-radius:7px;font-size:11px;cursor:pointer;transition:all .15s;line-height:1.3}
+.ti{padding:7px 4px;text-align:center;background:var(--s1);border:1px solid var(--br);border-radius:7px;font-size:11px;cursor:pointer;transition:all .15s;line-height:1.3;user-select:none}
 .ti.sel{background:var(--blo);border-color:var(--blu);color:#90bcff}
 .intr{display:flex;align-items:center;gap:10px}
 .intv{font-family:var(--fb);font-size:32px;min-width:44px;text-align:center}
-.slider{flex:1;-webkit-appearance:none;height:4px;border-radius:2px;outline:none;cursor:pointer}
+.slider{flex:1;-webkit-appearance:none;height:4px;border-radius:2px;outline:none;cursor:pointer;background:linear-gradient(to right,var(--blu) 70%,var(--br) 70%)}
 .slider::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:#fff;cursor:pointer}
 .rtog{display:flex;gap:7px}
-.ropt{flex:1;padding:10px;text-align:center;background:var(--s1);border:1px solid var(--br);border-radius:7px;font-size:12px;cursor:pointer;transition:all .15s}
+.ropt{flex:1;padding:10px;text-align:center;background:var(--s1);border:1px solid var(--br);border-radius:7px;font-size:12px;cursor:pointer;transition:all .15s;user-select:none}
 .ropt.win{background:rgba(46,204,132,.07);border-color:var(--grn);color:var(--grn)}
 .ropt.lose{background:var(--rlo);border-color:var(--red);color:#ff9090}
-.tinp{width:100%;background:var(--s1);border:1px solid var(--br);border-radius:8px;padding:9px 11px;color:var(--tx);font-family:var(--fn);font-size:13px;resize:none;outline:none;transition:border-color .2s;line-height:1.6}
-.tinp:focus{border-color:var(--blu)}
-.tinp::placeholder{color:var(--mu)}
+textarea,input[type=text]{width:100%;background:var(--s1);border:1px solid var(--br);border-radius:8px;padding:9px 11px;color:var(--tx);font-family:var(--fn);font-size:13px;resize:none;outline:none;transition:border-color .2s;line-height:1.6}
+textarea:focus,input[type=text]:focus{border-color:var(--blu)}
+textarea::placeholder,input::placeholder{color:var(--mu)}
 .pts-pre{background:rgba(255,190,46,.06);border:1px solid rgba(255,190,46,.18);border-radius:8px;padding:9px 12px;display:flex;align-items:center;justify-content:space-between}
 .pp-l{font-size:11px;color:var(--mu)}
 .pp-v{font-family:var(--fb);font-size:22px}
 .divider{border:none;border-top:1px solid var(--br)}
-
-/* SHOP — 修正済み */
-.shop-header{padding:16px 18px 12px;border-bottom:1px solid var(--br);flex-shrink:0}
-.shop-header h2{font-size:16px;font-weight:700}
-.shop-header p{font-size:11px;color:var(--mu);margin-top:2px}
-
-/* ポイント表示：数値が大きくても崩れないよう修正 */
+/* SHOP */
 .pts-hero{background:var(--s1);border:1px solid var(--br);border-radius:14px;padding:16px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px}
 .pts-hero-left{min-width:0;flex:1}
 .pts-hero-num{font-family:var(--fb);font-size:52px;letter-spacing:1px;color:var(--gld);line-height:1;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -237,7 +117,6 @@ html,body,#root{height:100%;overflow:hidden}
 .pts-mini{background:var(--s2);border:1px solid var(--br);border-radius:8px;padding:8px 12px;text-align:center;min-width:72px}
 .pts-mini-v{font-family:var(--fb);font-size:22px;letter-spacing:1px;display:block}
 .pts-mini-l{font-size:8.5px;color:var(--mu);margin-top:1px}
-
 .shop-item{background:var(--s1);border:1px solid var(--br);border-radius:10px;padding:12px 14px}
 .si-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;gap:8px}
 .si-name{font-size:14px;font-weight:700;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -248,35 +127,28 @@ html,body,#root{height:100%;overflow:hidden}
 .si-pct{font-size:10px;color:var(--mu);flex:1;min-width:0}
 .si-actions{display:flex;gap:5px;flex-shrink:0}
 .si-btn{background:none;border:1px solid var(--br);border-radius:6px;color:var(--mu);font-size:11px;cursor:pointer;padding:3px 8px;transition:all .15s;font-family:var(--fn);white-space:nowrap}
-.si-btn:hover{border-color:var(--blu);color:var(--tx)}
-.si-btn.danger:hover{border-color:var(--red);color:#ff9090}
 .si-btn.exchange{border-color:rgba(255,190,46,.4);color:var(--gld);background:rgba(255,190,46,.06)}
-.si-btn.exchange:hover{background:rgba(255,190,46,.14)}
-.si-btn.exchange:disabled{opacity:.3;cursor:not-allowed}
+.si-btn:disabled{opacity:.3;cursor:not-allowed}
 .add-form{background:var(--s1);border:1px solid var(--br);border-radius:10px;padding:12px}
 .add-row{display:flex;gap:8px;margin-bottom:8px}
-.sinp{flex:1;background:var(--s2);border:1px solid var(--br);border-radius:7px;padding:8px 10px;color:var(--tx);font-family:var(--fn);font-size:12px;outline:none;transition:border-color .2s;min-width:0}
+.sinp{flex:1;background:var(--s2);border:1px solid var(--br);border-radius:7px;padding:8px 10px;color:var(--tx);font-family:var(--fn);font-size:12px;outline:none;min-width:0}
 .sinp:focus{border-color:var(--blu)}
 .sinp::placeholder{color:var(--mu)}
 .sinp.pts-inp{width:80px;flex:none;font-family:var(--fm)}
-
 /* CONGRATS */
 .overlay{position:absolute;inset:0;background:rgba(6,6,16,.9);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;z-index:100;text-align:center;padding:32px}
 .ov-emoji{font-size:72px;line-height:1}
 .ov-title{font-family:var(--fb);font-size:42px;letter-spacing:3px;color:var(--gld)}
 .ov-sub{font-size:16px;color:var(--tx);line-height:1.7}
 .ov-pts{font-family:var(--fm);font-size:12px;color:var(--mu)}
-
 /* LOGS */
 .log-item{background:var(--s1);border:1px solid var(--br);border-radius:9px;padding:10px 12px;display:flex;align-items:flex-start;gap:10px}
-.ib{width:34px;height:34px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-family:var(--fb);font-size:13px;flex-shrink:0;margin-top:1px}
+.ib{width:34px;height:34px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-family:var(--fb);font-size:13px;flex-shrink:0}
 .ldet{flex:1;min-width:0}
 .lt{font-size:12px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .lm{font-size:10px;color:var(--mu);margin-top:2px;line-height:1.5}
-.ltags{display:flex;gap:4px;flex-wrap:wrap;margin-top:4px}
-.ltag{font-size:9px;padding:2px 6px;border-radius:8px;background:var(--s2);color:var(--mu);border:1px solid var(--br)}
+.ltag{font-size:9px;padding:2px 6px;border-radius:8px;background:var(--s2);color:var(--mu);border:1px solid var(--br);display:inline-block;margin:2px 2px 0 0}
 .rtag{font-size:10px;padding:2px 7px;border-radius:10px;flex-shrink:0;margin-top:1px;white-space:nowrap}
-
 /* SETTINGS */
 .acc{border:1px solid var(--br);border-radius:10px;overflow:hidden;background:var(--s1)}
 .acc-hdr{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;cursor:pointer;user-select:none}
@@ -285,537 +157,671 @@ html,body,#root{height:100%;overflow:hidden}
 .acc-sub{font-size:10px;color:var(--mu);margin-top:1px}
 .acc-arrow{color:var(--mu);font-size:12px;transition:transform .25s}
 .acc-arrow.open{transform:rotate(180deg)}
-.acc-body{padding:0 14px;max-height:0;overflow:hidden;transition:max-height .3s ease,padding .3s ease}
+.acc-body{padding:0 14px;max-height:0;overflow:hidden;transition:max-height .3s ease,padding .3s}
 .acc-body.open{max-height:800px;padding:12px 14px}
 .tag-list{display:flex;flex-direction:column;gap:5px;margin-bottom:8px;max-height:160px;overflow-y:auto}
 .tag-row{display:flex;align-items:center;gap:8px;background:var(--s2);border-radius:7px;padding:7px 10px}
 .tag-row span{flex:1;font-size:11px;line-height:1.4;word-break:break-all}
-.del-btn{background:none;border:none;color:var(--mu);font-size:13px;cursor:pointer;flex-shrink:0;transition:color .15s}
-.del-btn:hover{color:var(--red)}
-
+.del-btn{background:none;border:none;color:var(--mu);font-size:13px;cursor:pointer;flex-shrink:0}
 /* SHARED */
 .btn{flex:1;padding:11px 6px;border-radius:8px;border:1px solid var(--br);background:var(--s2);color:var(--tx);font-family:var(--fn);font-size:12px;font-weight:500;cursor:pointer;transition:all .15s}
-.btn:hover{background:var(--s3);border-color:var(--blu)}
 .btn.pri{background:var(--blu);border-color:var(--blu);color:#fff}
-.btn.pri:hover{filter:brightness(1.1)}
 .btn.gld{background:rgba(255,190,46,.1);border-color:var(--gld);color:var(--gld)}
-.btn.full{width:100%;flex:none}
+.btn.full{width:100%;flex:none;display:block}
 .acts{display:flex;gap:7px}
-`;
+</style>
+</head>
+<body>
+<div class="app" id="app">
+  <div class="hdr">
+    <span class="logo">ANGERFORGE</span>
+    <div class="hdr-r">
+      <span class="badge gold" id="hdr-pts">★ 0P</span>
+      <span class="badge grn" id="hdr-wins">今日 0勝</span>
+    </div>
+  </div>
 
-const IC = {
-  home: <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>,
-  log:  <svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>,
-  shop: <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>,
-  logs: <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>,
-  set:  <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>,
+  <!-- HOME -->
+
+  <div class="screen active" id="scr-home">
+    <div class="home-inner">
+      <button class="pbtn" id="panic-btn">
+        <span class="pb-main">心を整える</span>
+        <span class="pb-sub">タップして深呼吸へ</span>
+      </button>
+      <div class="lose-wrap" id="lose-list"></div>
+      <div class="hstats">
+        <div class="hsc"><span class="hscv" id="stat-today" style="color:var(--grn)">0</span><span class="hscl">今日の勝利</span></div>
+        <div class="hsc"><span class="hscv" id="stat-total" style="color:var(--blu)">0</span><span class="hscl">累計勝利</span></div>
+        <div class="hsc"><span class="hscv" id="stat-pts" style="color:var(--gld)">0</span><span class="hscl">残りP</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EMERGENCY -->
+
+  <div class="screen" id="scr-emergency">
+    <!-- count phase -->
+    <div id="phase-count" class="emrg-inner">
+      <div style="font-size:11px;letter-spacing:3px;color:var(--mu);font-weight:700">HOLD ON</div>
+      <div class="cnt-num" id="cnt-num">6</div>
+      <div class="cnt-bar-wrap"><div class="cnt-bar" id="cnt-bar" style="width:0%"></div></div>
+      <div class="cnt-msg">この<span id="cnt-msg-n">6</span>秒だけやり過ごす<br><b>動かない = 勝利</b></div>
+      <button class="skip-link" id="skip-to-breathe">スキップ →</button>
+    </div>
+    <!-- breathe phase -->
+    <div id="phase-breathe" class="emrg-inner" style="display:none">
+      <div>
+        <div style="font-size:11px;letter-spacing:3px;color:rgba(128,188,255,.6);font-weight:700">生理的ため息</div>
+        <div style="font-size:11px;color:var(--mu);margin-top:3px">Stanford研究・最速の鎮静法</div>
+      </div>
+      <div style="width:220px;height:220px;display:flex;align-items:center;justify-content:center">
+        <div class="bc" id="breath-circle">
+          <span class="bc-ph" id="breath-label">鼻から吸う</span>
+          <span class="bc-t" id="breath-timer">2</span>
+        </div>
+      </div>
+      <div class="bc-hint" id="breath-hint">👃 鼻からゆっくり吸う</div>
+      <div class="bc-dots">
+        <div class="bcd" id="dot0"></div>
+        <div class="bcd" id="dot1"></div>
+        <div class="bcd" id="dot2"></div>
+      </div>
+      <button class="skip-link" id="skip-to-reward">スキップ</button>
+    </div>
+    <!-- reward phase -->
+    <div id="phase-reward" style="display:none;flex-direction:column;height:100%">
+      <div class="rew-img-zone">
+        <img class="rew-img" id="rew-img" src="" alt="" onerror="this.style.display='none';document.getElementById('rew-fallback').style.display='flex'">
+        <div class="rew-fallback" id="rew-fallback" style="display:none">🐕</div>
+        <div class="rew-overlay"><div class="rew-crown">🏆 今日も勝利した</div></div>
+      </div>
+      <div class="praise-zone">
+        <div class="praise-txt" id="praise-txt"></div>
+        <div class="praise-pts" id="praise-pts">★ +0P 獲得見込み</div>
+      </div>
+      <div class="rew-acts">
+        <button class="btn" id="btn-shuffle">🔄</button>
+        <button class="btn" id="btn-to-log">📝 記録する</button>
+        <button class="btn gld" id="btn-done">完了 ✓</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- LOG FORM -->
+
+  <div class="screen" id="scr-form">
+    <div class="shdr"><h2>事件を記録する</h2><p>15設問で創作素材に変換</p></div>
+    <div class="scon">
+      <div>
+        <div class="sec-lbl">今日の結果</div>
+        <div class="rtog" style="margin-bottom:8px">
+          <div class="ropt win sel" id="ropt-win" onclick="setReacted(false)">✓ 乗り越えた！</div>
+          <div class="ropt" id="ropt-lose" onclick="setReacted(true)">次は勝てる</div>
+        </div>
+        <div class="pts-pre">
+          <span class="pp-l">獲得ポイント</span>
+          <span class="pp-v" id="pts-preview" style="color:var(--mu)">0P</span>
+        </div>
+      </div>
+      <hr class="divider">
+      <div class="cat-hdr">📋 FACT — 事実</div>
+      <div><div class="sec-lbl">① 発生時刻</div><div class="g5" id="grid-time"></div></div>
+      <div><div class="sec-lbl">② 場所・状況</div><textarea rows="2" id="f-place" placeholder="例：品川駅ホーム"></textarea></div>
+      <div><div class="sec-lbl">③ トリガーの事実</div><textarea rows="2" id="f-fact" placeholder="例：横入りされた"></textarea></div>
+      <div><div class="sec-lbl">④ 実際の対応</div><div class="g2" id="grid-action"></div></div>
+      <hr class="divider">
+      <div class="cat-hdr">🎴 ENEMY — 敵キャラ分析</div>
+      <div><div class="sec-lbl">⑤ 敵の属性</div><div class="g4" id="grid-monster"></div></div>
+      <div><div class="sec-lbl">⑥ 必殺技</div><textarea rows="2" id="f-skill" placeholder="例：終わらない自慢話"></textarea></div>
+      <div><div class="sec-lbl">⑦ 弱点・ダサい所</div><textarea rows="2" id="f-weakness" placeholder="例：上にはペコペコ"></textarea></div>
+      <div><div class="sec-lbl">⑧ スケール感</div><div class="g3" id="grid-scale"></div></div>
+      <hr class="divider">
+      <div class="cat-hdr">💥 EXPLOSION — 本音</div>
+      <div><div class="sec-lbl">⑨ 怒りの色</div><div class="g3" id="grid-color"></div></div>
+      <div>
+        <div class="sec-lbl">⑩ 強度（1〜100）</div>
+        <div class="intr">
+          <span class="intv" id="intensity-val" style="color:var(--red)">70</span>
+          <input type="range" min="1" max="100" step="1" value="70" id="intensity-slider" class="slider" oninput="updateIntensity(this.value)">
+        </div>
+      </div>
+      <div><div class="sec-lbl">⑪ 怒りの「音」</div><textarea rows="2" id="f-sound" placeholder="例：ガラスが割れる音"></textarea></div>
+      <div><div class="sec-lbl">⑫ 制約なく解消するなら（法律無視OK）</div><textarea rows="2" id="f-fantasy" placeholder="例：顔面にパイを投げる"></textarea></div>
+      <hr class="divider">
+      <div class="cat-hdr">🎯 CATHARSIS — 決着</div>
+      <div><div class="sec-lbl">⑬ 捨て台詞</div><textarea rows="2" id="f-quote" placeholder="例：二度と話しかけんな"></textarea></div>
+      <div><div class="sec-lbl">⑭ 望む結末</div><div class="g2" id="grid-ending"></div></div>
+      <div><div class="sec-lbl">⑮ 事件タイトル</div><textarea rows="1" id="f-title" placeholder="例：品川駅・横入りおじさん討伐戦"></textarea></div>
+      <div class="acts" style="padding-bottom:8px">
+        <button class="btn" onclick="goScreen('home')">キャンセル</button>
+        <button class="btn pri" id="btn-save-log">★ 記録してP獲得</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SHOP -->
+
+  <div class="screen" id="scr-shop">
+    <div class="shdr"><h2>勝利ポイント & ご褒美</h2><p>乗り越えた分だけ、自分に贈る</p></div>
+    <div class="scon">
+      <div class="pts-hero">
+        <div class="pts-hero-left">
+          <span class="pts-hero-num" id="shop-pts-num">0</span>
+          <div class="pts-hero-label">★ 使えるポイント</div>
+          <div class="pts-hero-sub" id="shop-pts-sub">獲得 0P − 消費 0P</div>
+        </div>
+        <div class="pts-hero-right">
+          <div class="pts-mini"><span class="pts-mini-v" id="shop-today" style="color:var(--grn)">0</span><div class="pts-mini-l">今日の勝利</div></div>
+          <div class="pts-mini"><span class="pts-mini-v" id="shop-total" style="color:var(--blu)">0</span><div class="pts-mini-l">累計勝利</div></div>
+        </div>
+      </div>
+      <div class="add-form">
+        <div style="font-size:10px;font-weight:700;letter-spacing:2px;color:var(--mu);text-transform:uppercase;margin-bottom:8px">＋ アイテム追加</div>
+        <div class="add-row">
+          <input class="sinp" id="new-item-name" placeholder="ご褒美の名前">
+          <input class="sinp pts-inp" id="new-item-pts" type="number" min="1" placeholder="P数">
+        </div>
+        <button class="btn pri full" style="padding:9px;font-size:12px" onclick="addShopItem()">追加する</button>
+      </div>
+      <div id="shop-list" style="display:flex;flex-direction:column;gap:8px"></div>
+      <div style="background:rgba(85,153,255,.05);border:1px solid rgba(85,153,255,.13);border-radius:10px;padding:12px;font-size:11px;color:var(--mu);line-height:1.75">
+        💡 1回の勝利 = 強度÷10×10P（最大100P）<br>6回乗り越えると ≈ 420〜600P
+      </div>
+    </div>
+  </div>
+
+  <!-- LOGS -->
+
+  <div class="screen" id="scr-logs">
+    <div class="shdr"><h2>勝利ログ</h2><p>CSV → GeminiでNo.1は漫画、No.2は小説…</p></div>
+    <div class="scon">
+      <button class="btn full" style="padding:12px" onclick="downloadCSV()">📥 CSVダウンロード</button>
+      <div style="background:rgba(255,190,46,.05);border:1px solid rgba(255,190,46,.15);border-radius:10px;padding:12px;font-size:11px;color:var(--mu);line-height:1.75">
+        📌 Geminiへの渡し方<br>CSVを添付して「No.1は漫画に」「No.2は小説に」<br>「No.3と4はSuno向けの歌詞作って」
+      </div>
+      <div id="log-list" style="display:flex;flex-direction:column;gap:6px"></div>
+    </div>
+  </div>
+
+  <!-- SETTINGS -->
+
+  <div class="screen" id="scr-set">
+    <div class="shdr"><h2>設定</h2><p>スプシ連携で永続管理</p></div>
+    <div class="scon">
+      <div class="acc">
+        <div class="acc-hdr" onclick="toggleAcc(this)">
+          <div><div class="acc-title">📊 スプレッドシート連携</div><div class="acc-sub">褒め言葉・失うもの・画像を一括管理</div></div>
+          <span class="acc-arrow">▼</span>
+        </div>
+        <div class="acc-body">
+          <p style="font-size:11px;color:var(--mu);line-height:1.7;margin-bottom:10px">スプシIDを貼って「読み込む」だけ。<br>シート名：「褒め言葉」「失うもの」「画像URL」</p>
+          <input class="sinp" id="sheet-id-inp" style="width:100%;margin-bottom:8px" placeholder="スプレッドシートID">
+          <button class="btn pri full" style="padding:9px;font-size:12px" onclick="syncSheet()">🔄 スプシから読み込む</button>
+          <div id="sync-status" style="font-size:11px;margin-top:6px"></div>
+        </div>
+      </div>
+      <div class="acc">
+        <div class="acc-hdr" onclick="toggleAcc(this)">
+          <div><div class="acc-title">🏆 褒め言葉</div><div class="acc-sub" id="praises-count">0件</div></div>
+          <span class="acc-arrow">▼</span>
+        </div>
+        <div class="acc-body">
+          <div class="tag-list" id="praises-list"></div>
+          <input class="sinp" id="new-praise" style="width:100%;margin-bottom:6px" placeholder="新しい褒め言葉…">
+          <button class="btn pri full" style="padding:8px;font-size:11px" onclick="addPraise()">＋ 追加</button>
+        </div>
+      </div>
+      <div class="acc">
+        <div class="acc-hdr" onclick="toggleAcc(this)">
+          <div><div class="acc-title">⚡ 失うものリスト</div><div class="acc-sub" id="loses-count">0件</div></div>
+          <span class="acc-arrow">▼</span>
+        </div>
+        <div class="acc-body">
+          <div class="tag-list" id="loses-list"></div>
+          <input class="sinp" id="new-lose" style="width:100%;margin-bottom:6px" placeholder="新しい項目…">
+          <button class="btn pri full" style="padding:8px;font-size:11px" onclick="addLose()">＋ 追加</button>
+        </div>
+      </div>
+      <div class="acc">
+        <div class="acc-hdr" onclick="toggleAcc(this)">
+          <div><div class="acc-title">📸 ご褒美写真URL</div><div class="acc-sub" id="imgs-count">0枚</div></div>
+          <span class="acc-arrow">▼</span>
+        </div>
+        <div class="acc-body">
+          <p style="font-size:11px;color:var(--mu);line-height:1.6;margin-bottom:8px">GoogleドライブURL形式：<br><code style="font-size:10px;background:var(--s2);padding:1px 5px;border-radius:4px">drive.google.com/uc?export=view&id=【ID】</code></p>
+          <div class="tag-list" id="imgs-list"></div>
+          <input class="sinp" id="new-img" style="width:100%;margin-bottom:6px" placeholder="https://...">
+          <button class="btn pri full" style="padding:8px;font-size:11px" onclick="addImg()">＋ 追加</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NAV -->
+
+  <div class="nav" id="main-nav">
+    <button class="nb act" onclick="goScreen('home')" id="nav-home">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>ホーム
+    </button>
+    <button class="nb" onclick="goScreen('form')" id="nav-form">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>記録
+    </button>
+    <button class="nb" onclick="goScreen('shop')" id="nav-shop">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>ポイント
+    </button>
+    <button class="nb" onclick="goScreen('logs')" id="nav-logs">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>ログ
+    </button>
+    <button class="nb" onclick="goScreen('set')" id="nav-set">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>設定
+    </button>
+  </div>
+
+  <!-- CONGRATS OVERLAY -->
+
+  <div class="overlay" id="congrats-overlay" style="display:none">
+    <div class="ov-emoji">🎉</div>
+    <div class="ov-title">おめでとう！</div>
+    <div class="ov-sub" id="congrats-name"></div>
+    <div class="ov-pts" id="congrats-pts"></div>
+    <button class="btn pri" style="max-width:180px;margin-top:8px" onclick="closeCongratsOverlay()">閉じる</button>
+  </div>
+</div>
+
+<script>
+// ─── DATA ───────────────────────────────────────
+const DEF_PRAISES = ["お前、今日も勝った。","感情より知性が勝った瞬間。","不動の心、また一段強くなった。","衝動をいなした。それがワタベの強さ。","6秒やり過ごした。十分すごい。","今日の判断、5年後の自分が誇る。","静かに強い。それが本物。","電車ごときに不動の心は揺るがない。","修羅場で動じなかった男。","今日の我慢、スペアリブ1本分の価値がある。","感情じゃなく実力で返す。プロだ。","今日の怒り、のちに名曲になる。","あの相手、モンスターカードにしてやれ。","雑魚に反応しなかった。それが余裕。","外部環境に左右されない心、今日も育った。","勝った！","お前の勝ちだ。完全に。","今日の辛抱が、明日の余裕を作る。","怒りは燃料。今日も正しく使った。","今日もデータが増えた。それが成長の証明書。"];
+const DEF_LOSES = ["信頼の修復に3ヶ月かかる","自分のエネルギーを無駄消費する","相手じゃなく自分が一番損する","「感情的な人」と一生記憶される","後から後悔する言動が出る","職場での評価が静かに下がる","怒った側が損をする世界の法則","冷静な人との差がさらに開く"];
+const DEF_IMGS = ["https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=400&h=600&fit=crop","https://images.unsplash.com/photo-1601979031925-424e53b6caaa?w=400&h=600&fit=crop","https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=400&h=600&fit=crop","https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?w=400&h=600&fit=crop"];
+const DEF_SHOP = [{id:1,name:"コーヒー☕",pts:100},{id:2,name:"ケーキ🍰",pts:600},{id:3,name:"スペアリブ🍖",pts:800},{id:4,name:"外ランチ🍜",pts:1200},{id:5,name:"新しい植木🌱",pts:2000},{id:6,name:"旅行✈️",pts:100000}];
+const DEF_SAMPLE = [{id:1,time:"朝",place:"満員電車",fact:"横入りされた",action:"無言で耐えた",monsterType:"害虫",skill:"突進技「割り込み」",weakness:"上司にはペコペコ",scale:"等身大（個人）",color:"爆発の赤🔴",intensity:70,sound:"ガラスが割れる音",fantasy:"顔面にパイを投げる",quote:"二度と話しかけんな",ending:"ギャグ化して消滅",title:"品川駅・横入りおじさん討伐戦",reacted:false,date:Date.now()-86400000}];
+const TIME_OPTS=["朝","昼","夕方","夜","深夜"],ACTION_OPTS=["無言で耐えた","愛想笑いした","少し反論した","その場を離れた"],MONSTER_OPTS=["暴君","ゾンビ","妖怪","機械","害虫","自然災害","その他"],SCALE_OPTS=["巨大（組織）","等身大（個人）","極小（ネット）"],COLOR_OPTS=["爆発の赤🔴","冷え切った青🔵","ドロドロの紫🟣","虚無の白⚪","漆黒⚫"],END_OPTS=["社会的に破滅","改心して謝罪","ギャグ化して消滅","完全に無力化"];
+const BREATH=[{label:"鼻から吸う",dur:2,scale:1.2,hint:"👃 鼻からゆっくり吸う"},{label:"もう一口",dur:1,scale:1.45,hint:"👃 もう一口、追加で吸い込む"},{label:"ゆっくり吐く",dur:6,scale:0.75,hint:"👄 口から細く長く吐き出す…"}];
+
+// ─── STATE (localStorage) ─────────────────────
+function lsGet(k,def,rev){try{const v=localStorage.getItem(k);if(v===null)return def;const p=JSON.parse(v);return rev?rev(p):p;}catch{return def;}}
+function lsSet(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch{}}
+
+let logs = lsGet("af_logs",DEF_SAMPLE,a=>Array.isArray(a)?a.map(l=>({...l,date:Number(l.date)})):DEF_SAMPLE);
+let shop = lsGet("af_shop",DEF_SHOP);
+let shopPts = lsGet("af_shopPts",0);
+let praises = lsGet("af_praises",DEF_PRAISES);
+let loses = lsGet("af_loses",DEF_LOSES);
+let imgs = lsGet("af_imgs",DEF_IMGS);
+let sheetId = lsGet("af_sheetId","");
+
+// ─── HELPERS ──────────────────────────────────
+const rnd=a=>a[Math.floor(Math.random()*a.length)];
+const s3=a=>{const c=[...a],r=[];for(let i=0;i<Math.min(3,c.length);i++){const j=Math.floor(Math.random()*(c.length-i));r.push(c.splice(j,1)[0]);}return r;};
+const calcPts=l=>l.reacted?0:Math.round(l.intensity/10)*10;
+const earned=()=>logs.reduce((s,l)=>s+calcPts(l),0);
+const avail=()=>earned()-shopPts;
+const todayWins=()=>{const t=new Date();t.setHours(0,0,0,0);return logs.filter(l=>{const d=new Date(l.date);d.setHours(0,0,0,0);return d.getTime()===t.getTime()&&!l.reacted;}).length;};
+const ago=d=>{const n=Math.floor((Date.now()-d)/86400000);return n===0?"今日":n===1?"昨日":n+"日前";};
+const esc=s=>`"${(s||"").replace(/"/g,'""').replace(/\r?\n/g,' ')}"`;
+
+// ─── SCREEN ROUTING ───────────────────────────
+let currentScreen = "home";
+function goScreen(id){
+  document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
+  document.querySelectorAll(".nb").forEach(b=>b.classList.remove("act"));
+  document.getElementById("scr-"+id).classList.add("active");
+  const navBtn = document.getElementById("nav-"+id);
+  if(navBtn) navBtn.classList.add("act");
+  currentScreen = id;
+  if(id==="shop") renderShop();
+  if(id==="logs") renderLogs();
+  if(id==="set")  renderSettings();
+  updateHeader();
+}
+
+// ─── HEADER ───────────────────────────────────
+function updateHeader(){
+  const a=avail(), tw=todayWins(), aw=logs.filter(l=>!l.reacted).length;
+  document.getElementById("hdr-pts").textContent="★ "+a.toLocaleString()+"P";
+  document.getElementById("hdr-wins").textContent="今日 "+tw+"勝";
+  document.getElementById("stat-today").textContent=tw;
+  document.getElementById("stat-total").textContent=aw;
+  document.getElementById("stat-pts").textContent=a.toLocaleString();
+}
+
+// ─── HOME LOSES ───────────────────────────────
+function renderHomeLoses(){
+  const list=document.getElementById("lose-list");
+  const three=s3(loses);
+  list.innerHTML=three.map((t,i)=>`<div class="lose-item"><span class="lose-n">${i+1}</span><span class="lose-t">${t}</span></div>`).join("");
+}
+
+// ─── EMERGENCY ────────────────────────────────
+let cntTimer=null, breathTimer=null;
+let bPhIdx=0, bTimer=0, bCycle=0;
+let currentIntensity=70;
+
+function startEmergency(){
+  renderHomeLoses();
+  document.getElementById("main-nav").style.display="none";
+  document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
+  document.getElementById("scr-emergency").classList.add("active");
+  showPhase("count");
+  startCountdown();
+}
+
+function showPhase(p){
+  ["count","breathe","reward"].forEach(id=>{
+    const el=document.getElementById("phase-"+id);
+    el.style.display= id===p?(id==="reward"?"flex":"flex"):"none";
+  });
+  if(p==="reward") document.getElementById("phase-reward").style.flexDirection="column";
+}
+
+function startCountdown(){
+  let n=6;
+  document.getElementById("cnt-num").textContent=n;
+  document.getElementById("cnt-bar").style.width="0%";
+  clearInterval(cntTimer);
+  cntTimer=setInterval(()=>{
+    n--;
+    document.getElementById("cnt-num").textContent=n;
+    document.getElementById("cnt-msg-n").textContent=n;
+    document.getElementById("cnt-bar").style.width=((6-n)/6*100)+"%";
+    if(n<=0){clearInterval(cntTimer);startBreathe();}
+  },1000);
+}
+
+function startBreathe(){
+  clearInterval(cntTimer);
+  bPhIdx=0; bCycle=0;
+  showPhase("breathe");
+  runBreath();
+}
+
+function runBreath(){
+  const ph=BREATH[bPhIdx];
+  bTimer=ph.dur;
+  document.getElementById("breath-label").textContent=ph.label;
+  document.getElementById("breath-timer").textContent=bTimer;
+  document.getElementById("breath-hint").textContent=ph.hint;
+  document.getElementById("breath-circle").style.transform="scale("+ph.scale+")";
+  clearInterval(breathTimer);
+  breathTimer=setInterval(()=>{
+    bTimer--;
+    document.getElementById("breath-timer").textContent=bTimer;
+    if(bTimer<=0){
+      clearInterval(breathTimer);
+      bPhIdx++;
+      if(bPhIdx>=BREATH.length){
+        bCycle++;
+        document.getElementById("dot"+(bCycle-1)).classList.add("done");
+        if(bCycle>=3){showReward();return;}
+        bPhIdx=0;
+      }
+      runBreath();
+    }
+  },1000);
+}
+
+function showReward(){
+  clearInterval(breathTimer);
+  const praise=rnd(praises);
+  const img=rnd(imgs.length?imgs:DEF_IMGS);
+  document.getElementById("praise-txt").textContent=praise;
+  document.getElementById("praise-pts").textContent="★ +"+Math.round(currentIntensity/10)*10+"P 獲得見込み";
+  const imgEl=document.getElementById("rew-img");
+  const fallEl=document.getElementById("rew-fallback");
+  imgEl.style.display="block"; fallEl.style.display="none";
+  imgEl.src=img;
+  showPhase("reward");
+}
+
+function endEmergency(){
+  clearInterval(cntTimer); clearInterval(breathTimer);
+  document.getElementById("main-nav").style.display="flex";
+  goScreen("home");
+}
+
+document.getElementById("panic-btn").onclick=startEmergency;
+document.getElementById("skip-to-breathe").onclick=()=>{clearInterval(cntTimer);startBreathe();};
+document.getElementById("skip-to-reward").onclick=()=>{clearInterval(breathTimer);showReward();};
+document.getElementById("btn-shuffle").onclick=()=>{
+  document.getElementById("praise-txt").textContent=rnd(praises);
+  const img=rnd(imgs.length?imgs:DEF_IMGS);
+  document.getElementById("rew-img").style.display="block";
+  document.getElementById("rew-fallback").style.display="none";
+  document.getElementById("rew-img").src=img;
+};
+document.getElementById("btn-to-log").onclick=()=>{endEmergency();goScreen("form");};
+document.getElementById("btn-done").onclick=endEmergency;
+
+// ─── FORM ─────────────────────────────────────
+let formState={time:"朝",action:"無言で耐えた",monsterType:"害虫",scale:"等身大（個人）",color:"爆発の赤🔴",ending:"ギャグ化して消滅",reacted:false,intensity:70};
+
+function makeGrid(containerId,opts,stateKey,cols){
+  const el=document.getElementById(containerId);
+  el.innerHTML=opts.map(o=>`<div class="ti${formState[stateKey]===o?" sel":""}" onclick="selectGrid('${containerId}','${stateKey}','${o.replace(/'/g,"\\'")}')">${o}</div>`).join("");
+}
+function selectGrid(cid,key,val){
+  formState[key]=val;
+  makeGrid(cid,[...document.getElementById(cid).querySelectorAll(".ti")].map(t=>t.textContent),key);
+  // rebuild properly
+  const maps={
+    "grid-time":[TIME_OPTS,"time"],"grid-action":[ACTION_OPTS,"action"],"grid-monster":[MONSTER_OPTS,"monsterType"],
+    "grid-scale":[SCALE_OPTS,"scale"],"grid-color":[COLOR_OPTS,"color"],"grid-ending":[END_OPTS,"ending"]
+  };
+  if(maps[cid]) makeGrid(cid,maps[cid][0],maps[cid][1]);
+  updatePtsPreview();
+}
+function setReacted(v){
+  formState.reacted=v;
+  document.getElementById("ropt-win").className="ropt win"+(v?"":" sel");
+  document.getElementById("ropt-lose").className="ropt lose"+(v?" sel":"");
+  updatePtsPreview();
+}
+function updateIntensity(v){
+  formState.intensity=+v;
+  currentIntensity=+v;
+  const col=v>=70?"var(--red)":v>=40?"var(--gld)":"var(--grn)";
+  document.getElementById("intensity-val").textContent=v;
+  document.getElementById("intensity-val").style.color=col;
+  document.getElementById("intensity-slider").style.background=`linear-gradient(to right,var(--blu) ${v}%,var(--br) ${v}%)`;
+  updatePtsPreview();
+}
+function updatePtsPreview(){
+  const p=formState.reacted?0:Math.round(formState.intensity/10)*10;
+  const el=document.getElementById("pts-preview");
+  el.textContent=p>0?"★ "+p+"P":"0P";
+  el.style.color=p>0?"var(--gld)":"var(--mu)";
+  document.getElementById("btn-save-log").textContent="★ 記録して"+(p>0?p+"P":"0P")+"獲得";
+}
+
+function initForm(){
+  makeGrid("grid-time",TIME_OPTS,"time");
+  makeGrid("grid-action",ACTION_OPTS,"action");
+  makeGrid("grid-monster",MONSTER_OPTS,"monsterType");
+  makeGrid("grid-scale",SCALE_OPTS,"scale");
+  makeGrid("grid-color",COLOR_OPTS,"color");
+  makeGrid("grid-ending",END_OPTS,"ending");
+  updatePtsPreview();
+}
+
+document.getElementById("btn-save-log").onclick=()=>{
+  const log={
+    id:Date.now(),
+    time:formState.time,
+    place:document.getElementById("f-place").value,
+    fact:document.getElementById("f-fact").value,
+    action:formState.action,
+    monsterType:formState.monsterType,
+    skill:document.getElementById("f-skill").value,
+    weakness:document.getElementById("f-weakness").value,
+    scale:formState.scale,
+    color:formState.color,
+    intensity:formState.intensity,
+    sound:document.getElementById("f-sound").value,
+    fantasy:document.getElementById("f-fantasy").value,
+    quote:document.getElementById("f-quote").value,
+    ending:formState.ending,
+    title:document.getElementById("f-title").value,
+    reacted:formState.reacted,
+    date:Date.now()
+  };
+  logs.unshift(log);
+  lsSet("af_logs",logs);
+  ["f-place","f-fact","f-skill","f-weakness","f-sound","f-fantasy","f-quote","f-title"].forEach(id=>document.getElementById(id).value="");
+  goScreen("home");
 };
 
-function Acc({ title, sub, children }) {
-  const [open, setOpen] = useState(false);
-  return (
-    <div className="acc">
-      <div className="acc-hdr" onClick={() => setOpen(o=>!o)}>
-        <div><div className="acc-title">{title}</div>{sub&&<div className="acc-sub">{sub}</div>}</div>
-        <span className={`acc-arrow ${open?"open":""}`}>▼</span>
+// ─── SHOP ─────────────────────────────────────
+function renderShop(){
+  const a=avail(),e=earned(),tw=todayWins(),aw=logs.filter(l=>!l.reacted).length;
+  document.getElementById("shop-pts-num").textContent=a.toLocaleString();
+  document.getElementById("shop-pts-sub").textContent="獲得 "+e.toLocaleString()+"P − 消費 "+shopPts.toLocaleString()+"P";
+  document.getElementById("shop-today").textContent=tw;
+  document.getElementById("shop-total").textContent=aw;
+  const list=document.getElementById("shop-list");
+  list.innerHTML=shop.map(item=>{
+    const pct=Math.min(100,Math.round(a/item.pts*100));
+    const can=a>=item.pts;
+    return `<div class="shop-item">
+      <div class="si-top"><span class="si-name">${item.name}</span><span class="si-pts">${item.pts.toLocaleString()}P</span></div>
+      <div class="si-bar"><div class="si-fi" style="width:${pct}%"></div></div>
+      <div class="si-bot">
+        <span class="si-pct">${can?"🎉 交換できる！":a.toLocaleString()+" / "+item.pts.toLocaleString()+"P ("+pct+"%)"}
+        </span>
+        <div class="si-actions">
+          <button class="si-btn exchange" ${can?"":"disabled"} onclick="exchangeItem(${item.id})">交換</button>
+          <button class="si-btn" onclick="editItem(${item.id})">編集</button>
+          <button class="si-btn" onclick="deleteItem(${item.id})">削除</button>
+        </div>
       </div>
-      <div className={`acc-body ${open?"open":""}`}>{children}</div>
-    </div>
-  );
+    </div>`;
+  }).join("");
 }
 
-function Grid({ opts, val, onChange, cols=3 }) {
-  const cls = cols===2?"g2":cols===4?"g4":cols===5?"g5":"g3";
-  return <div className={cls}>{opts.map(o=><div key={o} className={`ti ${val===o?"sel":""}`} onClick={()=>onChange(o)}>{o}</div>)}</div>;
+function addShopItem(){
+  const name=document.getElementById("new-item-name").value.trim();
+  const pts=parseInt(document.getElementById("new-item-pts").value);
+  if(!name||isNaN(pts)||pts<=0)return;
+  shop.push({id:Date.now(),name,pts});
+  lsSet("af_shop",shop);
+  document.getElementById("new-item-name").value="";
+  document.getElementById("new-item-pts").value="";
+  renderShop();
+}
+function deleteItem(id){shop=shop.filter(i=>i.id!==id);lsSet("af_shop",shop);renderShop();}
+function editItem(id){
+  const item=shop.find(i=>i.id===id);
+  if(!item)return;
+  const name=prompt("名前を変更:",item.name);
+  if(name===null)return;
+  const pts=parseInt(prompt("ポイント数を変更:",item.pts));
+  if(isNaN(pts)||pts<=0)return;
+  item.name=name.trim()||item.name;
+  item.pts=pts;
+  lsSet("af_shop",shop);
+  renderShop();
+}
+function exchangeItem(id){
+  const item=shop.find(i=>i.id===id);
+  if(!item||avail()<item.pts)return;
+  shopPts+=item.pts;
+  lsSet("af_shopPts",shopPts);
+  document.getElementById("congrats-name").textContent=item.name+"と交換しました";
+  document.getElementById("congrats-pts").textContent="-"+item.pts.toLocaleString()+"P 消費 · 残り "+avail().toLocaleString()+"P";
+  document.getElementById("congrats-overlay").style.display="flex";
+  renderShop();
+  updateHeader();
+}
+function closeCongratsOverlay(){document.getElementById("congrats-overlay").style.display="none";}
+
+// ─── LOGS ─────────────────────────────────────
+function renderLogs(){
+  const list=document.getElementById("log-list");
+  list.innerHTML=logs.map(l=>{
+    const p=calcPts(l);
+    const col=l.intensity>=70?"rgba(255,80,80,.15)":l.intensity>=40?"rgba(255,190,46,.1)":"rgba(46,204,132,.1)";
+    const tcol=l.intensity>=70?"#ff8080":l.intensity>=40?"var(--gld)":"var(--grn)";
+    return `<div class="log-item">
+      <div class="ib" style="background:${col};color:${tcol}">${l.intensity}</div>
+      <div class="ldet">
+        <div class="lt">${l.title||l.fact||"記録"}</div>
+        <div class="lm">${ago(l.date)} · ${l.time} · ${l.place||""}</div>
+        ${l.quote?`<div class="lm" style="color:rgba(221,224,255,.5)">「${l.quote.slice(0,20)}…」</div>`:""}
+        <div>${l.monsterType?`<span class="ltag">🎴${l.monsterType}</span>`:""}${p>0?`<span class="ltag" style="color:var(--gld);border-color:rgba(255,190,46,.3)">★${p}P</span>`:""}</div>
+      </div>
+      <span class="rtag" style="background:${l.reacted?"var(--rlo)":"rgba(46,204,132,.07)"};color:${l.reacted?"#ff9090":"var(--grn)"}">${l.reacted?"次は勝つ":"✓勝利"}</span>
+    </div>`;
+  }).join("");
 }
 
-function App() {
-  const [screen, setScreen] = useState("home");
-  const [ePhase, setEPhase] = useState("count");
-  const [cnt,    setCnt]    = useState(6);
-  const [bPhIdx, setBPhIdx] = useState(0);
-  const [bTimer, setBTimer] = useState(2);
-  const [bCycle, setBCycle] = useState(0);
-  const [praise, setPraise] = useState("");
-  const [img,    setImg]    = useState("");
-  const [imgErr, setImgErr] = useState(false);
+function downloadCSV(){
+  const h="日時,時刻,場所,事実,対応,敵属性,必殺技,弱点,スケール,色,強度,音,妄想,捨て台詞,結末,タイトル,結果,P";
+  const rows=logs.map(l=>[new Date(l.date).toLocaleString("ja-JP"),l.time,esc(l.place),esc(l.fact),l.action,l.monsterType,esc(l.skill),esc(l.weakness),l.scale,l.color,l.intensity,esc(l.sound),esc(l.fantasy),esc(l.quote),l.ending,esc(l.title),l.reacted?"行動した":"勝利",calcPts(l)].join(","));
+  const b=new Blob([[h,...rows].join("\n"),"\uFEFF"],{type:"text/csv;charset=utf-8;"});
+  const a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="angerforge.csv";a.click();
+}
 
-  // 永続化ステート
-  const [logs,    setLogs]    = useStickyState(SAMPLE,     "af_logs",    arr => Array.isArray(arr) ? arr.map(l=>({...l,date:new Date(l.date)})) : SAMPLE);
-  const [shop,    setShop]    = useStickyState(INIT_SHOP,  "af_shop");
-  const [shopPts, setShopPts] = useStickyState(0,          "af_shopPts");
-  const [sheetId, setSheetId] = useStickyState("",         "af_sheetId");
-  const [praises, setPraises] = useStickyState(FB_PRAISES, "af_praises");
-  const [loses,   setLoses]   = useStickyState(FB_LOSES,   "af_loses");
-  const [imgs,    setImgs]    = useStickyState(FB_IMGS,     "af_imgs");
+// ─── SETTINGS ────────────────────────────────
+function renderSettings(){
+  document.getElementById("sheet-id-inp").value=sheetId;
+  renderTagList("praises-list",praises,"praises");
+  renderTagList("loses-list",loses,"loses");
+  renderTagList("imgs-list",imgs,"imgs",true);
+  document.getElementById("praises-count").textContent=praises.length+"件";
+  document.getElementById("loses-count").textContent=loses.length+"件・ホームにランダム3つ表示";
+  document.getElementById("imgs-count").textContent=imgs.length+"枚";
+}
+function renderTagList(id,arr,key,trunc){
+  document.getElementById(id).innerHTML=arr.map((t,i)=>
+    `<div class="tag-row"><span>${trunc&&t.length>40?t.slice(0,40)+"…":t}</span><button class="del-btn" onclick="removeItem('${key}',${i})">✕</button></div>`
+  ).join("");
+}
+function removeItem(key,i){
+  if(key==="praises"){praises.splice(i,1);lsSet("af_praises",praises);}
+  else if(key==="loses"){loses.splice(i,1);lsSet("af_loses",loses);}
+  else if(key==="imgs"){imgs.splice(i,1);lsSet("af_imgs",imgs);}
+  renderSettings();
+}
+function addPraise(){const v=document.getElementById("new-praise").value.trim();if(!v)return;praises.push(v);lsSet("af_praises",praises);document.getElementById("new-praise").value="";renderSettings();}
+function addLose(){const v=document.getElementById("new-lose").value.trim();if(!v)return;loses.push(v);lsSet("af_loses",loses);document.getElementById("new-lose").value="";renderSettings();}
+function addImg(){const v=document.getElementById("new-img").value.trim();if(!v)return;imgs.push(v);lsSet("af_imgs",imgs);document.getElementById("new-img").value="";renderSettings();}
 
-  // 一時ステート
-  const [congrats,   setCongrats]   = useState(null);
-  const [newName,    setNewName]    = useState("");
-  const [newPtsStr,  setNewPtsStr]  = useState("");
-  const [editingId,  setEditingId]  = useState(null);
-  const [editName,   setEditName]   = useState("");
-  const [editPtsStr, setEditPtsStr] = useState("");
-  const [syncSt,     setSyncSt]     = useState("");
-  const [homeLoses,  setHomeLoses]  = useState(() => s3(loses));
-  const [newLose,    setNewLose]    = useState("");
-  const [newImgUrl,  setNewImgUrl]  = useState("");
-  const [newPraise,  setNewPraise]  = useState("");
-
-  const bph    = BREATH[bPhIdx];
-  const earned = totalPts(logs);
-  const avail  = earned - shopPts;
-  const tWins  = todayWins(logs);
-  const aWins  = logs.filter(l=>!l.reacted).length;
-
-  // カウントダウン
-  useEffect(() => {
-    if (ePhase !== "count") return;
-    if (cnt <= 0) { startBreathe(); return; }
-    const t = setTimeout(() => setCnt(c=>c-1), 1000);
-    return () => clearTimeout(t);
-  }, [ePhase, cnt]);
-
-  // 呼吸
-  useEffect(() => {
-    if (ePhase !== "breathe") return;
-    if (bTimer <= 0) {
-      const ni = bPhIdx + 1;
-      if (ni >= BREATH.length) {
-        const nc = bCycle + 1;
-        if (nc >= 3) { showReward(); return; }
-        setBCycle(nc); setBPhIdx(0); setBTimer(BREATH[0].dur);
-      } else { setBPhIdx(ni); setBTimer(BREATH[ni].dur); }
-      return;
-    }
-    const t = setTimeout(() => setBTimer(b=>b-1), 1000);
-    return () => clearTimeout(t);
-  }, [ePhase, bTimer, bPhIdx, bCycle]);
-
-  const startBreathe = () => { setEPhase("breathe"); setBPhIdx(0); setBTimer(BREATH[0].dur); setBCycle(0); };
-  const showReward   = useCallback(() => {
-    setPraise(rnd(praises)); setImg(rnd(imgs.length?imgs:FB_IMGS));
-    setImgErr(false); setEPhase("reward");
-  }, [praises, imgs]);
-
-  const startEmergency = useCallback(() => {
-    setHomeLoses(s3(loses));
-    setScreen("emergency"); setEPhase("count"); setCnt(6);
-  }, [loses]);
-
-  // 記録フォーム
-  const EF = { time:"朝", place:"", fact:"", action:"無言で耐えた", monsterType:"害虫",
-    skill:"", weakness:"", scale:"等身大（個人）", color:"爆発の赤🔴", intensity:70,
-    sound:"", fantasy:"", quote:"", ending:"ギャグ化して消滅", title:"", reacted:false };
-  const [lf, setLf] = useState(EF);
-  const F = (k,v) => setLf(f=>({...f,[k]:v}));
-
-  const saveLog = () => {
-    setLogs(p => [{ id:Date.now(), ...lf, date:new Date() }, ...p]);
-    setLf(EF); setScreen("home");
-  };
-
-  // ショップ操作
-  const addShopItem = () => {
-    const p = parseInt(newPtsStr);
-    if (!newName.trim() || isNaN(p) || p <= 0) return;
-    setShop(s => [...s, { id:Date.now(), name:newName.trim(), pts:p }]);
-    setNewName(""); setNewPtsStr("");
-  };
-  const deleteItem = id => setShop(s => s.filter(i=>i.id!==id));
-  const startEdit  = item => { setEditingId(item.id); setEditName(item.name); setEditPtsStr(String(item.pts)); };
-  const saveEdit   = () => {
-    const p = parseInt(editPtsStr);
-    if (!editName.trim() || isNaN(p) || p <= 0) return;
-    setShop(s => s.map(i => i.id===editingId ? {...i,name:editName.trim(),pts:p} : i));
-    setEditingId(null);
-  };
-  const exchange = item => {
-    if (avail < item.pts) return;
-    setShopPts(p => p + item.pts);
-    setCongrats({ name:item.name, pts:item.pts, remaining:avail - item.pts });
-  };
-
-  // スプシ同期
-  const syncSheet = async id => {
-    if (!id) { setSyncSt("err"); return; }
-    setSyncSt("loading");
-    const [p,l,i] = await Promise.all([
-      fetchSheet(id,"褒め言葉"), fetchSheet(id,"失うもの"), fetchSheet(id,"画像URL"),
+async function syncSheet(){
+  const id=document.getElementById("sheet-id-inp").value.trim();
+  if(!id){document.getElementById("sync-status").textContent="✗ IDを入力してください";return;}
+  document.getElementById("sync-status").textContent="読み込み中…";
+  const base=`https://docs.google.com/spreadsheets/d/${id}/gviz/tq?tqx=out:csv&sheet=`;
+  const parse=txt=>txt.split("\n").map(l=>l.replace(/^"|"$/g,"").trim()).filter(Boolean);
+  try{
+    const [p,l,im]=await Promise.all([
+      fetch(base+encodeURIComponent("褒め言葉")).then(r=>r.ok?r.text():null),
+      fetch(base+encodeURIComponent("失うもの")).then(r=>r.ok?r.text():null),
+      fetch(base+encodeURIComponent("画像URL")).then(r=>r.ok?r.text():null),
     ]);
-    if (!p&&!l&&!i) { setSyncSt("err"); return; }
-    if (p?.length) setPraises(p);
-    if (l?.length) { setLoses(l); setHomeLoses(s3(l)); }
-    if (i?.length) setImgs(i);
-    setSyncSt("ok");
-    setTimeout(() => setSyncSt(""), 3000);
-  };
-
-  // CSV
-  const downloadCSV = () => {
-    const h = "日時,時刻,場所,事実,対応,敵属性,必殺技,弱点,スケール,色,強度,音,妄想,捨て台詞,結末,タイトル,結果,P";
-    const rows = logs.map(l=>[
-      new Date(l.date).toLocaleString("ja-JP"), l.time,
-      esc(l.place), esc(l.fact), l.action, l.monsterType,
-      esc(l.skill), esc(l.weakness), l.scale, l.color, l.intensity,
-      esc(l.sound), esc(l.fantasy), esc(l.quote), l.ending, esc(l.title),
-      l.reacted?"行動した":"勝利", calcPts(l),
-    ].join(","));
-    const b = new Blob([[h,...rows].join("\n")],{type:"text/csv;charset=utf-8;"});
-    const a = document.createElement("a"); a.href=URL.createObjectURL(b); a.download="angerforge.csv"; a.click();
-  };
-
-  const previewPts = lf.reacted ? 0 : Math.round(lf.intensity/10)*10;
-  const navs = [
-    {id:"home",icon:IC.home,lbl:"ホーム"},
-    {id:"form",icon:IC.log, lbl:"記録"},
-    {id:"shop",icon:IC.shop,lbl:"ポイント"},
-    {id:"logs",icon:IC.logs,lbl:"ログ"},
-    {id:"set", icon:IC.set, lbl:"設定"},
-  ];
-
-  return (
-    <>
-      <style>{CSS}</style>
-      <div className="app">
-
-        {/* おめでとうオーバーレイ */}
-        {congrats && (
-          <div className="overlay">
-            <div className="ov-emoji">🎉</div>
-            <div className="ov-title">おめでとう！</div>
-            <div className="ov-sub">{congrats.name}<br/>と交換しました</div>
-            <div className="ov-pts">-{congrats.pts.toLocaleString()}P 消費 · 残り {congrats.remaining.toLocaleString()}P</div>
-            <button className="btn pri" style={{maxWidth:180,marginTop:8}} onClick={()=>setCongrats(null)}>閉じる</button>
-          </div>
-        )}
-
-        <div className="hdr">
-          <span className="logo">ANGERFORGE</span>
-          <div className="hdr-r">
-            <span className="badge gold">★ {avail.toLocaleString()}P</span>
-            <span className="badge grn">今日 {tWins}勝</span>
-          </div>
-        </div>
-
-        <div className="scr">
-
-          {/* HOME */}
-          {screen==="home" && (
-            <div className="home">
-              <button className="pbtn" onClick={startEmergency}>
-                <span className="pb-main">心を整える</span>
-                <span className="pb-sub">タップして深呼吸へ</span>
-              </button>
-              <div className="lose-wrap">
-                {homeLoses.map((t,i) => (
-                  <div className="lose-item" key={i}>
-                    <span className="lose-n">{i+1}</span>
-                    <span className="lose-t">{t}</span>
-                  </div>
-                ))}
-              </div>
-              <div className="hstats">
-                <div className="hsc"><span className="hscv" style={{color:"var(--grn)"}}>{tWins}</span><span className="hscl">今日の勝利</span></div>
-                <div className="hsc"><span className="hscv" style={{color:"var(--blu)"}}>{aWins}</span><span className="hscl">累計勝利</span></div>
-                <div className="hsc"><span className="hscv" style={{color:"var(--gld)"}}>{avail.toLocaleString()}</span><span className="hscl">残りP</span></div>
-              </div>
-            </div>
-          )}
-
-          {/* EMERGENCY: カウント */}
-          {screen==="emergency" && ePhase==="count" && (
-            <div className="emrg">
-              <div style={{fontSize:11,letterSpacing:3,color:"var(--mu)",fontWeight:700}}>HOLD ON</div>
-              <div className="cnt-num">{cnt}</div>
-              <div className="cnt-bar-wrap"><div className="cnt-bar" style={{width:`${((6-cnt)/6)*100}%`}}/></div>
-              <div className="cnt-msg">この{cnt}秒だけやり過ごす<br/><b>動かない = 勝利</b></div>
-              <button className="skip-link" onClick={startBreathe}>スキップ →</button>
-            </div>
-          )}
-
-          {/* EMERGENCY: 呼吸 */}
-          {screen==="emergency" && ePhase==="breathe" && (
-            <div className="emrg">
-              <div>
-                <div style={{fontSize:11,letterSpacing:3,color:"rgba(128,188,255,.6)",fontWeight:700}}>生理的ため息</div>
-                <div style={{fontSize:11,color:"var(--mu)",marginTop:3}}>Stanford研究・最速の鎮静法</div>
-              </div>
-              <div style={{width:220,height:220,display:"flex",alignItems:"center",justifyContent:"center"}}>
-                <div className="bc" style={{transform:`scale(${bph.scale})`}}>
-                  <span className="bc-ph">{bph.label}</span>
-                  <span className="bc-t">{bTimer}</span>
-                </div>
-              </div>
-              <div className="bc-hint">
-                {bPhIdx===0 && "👃 鼻からゆっくり吸う"}
-                {bPhIdx===1 && "👃 もう一口、追加で吸い込む"}
-                {bPhIdx===2 && "👄 口から細く長く吐き出す…"}
-              </div>
-              <div className="bc-dots">{[0,1,2].map(i=><div key={i} className={`bcd ${i<bCycle?"done":""}`}/>)}</div>
-              <button className="skip-link" onClick={showReward}>スキップ</button>
-            </div>
-          )}
-
-          {/* EMERGENCY: ご褒美 */}
-          {screen==="emergency" && ePhase==="reward" && (
-            <div className="rew-wrap">
-              <div className="rew-img-zone">
-                {imgErr ? <div className="rew-fallback">🐕</div>
-                  : <img className="rew-img" src={img} alt="" onError={()=>setImgErr(true)}/>}
-                <div className="rew-overlay"><div className="rew-crown">🏆 今日も勝利した</div></div>
-              </div>
-              <div className="praise-zone">
-                <div className="praise-txt">{praise}</div>
-                <div className="praise-pts">★ +{Math.round(lf.intensity/10)*10}P 獲得見込み</div>
-              </div>
-              <div className="rew-acts">
-                <button className="btn" onClick={()=>{setPraise(rnd(praises));setImg(rnd(imgs.length?imgs:FB_IMGS));setImgErr(false);}}>🔄</button>
-                <button className="btn" onClick={()=>setScreen("form")}>📝 記録する</button>
-                <button className="btn gld" onClick={()=>setScreen("home")}>完了 ✓</button>
-              </div>
-            </div>
-          )}
-
-          {/* LOG FORM */}
-          {screen==="form" && (
-            <div style={{display:"flex",flexDirection:"column",height:"100%"}}>
-              <div className="shdr"><h2>事件を記録する</h2><p>15設問で創作素材に変換</p></div>
-              <div className="scon" style={{flex:1,overflowY:"auto"}}>
-                <div>
-                  <div className="sec">今日の結果</div>
-                  <div className="rtog" style={{marginBottom:8}}>
-                    <div className={`ropt ${!lf.reacted?"win":""}`} onClick={()=>F("reacted",false)}>✓ 乗り越えた！</div>
-                    <div className={`ropt ${lf.reacted?"lose":""}`} onClick={()=>F("reacted",true)}>次は勝てる</div>
-                  </div>
-                  <div className="pts-pre">
-                    <span className="pp-l">獲得ポイント</span>
-                    <span className="pp-v" style={{color:previewPts>0?"var(--gld)":"var(--mu)"}}>{previewPts>0?`★ ${previewPts}P`:"0P"}</span>
-                  </div>
-                </div>
-                <hr className="divider"/>
-                <div className="cat-hdr">📋 FACT — 事実</div>
-                <div><div className="sec">① 発生時刻</div><Grid opts={TIME_OPTS} val={lf.time} onChange={v=>F("time",v)} cols={5}/></div>
-                <div><div className="sec">② 場所・状況</div><textarea className="tinp" rows="2" placeholder="例：品川駅ホーム" value={lf.place} onChange={e=>F("place",e.target.value)}/></div>
-                <div><div className="sec">③ トリガーの事実</div><textarea className="tinp" rows="2" placeholder="例：横入りされた" value={lf.fact} onChange={e=>F("fact",e.target.value)}/></div>
-                <div><div className="sec">④ 実際の対応</div><Grid opts={ACTION_OPTS} val={lf.action} onChange={v=>F("action",v)} cols={2}/></div>
-                <hr className="divider"/>
-                <div className="cat-hdr">🎴 ENEMY — 敵キャラ分析</div>
-                <div><div className="sec">⑤ 敵の属性</div><Grid opts={MONSTER_OPTS} val={lf.monsterType} onChange={v=>F("monsterType",v)} cols={4}/></div>
-                <div><div className="sec">⑥ 必殺技</div><textarea className="tinp" rows="2" placeholder="例：終わらない自慢話" value={lf.skill} onChange={e=>F("skill",e.target.value)}/></div>
-                <div><div className="sec">⑦ 弱点・ダサい所</div><textarea className="tinp" rows="2" placeholder="例：上にはペコペコ" value={lf.weakness} onChange={e=>F("weakness",e.target.value)}/></div>
-                <div><div className="sec">⑧ スケール感</div><Grid opts={SCALE_OPTS} val={lf.scale} onChange={v=>F("scale",v)} cols={3}/></div>
-                <hr className="divider"/>
-                <div className="cat-hdr">💥 EXPLOSION — 本音</div>
-                <div><div className="sec">⑨ 怒りの色</div><Grid opts={COLOR_OPTS} val={lf.color} onChange={v=>F("color",v)} cols={3}/></div>
-                <div>
-                  <div className="sec">⑩ 強度（1〜100）</div>
-                  <div className="intr">
-                    <span className="intv" style={{color:lf.intensity>=70?"var(--red)":lf.intensity>=40?"var(--gld)":"var(--grn)"}}>{lf.intensity}</span>
-                    <input type="range" min="1" max="100" step="1" value={lf.intensity} className="slider"
-                      style={{background:`linear-gradient(to right,var(--blu) ${lf.intensity}%,var(--br) ${lf.intensity}%)`}}
-                      onChange={e=>F("intensity",+e.target.value)}/>
-                  </div>
-                </div>
-                <div><div className="sec">⑪ 怒りの「音」</div><textarea className="tinp" rows="2" placeholder="例：ガラスが割れる音" value={lf.sound} onChange={e=>F("sound",e.target.value)}/></div>
-                <div><div className="sec">⑫ 制約なく解消するなら <span className="hint">法律無視OK</span></div><textarea className="tinp" rows="2" placeholder="例：顔面にパイを投げる" value={lf.fantasy} onChange={e=>F("fantasy",e.target.value)}/></div>
-                <hr className="divider"/>
-                <div className="cat-hdr">🎯 CATHARSIS — 決着</div>
-                <div><div className="sec">⑬ 捨て台詞</div><textarea className="tinp" rows="2" placeholder="例：二度と話しかけんな" value={lf.quote} onChange={e=>F("quote",e.target.value)}/></div>
-                <div><div className="sec">⑭ 望む結末</div><Grid opts={END_OPTS} val={lf.ending} onChange={v=>F("ending",v)} cols={2}/></div>
-                <div><div className="sec">⑮ 事件タイトル</div><textarea className="tinp" rows="1" placeholder="例：品川駅・横入りおじさん討伐戦" value={lf.title} onChange={e=>F("title",e.target.value)}/></div>
-                <div className="acts" style={{paddingBottom:8}}>
-                  <button className="btn" onClick={()=>setScreen("home")}>キャンセル</button>
-                  <button className="btn pri" onClick={saveLog}>★ 記録して{previewPts}P獲得</button>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* SHOP — UIを横並びに変更して崩れを修正 */}
-          {screen==="shop" && (
-            <div style={{display:"flex",flexDirection:"column",height:"100%"}}>
-              <div className="shop-header"><h2>勝利ポイント & ご褒美</h2><p>乗り越えた分だけ、自分に贈る</p></div>
-              <div className="scon" style={{flex:1,overflowY:"auto"}}>
-
-                {/* ポイントヒーロー：横並びで数値が大きくても崩れない */}
-                <div className="pts-hero">
-                  <div className="pts-hero-left">
-                    <span className="pts-hero-num">{avail.toLocaleString()}</span>
-                    <div className="pts-hero-label">★ 使えるポイント</div>
-                    <div className="pts-hero-sub">獲得 {earned.toLocaleString()}P − 消費 {shopPts.toLocaleString()}P</div>
-                  </div>
-                  <div className="pts-hero-right">
-                    <div className="pts-mini">
-                      <span className="pts-mini-v" style={{color:"var(--grn)"}}>{tWins}</span>
-                      <div className="pts-mini-l">今日の勝利</div>
-                    </div>
-                    <div className="pts-mini">
-                      <span className="pts-mini-v" style={{color:"var(--blu)"}}>{aWins}</span>
-                      <div className="pts-mini-l">累計勝利</div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* アイテム追加 */}
-                <div className="add-form">
-                  <div style={{fontSize:10,fontWeight:700,letterSpacing:2,color:"var(--mu)",textTransform:"uppercase",marginBottom:8}}>＋ アイテム追加</div>
-                  <div className="add-row">
-                    <input className="sinp" placeholder="ご褒美の名前" value={newName} onChange={e=>setNewName(e.target.value)}
-                      onKeyDown={e=>{if(e.key==="Enter")addShopItem();}}/>
-                    <input className="sinp pts-inp" placeholder="P数" type="number" min="1" value={newPtsStr} onChange={e=>setNewPtsStr(e.target.value)}
-                      onKeyDown={e=>{if(e.key==="Enter")addShopItem();}}/>
-                  </div>
-                  <button className="btn pri full" style={{padding:9,fontSize:12}} onClick={addShopItem}>追加する</button>
-                </div>
-
-                {/* アイテム一覧 */}
-                <div style={{display:"flex",flexDirection:"column",gap:8}}>
-                  {shop.map(item => {
-                    const pct = Math.min(100, Math.round(avail/item.pts*100));
-                    const canExchange = avail >= item.pts;
-                    if (editingId === item.id) {
-                      return (
-                        <div key={item.id} className="shop-item">
-                          <div className="add-row">
-                            <input className="sinp" value={editName} onChange={e=>setEditName(e.target.value)}/>
-                            <input className="sinp pts-inp" type="number" min="1" value={editPtsStr} onChange={e=>setEditPtsStr(e.target.value)}/>
-                          </div>
-                          <div className="acts">
-                            <button className="btn" onClick={()=>setEditingId(null)}>キャンセル</button>
-                            <button className="btn pri" onClick={saveEdit}>保存</button>
-                          </div>
-                        </div>
-                      );
-                    }
-                    return (
-                      <div key={item.id} className="shop-item">
-                        <div className="si-top">
-                          <span className="si-name">{item.name}</span>
-                          <span className="si-pts">{item.pts.toLocaleString()}P</span>
-                        </div>
-                        <div className="si-bar"><div className="si-fi" style={{width:`${pct}%`}}/></div>
-                        <div className="si-bot">
-                          <span className="si-pct">{canExchange?"🎉 交換できる！":`${avail.toLocaleString()} / ${item.pts.toLocaleString()}P (${pct}%)`}</span>
-                          <div className="si-actions">
-                            <button className="si-btn exchange" disabled={!canExchange} onClick={()=>exchange(item)}>交換</button>
-                            <button className="si-btn" onClick={()=>startEdit(item)}>編集</button>
-                            <button className="si-btn danger" onClick={()=>deleteItem(item.id)}>削除</button>
-                          </div>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-
-                <div style={{background:"rgba(85,153,255,.05)",border:"1px solid rgba(85,153,255,.13)",borderRadius:10,padding:12,fontSize:11,color:"var(--mu)",lineHeight:1.75}}>
-                  💡 1回の勝利 = 強度÷10×10P（最大100P）<br/>
-                  6回乗り越えると ≈ 420〜600P
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* LOGS */}
-          {screen==="logs" && (
-            <div style={{display:"flex",flexDirection:"column",height:"100%"}}>
-              <div className="shdr"><h2>勝利ログ</h2><p>CSV → GeminiでNo.1は漫画、No.2は小説…</p></div>
-              <div className="scon" style={{flex:1,overflowY:"auto"}}>
-                <button className="btn full" style={{padding:12}} onClick={downloadCSV}>📥 CSVダウンロード</button>
-                <div style={{background:"rgba(255,190,46,.05)",border:"1px solid rgba(255,190,46,.15)",borderRadius:10,padding:12,fontSize:11,color:"var(--mu)",lineHeight:1.75}}>
-                  📌 Geminiへの渡し方<br/>
-                  CSVを添付して「No.1は漫画に」「No.2は小説に」<br/>「No.3と4はSuno向けの歌詞作って」
-                </div>
-                <div style={{display:"flex",flexDirection:"column",gap:6}}>
-                  {logs.map(l=>(
-                    <div key={l.id} className="log-item">
-                      <div className="ib" style={{background:"rgba(255,190,46,.1)",color:"var(--gld)"}}>{l.intensity}</div>
-                      <div className="ldet">
-                        <div className="lt">{l.title||l.fact||"記録"}</div>
-                        <div className="lm">{ago(l.date)} · {l.time} · {l.place}</div>
-                        {l.quote&&<div className="lm" style={{color:"rgba(221,224,255,.5)"}}>「{l.quote.slice(0,20)}…」</div>}
-                        <div className="ltags">
-                          {l.monsterType&&<span className="ltag">🎴{l.monsterType}</span>}
-                          {calcPts(l)>0&&<span className="ltag" style={{color:"var(--gld)",borderColor:"rgba(255,190,46,.3)"}}>★{calcPts(l)}P</span>}
-                        </div>
-                      </div>
-                      <span className="rtag" style={{background:l.reacted?"var(--rlo)":"rgba(46,204,132,.07)",color:l.reacted?"#ff9090":"var(--grn)"}}>
-                        {l.reacted?"次は勝つ":"✓勝利"}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* SETTINGS */}
-          {screen==="set" && (
-            <div style={{display:"flex",flexDirection:"column",height:"100%"}}>
-              <div className="shdr"><h2>設定</h2><p>スプシ連携で永続管理</p></div>
-              <div className="scon" style={{flex:1,overflowY:"auto"}}>
-
-                <Acc title="📊 スプレッドシート連携" sub="褒め言葉・失うもの・画像を一括管理">
-                  <p style={{fontSize:11,color:"var(--mu)",lineHeight:1.7,marginBottom:10}}>
-                    スプシIDを貼って「読み込む」だけ。<br/>シート名：「褒め言葉」「失うもの」「画像URL」
-                  </p>
-                  <input className="sinp" style={{width:"100%",marginBottom:8}} placeholder="スプレッドシートID" value={sheetId} onChange={e=>setSheetId(e.target.value)}/>
-                  <button className="btn pri full" style={{padding:9,fontSize:12}} onClick={()=>syncSheet(sheetId)}>🔄 スプシから読み込む</button>
-                  {syncSt==="ok"      && <div style={{fontSize:11,marginTop:6,color:"var(--grn)"}}>✓ 同期成功</div>}
-                  {syncSt==="err"     && <div style={{fontSize:11,marginTop:6,color:"#ff9090"}}>✗ 失敗（公開設定・シート名を確認）</div>}
-                  {syncSt==="loading" && <div style={{fontSize:11,marginTop:6,color:"var(--mu)"}}>読み込み中…</div>}
-                </Acc>
-
-                <Acc title="🏆 褒め言葉" sub={`${praises.length}件`}>
-                  <div className="tag-list">
-                    {praises.map((t,i)=><div key={i} className="tag-row"><span>{t}</span><button className="del-btn" onClick={()=>setPraises(p=>p.filter((_,j)=>j!==i))}>✕</button></div>)}
-                  </div>
-                  <input className="sinp" style={{width:"100%",marginBottom:6}} placeholder="新しい褒め言葉…" value={newPraise} onChange={e=>setNewPraise(e.target.value)}
-                    onKeyDown={e=>{if(e.key==="Enter"&&newPraise.trim()){setPraises(p=>[...p,newPraise.trim()]);setNewPraise("");}}}/>
-                  <button className="btn pri full" style={{padding:8,fontSize:11}} onClick={()=>{if(newPraise.trim()){setPraises(p=>[...p,newPraise.trim()]);setNewPraise("");}}}>＋ 追加</button>
-                </Acc>
-
-                <Acc title="⚡ 失うものリスト" sub={`${loses.length}件・ホームにランダム3つ表示`}>
-                  <div className="tag-list">
-                    {loses.map((t,i)=><div key={i} className="tag-row"><span>{t}</span><button className="del-btn" onClick={()=>setLoses(p=>p.filter((_,j)=>j!==i))}>✕</button></div>)}
-                  </div>
-                  <input className="sinp" style={{width:"100%",marginBottom:6}} placeholder="新しい項目…" value={newLose} onChange={e=>setNewLose(e.target.value)}
-                    onKeyDown={e=>{if(e.key==="Enter"&&newLose.trim()){setLoses(p=>[...p,newLose.trim()]);setNewLose("");}}}/>
-                  <button className="btn pri full" style={{padding:8,fontSize:11}} onClick={()=>{if(newLose.trim()){setLoses(p=>[...p,newLose.trim()]);setNewLose("");}}}>＋ 追加</button>
-                </Acc>
-
-                <Acc title="📸 ご褒美写真URL" sub={`${imgs.length}枚`}>
-                  <p style={{fontSize:11,color:"var(--mu)",lineHeight:1.6,marginBottom:8}}>
-                    GoogleドライブURL形式：<br/>
-                    <code style={{fontSize:10,background:"var(--s2)",padding:"1px 5px",borderRadius:4}}>drive.google.com/uc?export=view&id=【ID】</code>
-                  </p>
-                  <div className="tag-list">
-                    {imgs.map((u,i)=><div key={i} className="tag-row"><span style={{fontSize:10}}>{u.slice(0,40)}…</span><button className="del-btn" onClick={()=>setImgs(p=>p.filter((_,j)=>j!==i))}>✕</button></div>)}
-                  </div>
-                  <input className="sinp" style={{width:"100%",marginBottom:6}} placeholder="https://..." value={newImgUrl} onChange={e=>setNewImgUrl(e.target.value)}
-                    onKeyDown={e=>{if(e.key==="Enter"&&newImgUrl.trim()){setImgs(p=>[...p,newImgUrl.trim()]);setNewImgUrl("");}}}/>
-                  <button className="btn pri full" style={{padding:8,fontSize:11}} onClick={()=>{if(newImgUrl.trim()){setImgs(p=>[...p,newImgUrl.trim()]);setNewImgUrl("");}}}>＋ 追加</button>
-                </Acc>
-
-              </div>
-            </div>
-          )}
-
-        </div>
-
-        {!(screen==="emergency" && ePhase==="count") && (
-          <div className="nav">
-            {navs.map(({id,icon,lbl})=>(
-              <button key={id} className={`nb ${screen===id?"act":""}`} onClick={()=>setScreen(id)}>{icon}{lbl}</button>
-            ))}
-          </div>
-        )}
-      </div>
-    </>
-  );
+    if(!p&&!l&&!im){document.getElementById("sync-status").textContent="✗ 失敗（公開設定・シート名を確認）";return;}
+    if(p){praises=parse(p);lsSet("af_praises",praises);}
+    if(l){loses=parse(l);lsSet("af_loses",loses);}
+    if(im){imgs=parse(im);lsSet("af_imgs",imgs);}
+    sheetId=id;lsSet("af_sheetId",id);
+    document.getElementById("sync-status").style.color="var(--grn)";
+    document.getElementById("sync-status").textContent="✓ 同期成功";
+    renderSettings();
+    setTimeout(()=>document.getElementById("sync-status").textContent="",3000);
+  }catch(e){document.getElementById("sync-status").textContent="✗ エラー";}
 }
 
-ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+function toggleAcc(hdr){
+  const body=hdr.nextElementSibling;
+  const arrow=hdr.querySelector(".acc-arrow");
+  body.classList.toggle("open");
+  arrow.classList.toggle("open");
+}
+
+// ─── INIT ─────────────────────────────────────
+initForm();
+renderHomeLoses();
+updateHeader();
 </script>
+
 </body>
 </html>
