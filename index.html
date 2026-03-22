@@ -179,8 +179,8 @@ textarea::placeholder,input::placeholder{color:var(--mu)}
 .acc-sub{font-size:10px;color:var(--mu);margin-top:1px}
 .acc-arrow{color:var(--mu);font-size:12px;transition:transform .25s}
 .acc-arrow.open{transform:rotate(180deg)}
-.acc-body{padding:0 14px;max-height:0;overflow:hidden;transition:max-height .3s ease,padding .3s}
-.acc-body.open{max-height:1200px;padding:12px 14px}
+.acc-body{padding:0 14px;height:0;overflow:hidden;transition:height .3s ease,padding .3s ease}
+.acc-body.open{padding:12px 14px}
 .tag-list{display:flex;flex-direction:column;gap:5px;margin-bottom:8px;max-height:200px;overflow-y:auto;-webkit-overflow-scrolling:touch}
 .tag-row{display:flex;align-items:center;gap:8px;background:var(--s2);border-radius:7px;padding:7px 10px}
 .tag-row span{flex:1;font-size:11px;line-height:1.4;word-break:break-all}
@@ -401,14 +401,15 @@ textarea::placeholder,input::placeholder{color:var(--mu)}
       </div>
       <div class="acc">
         <div class="acc-hdr" onclick="toggleAcc(this)">
-          <div><div class="acc-title">📸 ご褒美写真URL</div><div class="acc-sub" id="imgs-count">0枚</div></div>
+          <div><div class="acc-title">📸 ご褒美写真（最大5枚）</div><div class="acc-sub" id="imgs-count">0枚</div></div>
           <span class="acc-arrow">▼</span>
         </div>
         <div class="acc-body">
-          <p style="font-size:11px;color:var(--mu);line-height:1.6;margin-bottom:8px">GoogleドライブURL形式：<br><code style="font-size:10px;background:var(--s2);padding:1px 5px;border-radius:4px">drive.google.com/uc?export=view&id=【ID】</code></p>
-          <div class="tag-list" id="imgs-list"></div>
-          <input class="sinp" id="new-img" style="width:100%;margin-bottom:6px" placeholder="https://...">
-          <button class="btn pri full" style="padding:8px;font-size:11px" onclick="addImg()">＋ 追加</button>
+          <p style="font-size:11px;color:var(--mu);line-height:1.6;margin-bottom:12px">
+            端末から写真を選ぶだけ。外部サービス不要・完全プライベート。
+          </p>
+          <div id="img-slots" style="display:flex;flex-direction:column;gap:8px;margin-bottom:8px"></div>
+          <button class="btn pri full" style="padding:10px;font-size:12px" onclick="addImgSlot()" id="btn-add-img">＋ 写真を追加（残り<span id="img-slots-remaining">5</span>枚）</button>
         </div>
       </div>
     </div>
@@ -780,10 +781,66 @@ function renderSettings(){
   document.getElementById("sheet-id-inp").value=sheetId;
   renderTagList("praises-list",praises,"praises");
   renderTagList("loses-list",loses,"loses");
-  renderTagList("imgs-list",imgs,"imgs",true);
   document.getElementById("praises-count").textContent=praises.length+"件";
   document.getElementById("loses-count").textContent=loses.length+"件・ホームにランダム3つ表示";
-  document.getElementById("imgs-count").textContent=imgs.length+"枚";
+  renderImgSlots();
+}
+
+// ── 画像スロット（base64・最大5枚）
+function renderImgSlots(){
+  const slots=document.getElementById("img-slots");
+  const rem=document.getElementById("img-slots-remaining");
+  const addBtn=document.getElementById("btn-add-img");
+  if(!slots)return;
+  const count=imgs.length;
+  if(rem) rem.textContent=5-count;
+  if(addBtn) addBtn.style.display=count>=5?"none":"block";
+  document.getElementById("imgs-count").textContent=count+"枚";
+  slots.innerHTML=imgs.map((url,i)=>{
+    const isBase64=url.startsWith("data:");
+    const preview=isBase64?url:url; // both work as img src
+    return `<div style="display:flex;align-items:center;gap:10px;background:var(--s2);border:1px solid var(--br);border-radius:8px;padding:8px 10px">
+      <img src="${preview}" style="width:44px;height:44px;object-fit:cover;border-radius:6px;flex-shrink:0;background:var(--s1)" onerror="this.style.opacity='.3'">
+      <div style="flex:1;min-width:0">
+        <div style="font-size:11px;font-weight:700">写真 ${i+1}</div>
+        <div style="font-size:10px;color:var(--mu);margin-top:2px">${isBase64?"端末から読込済み":"URL登録"}</div>
+      </div>
+      <label style="background:var(--s2);border:1px solid var(--br);border-radius:6px;color:var(--mu);font-size:11px;cursor:pointer;padding:4px 8px;white-space:nowrap">
+        変更<input type="file" accept="image/*" style="display:none" onchange="replaceImg(${i},this)">
+      </label>
+      <button style="background:none;border:none;color:var(--mu);font-size:16px;cursor:pointer;padding:0 2px" onclick="removeItem('imgs',${i})">✕</button>
+    </div>`;
+  }).join("");
+}
+
+function addImgSlot(){
+  if(imgs.length>=5)return;
+  const inp=document.createElement("input");
+  inp.type="file"; inp.accept="image/*";
+  inp.onchange=e=>{
+    const file=e.target.files[0];
+    if(!file)return;
+    const reader=new FileReader();
+    reader.onload=ev=>{
+      imgs.push(ev.target.result);
+      lsSet("af_imgs",imgs);
+      renderImgSlots();
+    };
+    reader.readAsDataURL(file);
+  };
+  inp.click();
+}
+
+function replaceImg(i,input){
+  const file=input.files[0];
+  if(!file)return;
+  const reader=new FileReader();
+  reader.onload=ev=>{
+    imgs[i]=ev.target.result;
+    lsSet("af_imgs",imgs);
+    renderImgSlots();
+  };
+  reader.readAsDataURL(file);
 }
 function renderTagList(id,arr,key,trunc){
   document.getElementById(id).innerHTML=arr.map((t,i)=>
@@ -793,12 +850,12 @@ function renderTagList(id,arr,key,trunc){
 function removeItem(key,i){
   if(key==="praises"){praises.splice(i,1);lsSet("af_praises",praises);}
   else if(key==="loses"){loses.splice(i,1);lsSet("af_loses",loses);}
-  else if(key==="imgs"){imgs.splice(i,1);lsSet("af_imgs",imgs);}
-  renderSettings();
+  else if(key==="imgs"){imgs.splice(i,1);lsSet("af_imgs",imgs);renderImgSlots();}
+  if(key!=="imgs") renderSettings();
 }
 function addPraise(){const v=document.getElementById("new-praise").value.trim();if(!v)return;praises.push(v);lsSet("af_praises",praises);document.getElementById("new-praise").value="";renderSettings();}
 function addLose(){const v=document.getElementById("new-lose").value.trim();if(!v)return;loses.push(v);lsSet("af_loses",loses);document.getElementById("new-lose").value="";renderSettings();}
-function addImg(){const v=document.getElementById("new-img").value.trim();if(!v)return;imgs.push(v);lsSet("af_imgs",imgs);document.getElementById("new-img").value="";renderSettings();}
+function addImg(){} // replaced by file upload system
 
 async function syncSheet(){
   const id=document.getElementById("sheet-id-inp").value.trim();
@@ -827,14 +884,31 @@ async function syncSheet(){
 function toggleAcc(hdr){
   const body=hdr.nextElementSibling;
   const arrow=hdr.querySelector(".acc-arrow");
-  body.classList.toggle("open");
-  arrow.classList.toggle("open");
+  const isOpen=body.classList.contains("open");
+  if(isOpen){
+    // closing: set explicit height then animate to 0
+    body.style.height=body.scrollHeight+"px";
+    requestAnimationFrame(()=>{body.style.height="0px";});
+    body.classList.remove("open");
+    arrow.classList.remove("open");
+  } else {
+    // opening: measure content height and animate to it
+    body.classList.add("open");
+    arrow.classList.add("open");
+    body.style.height=body.scrollHeight+"px";
+    // after transition, set to auto so it can grow if content changes
+    body.addEventListener("transitionend",function once(){
+      if(body.classList.contains("open")) body.style.height="auto";
+      body.removeEventListener("transitionend",once);
+    });
+  }
 }
 
 // ─── INIT ─────────────────────────────────────
 initForm();
 renderHomeLoses();
 updateHeader();
+renderImgSlots();
 </script>
 </body>
 </html>
