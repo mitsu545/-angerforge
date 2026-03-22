@@ -1191,16 +1191,14 @@ document.getElementById("btn-save-log").onclick=()=>{
     date:Date.now()
   };
   logs.unshift(log);lsSet("af_logs",logs);
-  // 現在のセッションにボーナスPTを追加（2重勝利にならないよう既存セッションを更新）
-  const bonus=calcBonus(formState.intensity||7);
+  // ホームボタンを押したセッションにボーナスPTを追加
+  // currentWinIdがない（直接記録タブから来た）場合はポイントなし
   if(currentWinId){
+    const bonus=calcBonus(formState.intensity||7);
     const w=wins.find(x=>x.id===currentWinId);
     if(w){w.pts=WIN_BASE_PTS+bonus;w.logId=logId;}
-  }else{
-    // セッションなし（直接記録タブから）→新セッション作成
-    wins.push({id:logId,date:Date.now(),pts:WIN_BASE_PTS+bonus,logId});
+    lsSet("af_wins",wins);
   }
-  lsSet("af_wins",wins);
   currentWinId=null;
   resetForm();goScreen("home");
   updateHeader();
