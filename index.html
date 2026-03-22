@@ -4,13 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black">
 <meta name="apple-mobile-web-app-title" content="HYBRS">
 <meta name="theme-color" content="#0d0f14">
 <title>HYBRS</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@400;500&family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230a0c10'/%3E%3Cdefs%3E%3ClinearGradient id='lg' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23b8e4ff'/%3E%3Cstop offset='1' stop-color='%235ba8e0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpolygon points='62,8 32,54 54,54 38,92 72,42 48,42' fill='url(%23lg)'/%3E%3C/svg%3E">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Crect width='120' height='120' rx='24' fill='%230a0a0f'/%3E%3Cdefs%3E%3ClinearGradient id='bolt' x1='0%25' y1='0%25' x2='60%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23ff6060'/%3E%3Cstop offset='100%25' stop-color='%23cc1818'/%3E%3C/linearGradient%3E%3ClinearGradient id='glow' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23ff9090' stop-opacity='0.6'/%3E%3Cstop offset='100%25' stop-color='%23ff4040' stop-opacity='0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cellipse cx='60' cy='52' rx='28' ry='28' fill='url(%23glow)'/%3E%3Cpolygon points='68,8 38,55 60,55 44,90 80,40 56,40' fill='url(%23bolt)' stroke='%23ff8080' stroke-width='1' stroke-linejoin='round'/%3E%3Ctext x='60' y='108' text-anchor='middle' font-family='Arial Black,sans-serif' font-weight='900' font-size='16' fill='%23cc2020' letter-spacing='3'%3EHYBRS%3C/text%3E%3C/svg%3E">
+
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 :root{
@@ -108,11 +107,6 @@ html,body{height:100%;overflow:hidden;background:#0e0c0a;color:var(--tx)}
 .form-hdr p{font-size:10px;color:var(--mu);margin-top:2px}
 
 /* 結果バー（常時表示） */
-.result-bar{padding:10px 16px;background:var(--s1);border-bottom:1px solid var(--br);flex-shrink:0;display:flex;align-items:center;gap:8px}
-.rtog{display:flex;gap:6px;flex:1}
-.ropt{flex:1;padding:8px;text-align:center;background:var(--s2);border:1px solid var(--br);border-radius:7px;font-size:12px;cursor:pointer;transition:all .15s;user-select:none}
-.ropt.win{background:rgba(72,180,114,.07);border-color:var(--grn);color:var(--grn)}
-.ropt.lose{background:var(--rlo);border-color:var(--red);color:#e08080}
 .pts-pill{background:rgba(200,152,46,.08);border:1px solid rgba(200,152,46,.2);border-radius:12px;padding:5px 10px;font-family:var(--fm);font-size:11px;color:var(--gld);flex-shrink:0;white-space:nowrap}
 
 /* セクションカード（折りたたみ） */
@@ -170,10 +164,9 @@ html,body{height:100%;overflow:hidden;background:#0e0c0a;color:var(--tx)}
   background:#1a3850;border-color:#5090c8;color:#b0d8ff;
   box-shadow:0 0 0 1px #2a5878;
 }
-.chip.sel-blu{background:rgba(106,159,216,.12);border-color:var(--blu);color:#a8c8f0}
 
 /* グリッドチップ（短い選択肢向け） */
-.chips-grid{display:flex;flex-wrap:wrap;gap:5px}
+
 
 /* テキスト入力 */
 .ti-txt{width:100%;background:var(--s2);border:1px solid var(--br);border-radius:8px;padding:8px 11px;color:var(--tx);font-family:var(--fn);font-size:13px;resize:none;outline:none;transition:border-color .2s;line-height:1.6}
@@ -255,7 +248,7 @@ html,body{height:100%;overflow:hidden;background:#0e0c0a;color:var(--tx)}
 .img-type{font-size:10px;color:var(--mu);margin-top:2px}
 .img-chg{background:var(--s2);border:1px solid var(--br);border-radius:5px;color:var(--mu);font-size:11px;cursor:pointer;padding:3px 8px;white-space:nowrap}
 .img-del{background:none;border:none;color:var(--dim);font-size:15px;cursor:pointer;padding:0 2px}
-.sync-status-box{background:rgba(106,159,216,.06);border:1px solid rgba(106,159,216,.15);border-radius:8px;padding:10px 12px;margin-bottom:10px}
+
 
 /* ──────── SHARED BUTTONS ──────── */
 .btn{flex:1;padding:10px 6px;border-radius:8px;border:1px solid var(--br);background:var(--s2);color:var(--tx);font-family:var(--fn);font-size:12px;font-weight:500;cursor:pointer;transition:all .15s}
@@ -267,7 +260,6 @@ html,body{height:100%;overflow:hidden;background:#0e0c0a;color:var(--tx)}
 .shdr{padding:12px 16px 10px;border-bottom:1px solid var(--br);flex-shrink:0}
 .shdr h2{font-size:15px;font-weight:700}
 .shdr p{font-size:10px;color:var(--mu);margin-top:2px}
-.divider{border:none;border-top:1px solid var(--br);margin:2px 0}
 </style>
 </head>
 <body>
@@ -275,7 +267,7 @@ html,body{height:100%;overflow:hidden;background:#0e0c0a;color:var(--tx)}
 
   <!-- HDR -->
   <div class="hdr">
-    <span class="logo" id="app-logo"><svg width="12" height="16" viewBox="0 0 12 20" style="vertical-align:-2px;margin-right:5px"><defs><linearGradient id="lg2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff8080"/><stop offset="1" stop-color="#e03030"/></linearGradient></defs><polygon points="9,1 2,10 6,10 3,19 11,8 6,8" fill="url(#lg2)"/></svg>HYBRS</span>
+    <span class="logo" id="app-logo"><svg width="14" height="20" viewBox="0 0 14 24" style="vertical-align:-3px;margin-right:4px"><defs><linearGradient id="bl" x1="0" y1="0" x2="0.2" y2="1"><stop offset="0" stop-color="#fff" stop-opacity="0.95"/><stop offset="0.4" stop-color="#ff9090"/><stop offset="1" stop-color="#e02020"/></linearGradient></defs><polygon points="10,1 3,12 7.5,12 4,23 12,10 7,10" fill="url(#bl)"/></svg>HYBRS</span>
     <div class="hdr-r">
       <span class="bdg g" id="hdr-pts">★ 0P</span>
       <span class="bdg v" id="hdr-wins">今日 0勝</span>
@@ -665,7 +657,7 @@ html,body{height:100%;overflow:hidden;background:#0e0c0a;color:var(--tx)}
 
 <script>
 // ══════════════════════════════════════════════════════
-//  ANGERFORGE — JS v8
+//  HYBRS — JS v1.0
 // ══════════════════════════════════════════════════════
 
 const SHEET_ID = "1Ifxf58OVebL7KcWvOBXSPwK7K_xkGfzk5cSJPumRI58";
@@ -703,54 +695,13 @@ const O = {
     "不安","疲れ","悲しみ","焦り",
     "睡眠不足","空腹・体調不良","集中を邪魔された","何も感じてなかった","その他"
   ],
-  // ⑭ 自分が求めていたもの（添付資料に完全一致）
-  need: [
-    "尊重","公平","効率","安心","承認","自由",
-    "秩序・ルール","誠実さ・嘘のなさ","共感・理解","迅速な対応",
-    "自分のペース・裁量","正当な評価","正確なデータや事実",
-    "筋の通った説明・ロジック","静寂やノイズのない環境","その他"
-  ],
-  // ⑮ 自分の思考のクセ（添付資料に完全一致）
-  habit: [
-    "「〜すべき」という決めつけ","白黒思考(100か0か)","過度な一般化(いつもこうだ)",
-    "被害者意識","読心術(どうせバカにしている)",
-    "感情的決めつけ（私が不快だから相手が悪い）",
-    "マイナス思考（悪い部分ばかり目につく）",
-    "自己関連付け（すべて自分のせい、自分への攻撃だと感じる）",
-    "完璧主義","効率至上主義（無駄を許せない）",
-    "原因究明のしすぎ（「なぜ？」を詰めすぎる）",
-    "マニュアル・ルールへの固執","なし","その他"
-  ],
-  // ⑰ 望む結末（添付資料に完全一致）
-  ending: [
-    "社会的に破滅","改心して謝罪","ギャグ化して消滅","完全に無力化",
-    "公開処刑","仕事を失う","因果応報","逆に自分が出世",
-    "永遠に覚えていてやる","無視して消す","和解して仲間になる",
-    "自分が圧倒的な成功を収めて見返す","エラーを吐いて強制終了する",
-    "記憶から完全にデリートする","論破して完全に沈黙させる",
-    "遠い星へ物理的に射出する","肥料にして自分の養分にする","その他"
-  ],
-  // ⑳ この感情を曲にするなら（添付資料に完全一致）
+  // ⑬ 曲にするなら
   music: [
     "激しく叫ぶ","静かに語りかける","皮肉っぽく歌う","泣きながら歌う","リズムで刻む",
     "壮大なオーケストラで絶望を表現","ポップで明るく狂気を歌う",
     "呪文のようにブツブツと唱える（お経風）","民族音楽風に怒りを鎮める",
     "8ビット（ファミコン風）でコミカルに","EDMでテンションに任せて踊り狂う",
     "昭和歌謡風に哀愁を漂わせる","ゲームのボス戦BGM風","不協和音の現代音楽"
-  ],
-  // ㉑ 事後の自分の状態（添付資料に完全一致）
-  after: [
-    "すぐ回復","引きずった","昇華できた","まだ怒ってる","疲労困憊",
-    "怒りすぎて逆に笑えてきた","なぜか自己嫌悪","分析対象として割り切れた",
-    "ログ化して少しスッキリした","リセット（再起動）に時間がかかっている","創作意欲が湧いてきた"
-  ],
-  // ㉒ 今後どうするか（添付資料に完全一致）
-  next: [
-    "何もしない","距離を置く","創作に使う","いつか話す","仕組み・ルールで防ぐ",
-    "即座にネタとしてメモする","物理的な壁（イヤホンなど）を導入する",
-    "相手への期待値をゼロに再設定する",
-    "条件分岐（このパターンが来たらこう返す）で対応策を自動化する",
-    "データを蓄積して傾向を見る","新しいアプリやツールを開発する動機にする","その他"
   ],
 };
 
@@ -997,7 +948,7 @@ function toggleChip(el, key, multi, cls){
 
 function updateBadge(key){
   // カードのバッジ更新（入力済み表示）
-  const cardMap={time:"fact",action:"fact",monster:"enemy",body:"exp",trigger:"ana",before:"ana",need:"ana",habit:"ana",ending:"cat",music:"cre",after:"cre",next:"cre"};
+  const cardMap={time:"fact",action:"fact",monster:"enemy",skill:"enemy",body:"exp",fantasy:"exp",quote:"exp",trigger:"ana",before:"ana",music:"ana"};
   const cardId=cardMap[key];
   if(!cardId)return;
   // カード内の設問が1つでも入力されていればfilled
@@ -1008,7 +959,7 @@ function updateBadge(key){
     return false;
   });
   // テキスト入力も確認
-  const textIds={fact:["f-place","f-fact"],enemy:["f-skill","f-weakness","f-monster-name"],exp:["f-fantasy"],cat:["f-quote","f-title"]};
+  const textIds={fact:["f-place","f-fact"],enemy:["f-skill","f-monster-name"],exp:["f-body-free","f-fantasy","f-quote"],ana:["f-title","f-note"]};
   const tFilled=(textIds[cardId]||[]).some(id=>{const el=document.getElementById(id);return el&&el.value.trim();});
   const badge=document.getElementById("badge-"+cardId);
   if(badge){
@@ -1022,7 +973,7 @@ function setupTextBadge(id,cardId){
   const el=document.getElementById(id);
   if(el)el.addEventListener("input",()=>{
     // 全テキスト入力をチェック
-    const textIds={fact:["f-place","f-fact"],enemy:["f-skill","f-weakness","f-monster-name"],exp:["f-fantasy"],cat:["f-quote","f-title"]};
+    const textIds={fact:["f-place","f-fact"],enemy:["f-skill","f-monster-name"],exp:["f-body-free","f-fantasy","f-quote"],ana:["f-title","f-note"]};
     const tFilled=(textIds[cardId]||[]).some(tid=>{const te=document.getElementById(tid);return te&&te.value.trim();});
     const badge=document.getElementById("badge-"+cardId);
     if(badge){badge.textContent=tFilled?"入力済み":"未記入";badge.className="sec-card-badge"+(tFilled?" filled":"");}
@@ -1049,12 +1000,7 @@ function initFormChips(){
   ["f-title"].forEach(id=>setupTextBadge(id,"ana"));
 }
 
-function setReacted(v){
-  formState.reacted=v;
-  document.getElementById("ropt-win").className="ropt win"+(v?"":" sel");
-  document.getElementById("ropt-lose").className="ropt lose"+(v?" sel":"");
-  updatePtsPreview();
-}
+
 function updateIntensity(v){
   formState.intensity=+v;
   const col=+v>=8?"var(--red)":+v>=5?"var(--gld)":"var(--grn)";
@@ -1075,14 +1021,17 @@ function updatePtsPreview(){
 
 // フォームリセット
 function resetForm(){
-  formState={reacted:false,intensity:7,time:[],action:[],monster:[],body:[],trigger:[],before:[],need:[],habit:[],ending:[],music:[],after:[],next:[]};
+  formState={reacted:false,intensity:7,time:[],action:[],monster:[],body:[],trigger:[],before:[],music:[]};
   // チップリセット
   document.querySelectorAll(".chip").forEach(c=>{c.className="chip";});
   document.querySelectorAll(".free-input-wrap").forEach(w=>{w.className="free-input-wrap";});
   ["f-place","f-fact","f-skill","f-monster-name","f-fantasy","f-quote","f-title","f-note","f-action-free","f-monster-free","f-body-free","f-trigger-free","f-before-free"].forEach(id=>{const el=document.getElementById(id);if(el)el.value="";});
   document.querySelectorAll(".sec-card-badge").forEach(b=>{b.textContent="未記入";b.className="sec-card-badge";});
-  document.getElementById("ropt-win").className="ropt win sel";
-  document.getElementById("ropt-lose").className="ropt lose";
+  // ropt-win/lose は非表示UIのため条件付き
+  const rw=document.getElementById("ropt-win");
+  const rl=document.getElementById("ropt-lose");
+  if(rw)rw.className="ropt win sel";
+  if(rl)rl.className="ropt lose";
   document.getElementById("intensity-slider").value=7;
   updateIntensity(7);
   updatePtsPreview();
@@ -1104,12 +1053,9 @@ document.getElementById("btn-save-log").onclick=()=>{
     body:[...formState.body,f("f-body-free")].filter(Boolean).join("/"),
     fantasy:f("f-fantasy"),
     trigger:formState.trigger[0]||"",before:formState.before.join("/"),
-    need:formState.need.join("/"),habit:formState.habit.join("/"),
     quote:f("f-quote"),
-    ending:[...formState.ending,f("f-ending-free")].filter(Boolean).join("/"),
     title:f("f-title"),
-    music:formState.music[0]||"",after:formState.after[0]||"",
-    next:[...formState.next,f("f-next-free")].filter(Boolean).join("/"),
+    music:formState.music[0]||"",
     note:f("f-note"),
     reacted:false,
     date:Date.now()
