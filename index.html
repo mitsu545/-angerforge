@@ -463,7 +463,14 @@ let shop = lsGet("af_shop",DEF_SHOP);
 let shopPts = lsGet("af_shopPts",0);
 let praises = lsGet("af_praises",DEF_PRAISES);
 let loses = lsGet("af_loses",DEF_LOSES);
-let imgs = lsGet("af_imgs",DEF_IMGS);
+// 画像は個別キーから読込（容量対策）
+let imgs = (()=>{
+  const count=lsGet("af_imgs_count",0);
+  if(count===0) return [...DEF_IMGS]; // デフォルト画像
+  const loaded=[];
+  for(let i=0;i<count;i++){const v=lsGet("af_img_"+i,null);if(v)loaded.push(v);}
+  return loaded.length>0?loaded:[...DEF_IMGS];
+})();
 let sheetId = lsGet("af_sheetId","");
 
 // ─── HELPERS ──────────────────────────────────
@@ -724,6 +731,26 @@ function addShopItem(){
   renderShop();
 }
 function deleteItem(id){shop=shop.filter(i=>i.id!==id);lsSet("af_shop",shop);renderShop();}
+function addShopItemFromSettings(){
+  const name=document.getElementById("new-item-name2").value.trim();
+  const pts=parseInt(document.getElementById("new-item-pts2").value);
+  if(!name||isNaN(pts)||pts<=0){alert("名前とP数を入力してください");return;}
+  shop.push({id:Date.now(),name,pts});
+  lsSet("af_shop",shop);
+  document.getElementById("new-item-name2").value="";
+  document.getElementById("new-item-pts2").value="";
+  alert(name+" を追加しました！");
+}
+function addShopItemFromSettings(){
+  const name=document.getElementById("new-item-name2").value.trim();
+  const pts=parseInt(document.getElementById("new-item-pts2").value);
+  if(!name||isNaN(pts)||pts<=0)return;
+  shop.push({id:Date.now(),name,pts});
+  lsSet("af_shop",shop);
+  document.getElementById("new-item-name2").value="";
+  document.getElementById("new-item-pts2").value="";
+  alert(name+"を追加しました！");
+}
 function editItem(id){
   const item=shop.find(i=>i.id===id);
   if(!item)return;
@@ -778,11 +805,6 @@ function downloadCSV(){
 
 // ─── SETTINGS ────────────────────────────────
 function renderSettings(){
-  document.getElementById("sheet-id-inp").value=sheetId;
-  renderTagList("praises-list",praises,"praises");
-  renderTagList("loses-list",loses,"loses");
-  document.getElementById("praises-count").textContent=praises.length+"件";
-  document.getElementById("loses-count").textContent=loses.length+"件・ホームにランダム3つ表示";
   renderImgSlots();
 }
 
@@ -813,6 +835,24 @@ function renderImgSlots(){
   }).join("");
 }
 
+// 画像は1枚ずつ個別キー(af_img_0〜af_img_4)で保存 → 5MB上限を回避
+function saveImgsIndividually(){
+  for(let i=0;i<5;i++){
+    if(imgs[i]) lsSet("af_img_"+i, imgs[i]);
+    else{ try{localStorage.removeItem("af_img_"+i);}catch{} }
+  }
+  lsSet("af_imgs_count", imgs.length);
+}
+function loadImgsIndividually(){
+  const count = lsGet("af_imgs_count", 0);
+  const loaded = [];
+  for(let i=0;i<count;i++){
+    const v = lsGet("af_img_"+i, null);
+    if(v) loaded.push(v);
+  }
+  return loaded;
+}
+
 function addImgSlot(){
   if(imgs.length>=5)return;
   const inp=document.createElement("input");
@@ -820,13 +860,23 @@ function addImgSlot(){
   inp.onchange=e=>{
     const file=e.target.files[0];
     if(!file)return;
-    const reader=new FileReader();
-    reader.onload=ev=>{
-      imgs.push(ev.target.result);
-      lsSet("af_imgs",imgs);
+    // 圧縮してから保存（最大800px、品質0.7）
+    const img2=new Image();
+    const url=URL.createObjectURL(file);
+    img2.onload=()=>{
+      const MAX=800;
+      const canvas=document.createElement("canvas");
+      let w=img2.width, h=img2.height;
+      if(w>MAX||h>MAX){ if(w>h){h=Math.round(h*MAX/w);w=MAX;}else{w=Math.round(w*MAX/h);h=MAX;} }
+      canvas.width=w; canvas.height=h;
+      canvas.getContext("2d").drawImage(img2,0,0,w,h);
+      const data=canvas.toDataURL("image/jpeg",0.7);
+      URL.revokeObjectURL(url);
+      imgs.push(data);
+      saveImgsIndividually();
       renderImgSlots();
     };
-    reader.readAsDataURL(file);
+    img2.src=url;
   };
   inp.click();
 }
@@ -834,13 +884,22 @@ function addImgSlot(){
 function replaceImg(i,input){
   const file=input.files[0];
   if(!file)return;
-  const reader=new FileReader();
-  reader.onload=ev=>{
-    imgs[i]=ev.target.result;
-    lsSet("af_imgs",imgs);
+  const img2=new Image();
+  const url=URL.createObjectURL(file);
+  img2.onload=()=>{
+    const MAX=800;
+    const canvas=document.createElement("canvas");
+    let w=img2.width, h=img2.height;
+    if(w>MAX||h>MAX){ if(w>h){h=Math.round(h*MAX/w);w=MAX;}else{w=Math.round(w*MAX/h);h=MAX;} }
+    canvas.width=w; canvas.height=h;
+    canvas.getContext("2d").drawImage(img2,0,0,w,h);
+    const data=canvas.toDataURL("image/jpeg",0.7);
+    URL.revokeObjectURL(url);
+    imgs[i]=data;
+    saveImgsIndividually();
     renderImgSlots();
   };
-  reader.readAsDataURL(file);
+  img2.src=url;
 }
 function renderTagList(id,arr,key,trunc){
   document.getElementById(id).innerHTML=arr.map((t,i)=>
@@ -850,7 +909,7 @@ function renderTagList(id,arr,key,trunc){
 function removeItem(key,i){
   if(key==="praises"){praises.splice(i,1);lsSet("af_praises",praises);}
   else if(key==="loses"){loses.splice(i,1);lsSet("af_loses",loses);}
-  else if(key==="imgs"){imgs.splice(i,1);lsSet("af_imgs",imgs);renderImgSlots();}
+  else if(key==="imgs"){imgs.splice(i,1);saveImgsIndividually();renderImgSlots();}
   if(key!=="imgs") renderSettings();
 }
 function addPraise(){const v=document.getElementById("new-praise").value.trim();if(!v)return;praises.push(v);lsSet("af_praises",praises);document.getElementById("new-praise").value="";renderSettings();}
