@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
@@ -35,16 +34,16 @@ html,body{height:100%;overflow:hidden;background:#0e0c0a;color:var(--tx)}
 
 /* ── HDR */
 .hdr{display:flex;justify-content:space-between;align-items:center;padding:10px 16px;border-bottom:1px solid #504030;background:#1a1612;flex-shrink:0}
-.logo{font-family:var(–fb);font-size:20px;letter-spacing:3px;color:#e84040;text-shadow:0 0 14px rgba(232,64,64,.35)}
+.logo{font-family:var(--fb);font-size:20px;letter-spacing:3px;color:#e84040;text-shadow:0 0 14px rgba(232,64,64,.35)}
 .hdr-r{display:flex;gap:7px}
-.bdg{font-family:var(–fm);font-size:11px;border-radius:20px;padding:3px 10px;border:1px solid}
-.bdg.g{color:var(–gld);background:rgba(200,152,46,.08);border-color:rgba(200,152,46,.22)}
-.bdg.v{color:var(–grn);background:rgba(72,180,114,.06);border-color:rgba(72,180,114,.2)}
+.bdg{font-family:var(--fm);font-size:11px;border-radius:20px;padding:3px 10px;border:1px solid}
+.bdg.g{color:var(--gld);background:rgba(200,152,46,.08);border-color:rgba(200,152,46,.22)}
+.bdg.v{color:var(--grn);background:rgba(72,180,114,.06);border-color:rgba(72,180,114,.2)}
 
 /* ── NAV */
-.nav{display:flex;background:#1a1612;border-top:1px solid #504030;flex-shrink:0;padding-bottom:var(–safe-bot)}
-.nb{flex:1;padding:9px 2px 5px;background:none;border:none;color:var(–mu);font-family:var(–fn);font-size:9px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;transition:color .2s;min-height:52px}
-.nb.act{color:var(–blu)}
+.nav{display:flex;background:#1a1612;border-top:1px solid #504030;flex-shrink:0;padding-bottom:var(--safe-bot)}
+.nb{flex:1;padding:9px 2px 5px;background:none;border:none;color:var(--mu);font-family:var(--fn);font-size:9px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;transition:color .2s;min-height:52px}
+.nb.act{color:var(--blu)}
 .nb svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:2}
 
 /* ── SCREEN — overflow:hidden必須でnavが押し出されない */
@@ -57,133 +56,133 @@ html,body{height:100%;overflow:hidden;background:#0e0c0a;color:var(--tx)}
 /* ──────── HOME ──────── */
 .home-body{display:flex;flex-direction:column;align-items:center;padding:24px 18px 32px;gap:22px}
 .pbtn{
-width:168px;height:168px;border-radius:50%;border:none;cursor:pointer;
-background:conic-gradient(from 200deg,#4a1a0a,#8c2a10,#c04020,#8c2a10,#4a1a0a);
-display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;
-animation:hbp 3s ease-in-out infinite;transition:transform .12s;
+  width:168px;height:168px;border-radius:50%;border:none;cursor:pointer;
+  background:conic-gradient(from 200deg,#4a1a0a,#8c2a10,#c04020,#8c2a10,#4a1a0a);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;
+  animation:hbp 3s ease-in-out infinite;transition:transform .12s;
 }
 .pbtn:active{transform:scale(.9)}
 @keyframes hbp{0%,100%{box-shadow:0 0 60px rgba(200,60,40,.18)}50%{box-shadow:0 0 90px rgba(200,60,40,.3)}}
-.pb-main{font-family:var(–fb);font-size:26px;letter-spacing:3px;color:#fff;line-height:1}
+.pb-main{font-family:var(--fb);font-size:26px;letter-spacing:3px;color:#fff;line-height:1}
 .pb-sub{font-size:10px;color:rgba(255,255,255,.38)}
 .lose-wrap{display:flex;flex-direction:column;gap:6px;width:100%}
 .lose-item{display:flex;align-items:center;gap:11px;background:rgba(200,70,60,.04);border:1px solid rgba(200,70,60,.1);border-radius:9px;padding:9px 13px}
-.lose-n{font-family:var(–fb);font-size:24px;color:rgba(200,80,60,.2);flex-shrink:0;width:18px;line-height:1}
+.lose-n{font-family:var(--fb);font-size:24px;color:rgba(200,80,60,.2);flex-shrink:0;width:18px;line-height:1}
 .lose-t{font-size:12px;color:rgba(230,220,200,.65);line-height:1.4}
 .hstats{display:flex;gap:7px;width:100%}
 .hsc{flex:1;background:#1e1a14;border:1px solid #504030;border-radius:9px;padding:9px 5px;text-align:center;min-width:0}
-.hscv{font-family:var(–fb);font-size:24px;letter-spacing:1px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.hscl{font-size:8px;color:var(–mu);margin-top:2px}
+.hscv{font-family:var(--fb);font-size:24px;letter-spacing:1px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hscl{font-size:8px;color:var(--mu);margin-top:2px}
 
 /* ──────── EMERGENCY ──────── */
 .emrg-inner{flex:1;min-height:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px 22px;gap:24px;text-align:center;overflow-y:auto;-webkit-overflow-scrolling:touch}
-.cnt-num{font-family:var(–fb);font-size:120px;line-height:1;color:var(–red);animation:flk .9s ease-in-out infinite}
+.cnt-num{font-family:var(--fb);font-size:120px;line-height:1;color:var(--red);animation:flk .9s ease-in-out infinite}
 @keyframes flk{0%,100%{opacity:1}50%{opacity:.55}}
-.cnt-bar-wrap{width:180px;height:3px;background:var(–s2);border-radius:2px;overflow:hidden}
-.cnt-bar{height:100%;background:var(–red);transition:width 1s linear}
+.cnt-bar-wrap{width:180px;height:3px;background:var(--s2);border-radius:2px;overflow:hidden}
+.cnt-bar{height:100%;background:var(--red);transition:width 1s linear}
 .cnt-msg{font-size:14px;color:rgba(230,220,200,.45);line-height:2}
-.cnt-msg b{color:var(–tx)}
+.cnt-msg b{color:var(--tx)}
 .bc{width:126px;height:126px;border-radius:50%;background:rgba(106,159,216,.1);border:2px solid rgba(106,159,216,.25);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;transition:none}
-.bc-ph{font-family:var(–fb);font-size:14px;letter-spacing:2px;color:#90b8e0}
-.bc-t{font-family:var(–fm);font-size:30px;color:var(–blu)}
-.bc-hint{font-size:12px;color:var(–mu);max-width:240px;line-height:1.9}
+.bc-ph{font-family:var(--fb);font-size:14px;letter-spacing:2px;color:#90b8e0}
+.bc-t{font-family:var(--fm);font-size:30px;color:var(--blu)}
+.bc-hint{font-size:12px;color:var(--mu);max-width:240px;line-height:1.9}
 .bc-dots{display:flex;gap:7px}
-.bcd{width:32px;height:3px;background:var(–br);border-radius:2px;transition:background .4s}
-.bcd.done{background:var(–blu)}
-.skip-lnk{background:none;border:none;color:var(–dim);font-size:11px;cursor:pointer;font-family:var(–fn);text-decoration:underline}
+.bcd{width:32px;height:3px;background:var(--br);border-radius:2px;transition:background .4s}
+.bcd.done{background:var(--blu)}
+.skip-lnk{background:none;border:none;color:var(--dim);font-size:11px;cursor:pointer;font-family:var(--fn);text-decoration:underline}
 
 /* ──────── REWARD ──────── */
-.rew-img-zone{width:100%;height:240px;overflow:hidden;flex-shrink:0;background:var(–s2);position:relative}
+.rew-img-zone{width:100%;height:240px;overflow:hidden;flex-shrink:0;background:var(--s2);position:relative}
 .rew-img{width:100%;height:100%;object-fit:cover;display:block}
-.rew-fallback{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:72px;background:var(–s1)}
+.rew-fallback{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:72px;background:var(--s1)}
 .rew-overlay{position:absolute;bottom:0;left:0;right:0;padding:12px 16px;background:linear-gradient(transparent,rgba(14,12,10,.95))}
-.rew-crown{font-family:var(–fb);font-size:12px;letter-spacing:3px;color:var(–gld)}
+.rew-crown{font-family:var(--fb);font-size:12px;letter-spacing:3px;color:var(--gld)}
 .praise-zone{padding:14px 16px 10px;flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;min-height:0}
 .praise-txt{font-size:19px;font-weight:700;line-height:1.65;margin-bottom:10px}
-.praise-pts{display:inline-flex;align-items:center;gap:5px;background:rgba(200,152,46,.08);border:1px solid rgba(200,152,46,.22);border-radius:20px;padding:3px 11px;font-family:var(–fm);font-size:11px;color:var(–gld)}
+.praise-pts{display:inline-flex;align-items:center;gap:5px;background:rgba(200,152,46,.08);border:1px solid rgba(200,152,46,.22);border-radius:20px;padding:3px 11px;font-family:var(--fm);font-size:11px;color:var(--gld)}
 .rew-acts{display:flex;gap:6px;padding:10px 16px 16px;flex-shrink:0}
 
 /* ──────── FORM — 新設問UI ──────── */
-.form-hdr{padding:12px 16px 10px;border-bottom:1px solid var(–br);flex-shrink:0}
+.form-hdr{padding:12px 16px 10px;border-bottom:1px solid var(--br);flex-shrink:0}
 .form-hdr h2{font-size:15px;font-weight:700}
-.form-hdr p{font-size:10px;color:var(–mu);margin-top:2px}
+.form-hdr p{font-size:10px;color:var(--mu);margin-top:2px}
 
 /* 結果バー（常時表示） */
-.result-bar{padding:10px 16px;background:var(–s1);border-bottom:1px solid var(–br);flex-shrink:0;display:flex;align-items:center;gap:8px}
+.result-bar{padding:10px 16px;background:var(--s1);border-bottom:1px solid var(--br);flex-shrink:0;display:flex;align-items:center;gap:8px}
 .rtog{display:flex;gap:6px;flex:1}
-.ropt{flex:1;padding:8px;text-align:center;background:var(–s2);border:1px solid var(–br);border-radius:7px;font-size:12px;cursor:pointer;transition:all .15s;user-select:none}
-.ropt.win{background:rgba(72,180,114,.07);border-color:var(–grn);color:var(–grn)}
-.ropt.lose{background:var(–rlo);border-color:var(–red);color:#e08080}
-.pts-pill{background:rgba(200,152,46,.08);border:1px solid rgba(200,152,46,.2);border-radius:12px;padding:5px 10px;font-family:var(–fm);font-size:11px;color:var(–gld);flex-shrink:0;white-space:nowrap}
+.ropt{flex:1;padding:8px;text-align:center;background:var(--s2);border:1px solid var(--br);border-radius:7px;font-size:12px;cursor:pointer;transition:all .15s;user-select:none}
+.ropt.win{background:rgba(72,180,114,.07);border-color:var(--grn);color:var(--grn)}
+.ropt.lose{background:var(--rlo);border-color:var(--red);color:#e08080}
+.pts-pill{background:rgba(200,152,46,.08);border:1px solid rgba(200,152,46,.2);border-radius:12px;padding:5px 10px;font-family:var(--fm);font-size:11px;color:var(--gld);flex-shrink:0;white-space:nowrap}
 
 /* セクションカード（折りたたみ） */
 .sec-card{background:#1e1a14;border:1px solid #504030;border-radius:10px;overflow:hidden}
 .sec-card+.sec-card{margin-top:8px}
 .sec-card-hdr{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;cursor:pointer;user-select:none;transition:background .15s}
-.sec-card-hdr:active{background:var(–s2)}
+.sec-card-hdr:active{background:var(--s2)}
 .sec-card-title{font-size:12px;font-weight:700;display:flex;align-items:center;gap:7px}
-.sec-card-badge{font-size:9px;color:var(–mu);background:var(–s2);border:1px solid var(–br);border-radius:10px;padding:2px 7px}
-.sec-card-badge.filled{color:var(–grn);background:rgba(72,180,114,.08);border-color:rgba(72,180,114,.25)}
-.sec-card-arrow{color:var(–dim);font-size:11px;transition:transform .25s;flex-shrink:0}
+.sec-card-badge{font-size:9px;color:var(--mu);background:var(--s2);border:1px solid var(--br);border-radius:10px;padding:2px 7px}
+.sec-card-badge.filled{color:var(--grn);background:rgba(72,180,114,.08);border-color:rgba(72,180,114,.25)}
+.sec-card-arrow{color:var(--dim);font-size:11px;transition:transform .25s;flex-shrink:0}
 .sec-card-arrow.open{transform:rotate(180deg)}
 .sec-card-body{height:0;overflow:hidden;transition:height .3s ease}
 .sec-card-body.open{/* height set by JS */}
 .sec-card-inner{padding:12px 14px;display:flex;flex-direction:column;gap:10px}
 
 /* 設問ラベル */
-.q-lbl{font-size:9px;font-weight:700;letter-spacing:2px;color:var(–mu);text-transform:uppercase;margin-bottom:5px}
-.q-hint{font-size:10px;color:var(–dim);letter-spacing:0;text-transform:none;font-weight:400;margin-left:5px}
+.q-lbl{font-size:9px;font-weight:700;letter-spacing:2px;color:var(--mu);text-transform:uppercase;margin-bottom:5px}
+.q-hint{font-size:10px;color:var(--dim);letter-spacing:0;text-transform:none;font-weight:400;margin-left:5px}
 
 /* 横スクロールチップ（長い選択肢向け） */
 .chips-scroll{display:flex;gap:5px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:3px;scrollbar-width:none}
 .chips-scroll::-webkit-scrollbar{display:none}
 .chip{
-flex-shrink:0;padding:6px 12px;
-background:var(–s2);border:1px solid var(–br);
-border-radius:20px;font-size:11px;cursor:pointer;
-transition:background .12s,border-color .12s,color .12s,box-shadow .12s;
-user-select:none;white-space:nowrap;line-height:1;color:var(–mu);
+  flex-shrink:0;padding:6px 12px;
+  background:var(--s2);border:1px solid var(--br);
+  border-radius:20px;font-size:11px;cursor:pointer;
+  transition:background .12s,border-color .12s,color .12s,box-shadow .12s;
+  user-select:none;white-space:nowrap;line-height:1;color:var(--mu);
 }
 /* 未選択にホバー効果 */
 .chip:active{opacity:.7}
 /* 選択状態: カラーごとに不透明な背景で視認性確保 */
 .chip.sel{
-background:#2a4a6a;border-color:#5a9fd0;color:#d8eeff;
-box-shadow:0 0 0 1px #3a6a90;
+  background:#2a4a6a;border-color:#5a9fd0;color:#d8eeff;
+  box-shadow:0 0 0 1px #3a6a90;
 }
 .chip.sel-red{
-background:#5a2020;border-color:#c84040;color:#ffb8b8;
-box-shadow:0 0 0 1px #8a3030;
+  background:#5a2020;border-color:#c84040;color:#ffb8b8;
+  box-shadow:0 0 0 1px #8a3030;
 }
 .chip.sel-gld{
-background:#4a3800;border-color:#c8982e;color:#ffe090;
-box-shadow:0 0 0 1px #7a5a10;
+  background:#4a3800;border-color:#c8982e;color:#ffe090;
+  box-shadow:0 0 0 1px #7a5a10;
 }
 .chip.sel-pur{
-background:#3a2858;border-color:#9070c0;color:#d8b8ff;
-box-shadow:0 0 0 1px #6040a0;
+  background:#3a2858;border-color:#9070c0;color:#d8b8ff;
+  box-shadow:0 0 0 1px #6040a0;
 }
 .chip.sel-grn{
-background:#1a3a28;border-color:#48b472;color:#a0e8c0;
-box-shadow:0 0 0 1px #2a6040;
+  background:#1a3a28;border-color:#48b472;color:#a0e8c0;
+  box-shadow:0 0 0 1px #2a6040;
 }
 .chip.sel-blu{
-background:#1a3850;border-color:#5090c8;color:#b0d8ff;
-box-shadow:0 0 0 1px #2a5878;
+  background:#1a3850;border-color:#5090c8;color:#b0d8ff;
+  box-shadow:0 0 0 1px #2a5878;
 }
-.chip.sel-blu{background:rgba(106,159,216,.12);border-color:var(–blu);color:#a8c8f0}
+.chip.sel-blu{background:rgba(106,159,216,.12);border-color:var(--blu);color:#a8c8f0}
 
 /* グリッドチップ（短い選択肢向け） */
 .chips-grid{display:flex;flex-wrap:wrap;gap:5px}
 
 /* テキスト入力 */
-.ti-txt{width:100%;background:var(–s2);border:1px solid var(–br);border-radius:8px;padding:8px 11px;color:var(–tx);font-family:var(–fn);font-size:13px;resize:none;outline:none;transition:border-color .2s;line-height:1.6}
-.ti-txt:focus{border-color:var(–blu)}
-.ti-txt::placeholder{color:var(–dim)}
+.ti-txt{width:100%;background:var(--s2);border:1px solid var(--br);border-radius:8px;padding:8px 11px;color:var(--tx);font-family:var(--fn);font-size:13px;resize:none;outline:none;transition:border-color .2s;line-height:1.6}
+.ti-txt:focus{border-color:var(--blu)}
+.ti-txt::placeholder{color:var(--dim)}
 
 /* 強度スライダー */
 .intr{display:flex;align-items:center;gap:10px}
-.intv{font-family:var(–fb);font-size:32px;min-width:36px;text-align:center}
+.intv{font-family:var(--fb);font-size:32px;min-width:36px;text-align:center}
 .slider{flex:1;-webkit-appearance:none;height:4px;border-radius:2px;outline:none;cursor:pointer}
 .slider::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:#fff;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,.3)}
 
@@ -192,91 +191,89 @@ box-shadow:0 0 0 1px #2a5878;
 .free-input-wrap.show{display:block}
 
 /* フォームフッター */
-.form-footer{padding:10px 16px 14px;display:flex;gap:8px;flex-shrink:0;border-top:1px solid var(–br);background:var(–s1)}
+.form-footer{padding:10px 16px 14px;display:flex;gap:8px;flex-shrink:0;border-top:1px solid var(--br);background:var(--s1)}
 
 /* ──────── SHOP ──────── */
 .pts-hero{
-background:#1e1a14;  /* s1より少し明るく、必ず視認できる */
-border:1px solid #504030;  /* brより明るいボーダー */
-border-radius:12px;padding:14px 16px;
-display:flex;align-items:center;justify-content:space-between;gap:10px;
+  background:#1e1a14;  /* s1より少し明るく、必ず視認できる */
+  border:1px solid #504030;  /* brより明るいボーダー */
+  border-radius:12px;padding:14px 16px;
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
 }
 .pts-hero-left{min-width:0;flex:1}
-.pts-hero-num{font-family:var(–fb);font-size:48px;letter-spacing:1px;color:var(–gld);line-height:1;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.pts-hero-lbl{font-size:9px;color:var(–mu);margin-top:4px}
-.pts-hero-sub{font-size:9px;color:var(–mu);margin-top:2px}
+.pts-hero-num{font-family:var(--fb);font-size:48px;letter-spacing:1px;color:var(--gld);line-height:1;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pts-hero-lbl{font-size:9px;color:var(--mu);margin-top:4px}
+.pts-hero-sub{font-size:9px;color:var(--mu);margin-top:2px}
 .pts-hero-right{display:flex;flex-direction:column;gap:5px;flex-shrink:0}
 .pts-mini{background:#28221a;border:1px solid #504030;border-radius:7px;padding:7px 10px;text-align:center;min-width:66px}
-.pts-mini-v{font-family:var(–fb);font-size:20px;display:block}
-.pts-mini-l{font-size:8px;color:var(–mu);margin-top:1px}
+.pts-mini-v{font-family:var(--fb);font-size:20px;display:block}
+.pts-mini-l{font-size:8px;color:var(--mu);margin-top:1px}
 .shop-item{background:#1e1a14;border:1px solid #504030;border-radius:9px;padding:11px 13px}
 .si-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px;gap:8px}
 .si-name{font-size:13px;font-weight:700;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.si-pts{font-family:var(–fm);font-size:11px;color:var(–gld);flex-shrink:0}
-.si-bar{height:3px;background:var(–s2);border-radius:2px;overflow:hidden;margin-bottom:4px}
-.si-fi{height:100%;background:linear-gradient(to right,var(–gld),var(–ora));border-radius:2px;transition:width .8s ease}
+.si-pts{font-family:var(--fm);font-size:11px;color:var(--gld);flex-shrink:0}
+.si-bar{height:3px;background:var(--s2);border-radius:2px;overflow:hidden;margin-bottom:4px}
+.si-fi{height:100%;background:linear-gradient(to right,var(--gld),var(--ora));border-radius:2px;transition:width .8s ease}
 .si-bot{display:flex;justify-content:space-between;align-items:center;gap:8px}
-.si-pct{font-size:10px;color:var(–mu);flex:1;min-width:0}
+.si-pct{font-size:10px;color:var(--mu);flex:1;min-width:0}
 .si-actions{display:flex;gap:4px;flex-shrink:0}
-.si-btn{background:none;border:1px solid var(–br);border-radius:5px;color:var(–mu);font-size:10px;cursor:pointer;padding:3px 7px;font-family:var(–fn);white-space:nowrap;transition:all .15s}
-.si-btn.ex{border-color:rgba(200,152,46,.4);color:var(–gld);background:rgba(200,152,46,.06)}
+.si-btn{background:none;border:1px solid var(--br);border-radius:5px;color:var(--mu);font-size:10px;cursor:pointer;padding:3px 7px;font-family:var(--fn);white-space:nowrap;transition:all .15s}
+.si-btn.ex{border-color:rgba(200,152,46,.4);color:var(--gld);background:rgba(200,152,46,.06)}
 .si-btn:disabled{opacity:.28;cursor:not-allowed}
 .add-form{background:#1e1a14;border:1px solid #504030;border-radius:9px;padding:11px}
 .add-row{display:flex;gap:7px;margin-bottom:7px}
-.sinp{flex:1;background:var(–s2);border:1px solid var(–br);border-radius:6px;padding:7px 9px;color:var(–tx);font-family:var(–fn);font-size:12px;outline:none;min-width:0;transition:border-color .2s}
-.sinp:focus{border-color:var(–blu)}
-.sinp::placeholder{color:var(–dim)}
-.sinp.pi{width:76px;flex:none;font-family:var(–fm)}
+.sinp{flex:1;background:var(--s2);border:1px solid var(--br);border-radius:6px;padding:7px 9px;color:var(--tx);font-family:var(--fn);font-size:12px;outline:none;min-width:0;transition:border-color .2s}
+.sinp:focus{border-color:var(--blu)}
+.sinp::placeholder{color:var(--dim)}
+.sinp.pi{width:76px;flex:none;font-family:var(--fm)}
 
 /* ──────── CONGRATS ──────── */
 .overlay{position:absolute;inset:0;background:rgba(10,9,8,.92);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;z-index:100;text-align:center;padding:32px}
 .ov-emoji{font-size:68px;line-height:1}
-.ov-title{font-family:var(–fb);font-size:40px;letter-spacing:3px;color:var(–gld)}
-.ov-sub{font-size:15px;color:var(–tx);line-height:1.7}
-.ov-pts{font-family:var(–fm);font-size:11px;color:var(–mu)}
+.ov-title{font-family:var(--fb);font-size:40px;letter-spacing:3px;color:var(--gld)}
+.ov-sub{font-size:15px;color:var(--tx);line-height:1.7}
+.ov-pts{font-family:var(--fm);font-size:11px;color:var(--mu)}
 
 /* ──────── LOGS ──────── */
 .log-item{background:#1e1a14;border:1px solid #504030;border-radius:8px;padding:9px 11px;display:flex;align-items:flex-start;gap:9px}
-.ib{width:32px;height:32px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-family:var(–fb);font-size:12px;flex-shrink:0}
+.ib{width:32px;height:32px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-family:var(--fb);font-size:12px;flex-shrink:0}
 .ldet{flex:1;min-width:0}
 .lt{font-size:12px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.lm{font-size:10px;color:var(–mu);margin-top:2px;line-height:1.5}
-.ltag{font-size:9px;padding:2px 6px;border-radius:8px;background:var(–s2);color:var(–mu);border:1px solid var(–br);display:inline-block;margin:2px 2px 0 0}
+.lm{font-size:10px;color:var(--mu);margin-top:2px;line-height:1.5}
+.ltag{font-size:9px;padding:2px 6px;border-radius:8px;background:var(--s2);color:var(--mu);border:1px solid var(--br);display:inline-block;margin:2px 2px 0 0}
 .rtag{font-size:10px;padding:2px 6px;border-radius:9px;flex-shrink:0;margin-top:1px;white-space:nowrap}
 
 /* ──────── SETTINGS ──────── */
 .set-section{background:#1e1a14;border:1px solid #504030;border-radius:10px;padding:14px}
 .set-section+.set-section{margin-top:8px}
 .set-title{font-size:13px;font-weight:700;margin-bottom:4px}
-.set-desc{font-size:11px;color:var(–mu);line-height:1.65;margin-bottom:12px}
-.img-slot{display:flex;align-items:center;gap:9px;background:var(–s2);border:1px solid var(–br);border-radius:7px;padding:7px 9px}
-.img-thumb{width:42px;height:42px;object-fit:cover;border-radius:5px;flex-shrink:0;background:var(–s1)}
+.set-desc{font-size:11px;color:var(--mu);line-height:1.65;margin-bottom:12px}
+.img-slot{display:flex;align-items:center;gap:9px;background:var(--s2);border:1px solid var(--br);border-radius:7px;padding:7px 9px}
+.img-thumb{width:42px;height:42px;object-fit:cover;border-radius:5px;flex-shrink:0;background:var(--s1)}
 .img-info{flex:1;min-width:0}
 .img-name{font-size:11px;font-weight:700}
-.img-type{font-size:10px;color:var(–mu);margin-top:2px}
-.img-chg{background:var(–s2);border:1px solid var(–br);border-radius:5px;color:var(–mu);font-size:11px;cursor:pointer;padding:3px 8px;white-space:nowrap}
-.img-del{background:none;border:none;color:var(–dim);font-size:15px;cursor:pointer;padding:0 2px}
+.img-type{font-size:10px;color:var(--mu);margin-top:2px}
+.img-chg{background:var(--s2);border:1px solid var(--br);border-radius:5px;color:var(--mu);font-size:11px;cursor:pointer;padding:3px 8px;white-space:nowrap}
+.img-del{background:none;border:none;color:var(--dim);font-size:15px;cursor:pointer;padding:0 2px}
 .sync-status-box{background:rgba(106,159,216,.06);border:1px solid rgba(106,159,216,.15);border-radius:8px;padding:10px 12px;margin-bottom:10px}
 
 /* ──────── SHARED BUTTONS ──────── */
-.btn{flex:1;padding:10px 6px;border-radius:8px;border:1px solid var(–br);background:var(–s2);color:var(–tx);font-family:var(–fn);font-size:12px;font-weight:500;cursor:pointer;transition:all .15s}
-.btn.pri{background:var(–blu);border-color:var(–blu);color:#fff}
-.btn.gld{background:rgba(200,152,46,.1);border-color:var(–gld);color:var(–gld)}
+.btn{flex:1;padding:10px 6px;border-radius:8px;border:1px solid var(--br);background:var(--s2);color:var(--tx);font-family:var(--fn);font-size:12px;font-weight:500;cursor:pointer;transition:all .15s}
+.btn.pri{background:var(--blu);border-color:var(--blu);color:#fff}
+.btn.gld{background:rgba(200,152,46,.1);border-color:var(--gld);color:var(--gld)}
 .btn.full{width:100%;flex:none;display:block}
 .acts{display:flex;gap:7px}
 .scon{padding:14px 16px 32px;display:flex;flex-direction:column;gap:10px}
-.shdr{padding:12px 16px 10px;border-bottom:1px solid var(–br);flex-shrink:0}
+.shdr{padding:12px 16px 10px;border-bottom:1px solid var(--br);flex-shrink:0}
 .shdr h2{font-size:15px;font-weight:700}
-.shdr p{font-size:10px;color:var(–mu);margin-top:2px}
-.divider{border:none;border-top:1px solid var(–br);margin:2px 0}
+.shdr p{font-size:10px;color:var(--mu);margin-top:2px}
+.divider{border:none;border-top:1px solid var(--br);margin:2px 0}
 </style>
-
 </head>
 <body>
 <div class="app" id="app">
 
   <!-- HDR -->
-
   <div class="hdr">
     <span class="logo" id="app-logo"><svg width="12" height="16" viewBox="0 0 12 20" style="vertical-align:-2px;margin-right:5px"><defs><linearGradient id="lg2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff8080"/><stop offset="1" stop-color="#e03030"/></linearGradient></defs><polygon points="9,1 2,10 6,10 3,19 11,8 6,8" fill="url(#lg2)"/></svg>HYBRS</span>
     <div class="hdr-r">
@@ -286,7 +283,6 @@ display:flex;align-items:center;justify-content:space-between;gap:10px;
   </div>
 
   <!-- HOME -->
-
   <div class="screen active" id="scr-home">
     <div class="scroll"><div class="home-body">
       <button class="pbtn" id="panic-btn">
@@ -303,7 +299,6 @@ display:flex;align-items:center;justify-content:space-between;gap:10px;
   </div>
 
   <!-- EMERGENCY -->
-
   <div class="screen" id="scr-emergency">
     <div id="phase-count" class="emrg-inner">
       <div style="font-size:10px;letter-spacing:3px;color:var(--mu);font-weight:700">HOLD ON</div>
@@ -343,229 +338,168 @@ display:flex;align-items:center;justify-content:space-between;gap:10px;
   </div>
 
   <!-- FORM：新設問 -->
-
   <div class="screen" id="scr-form">
     <!-- 固定ヘッダー -->
-    <div class="form-hdr"><h2>事件を記録する</h2><p>各セクションをタップして展開 — スクロールで下まで進む</p></div>
-    <!-- 強度バー（常時表示） -->
-    <div class="result-bar" style="justify-content:space-between">
-      <div style="font-size:11px;color:var(--mu)">強度で獲得ポイントが変わります</div>
-      <span class="pts-pill" id="pts-preview">★ 250P</span>
-    </div>
+    <div class="form-hdr"><h2>事件を記録する</h2></div>
+
     <!-- スクロールエリア -->
     <div class="scroll" id="form-scroll">
       <div style="padding:10px 14px 40px;display:flex;flex-direction:column;gap:8px">
 
-```
-    <!-- ①FACT -->
-    <div class="sec-card" id="card-fact">
-      <div class="sec-card-hdr" onclick="toggleCard('fact')">
-        <div class="sec-card-title">📋 FACT <span style="font-weight:300;color:var(--mu)">— 事実</span>
-          <span class="sec-card-badge" id="badge-fact">未記入</span>
+        <!-- 強度（常時表示・折りたたみなし） -->
+        <div style="background:#1e1a14;border:1px solid #504030;border-radius:10px;padding:12px 14px">
+          <div class="q-lbl">強度（1〜10）</div>
+          <div class="intr">
+            <span class="intv" id="intensity-val" style="color:var(--red)">7</span>
+            <input type="range" min="1" max="10" step="1" value="7" id="intensity-slider" class="slider" oninput="updateIntensity(this.value)">
+            <span class="pts-pill" id="pts-preview" style="flex-shrink:0">★ 694P</span>
+          </div>
         </div>
-        <span class="sec-card-arrow" id="arrow-fact">▼</span>
-      </div>
-      <div class="sec-card-body" id="body-fact">
-        <div class="sec-card-inner">
-          <div>
-            <div class="q-lbl">① 発生時刻</div>
-            <div class="chips-scroll" id="chips-time"></div>
+
+        <!-- ①FACT — 何が起きたか -->
+        <div class="sec-card" id="card-fact">
+          <div class="sec-card-hdr" onclick="toggleCard('fact')">
+            <div class="sec-card-title">📋 FACT <span style="font-weight:300;color:var(--mu)">— 何が起きたか</span>
+              <span class="sec-card-badge" id="badge-fact">未記入</span>
+            </div>
+            <span class="sec-card-arrow" id="arrow-fact">▼</span>
           </div>
-          <div>
-            <div class="q-lbl">② 場所・状況</div>
-            <textarea class="ti-txt" rows="2" id="f-place" placeholder="例：品川駅ホーム 満員電車内"></textarea>
-          </div>
-          <div>
-            <div class="q-lbl">③ トリガーの事実</div>
-            <textarea class="ti-txt" rows="2" id="f-fact" placeholder="例：横入りされた・手柄を横取られた"></textarea>
-          </div>
-          <div>
-            <div class="q-lbl">④ 実際の対応<span class="q-hint">複数可</span></div>
-            <div class="chips-scroll" id="chips-action"></div>
-            <div class="free-input-wrap" id="free-action-wrap">
-              <textarea class="ti-txt" rows="1" id="f-action-free" placeholder="その他の対応…"></textarea>
+          <div class="sec-card-body" id="body-fact">
+            <div class="sec-card-inner">
+              <div>
+                <div class="q-lbl">① 時間帯</div>
+                <div class="chips-scroll" id="chips-time"></div>
+              </div>
+              <div>
+                <div class="q-lbl">② 場所・状況</div>
+                <textarea class="ti-txt" rows="2" id="f-place" placeholder="例：品川駅ホーム 満員電車内"></textarea>
+              </div>
+              <div>
+                <div class="q-lbl">③ 何があったか</div>
+                <textarea class="ti-txt" rows="2" id="f-fact" placeholder="例：横入りされた・手柄を横取られた"></textarea>
+              </div>
+              <div>
+                <div class="q-lbl">④ 自分の対応<span class="q-hint">複数可</span></div>
+                <div class="chips-scroll" id="chips-action"></div>
+                <div class="free-input-wrap" id="free-action-wrap">
+                  <textarea class="ti-txt" rows="1" id="f-action-free" placeholder="その他の対応…"></textarea>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+
+        <!-- ②ENEMY — 相手キャラ -->
+        <div class="sec-card" id="card-enemy">
+          <div class="sec-card-hdr" onclick="toggleCard('enemy')">
+            <div class="sec-card-title">🎴 ENEMY <span style="font-weight:300;color:var(--mu)">— 相手キャラ</span>
+              <span class="sec-card-badge" id="badge-enemy">未記入</span>
+            </div>
+            <span class="sec-card-arrow" id="arrow-enemy">▼</span>
+          </div>
+          <div class="sec-card-body" id="body-enemy">
+            <div class="sec-card-inner">
+              <div>
+                <div class="q-lbl">⑤ 属性<span class="q-hint">複数可</span></div>
+                <div class="chips-scroll" id="chips-monster"></div>
+                <div class="free-input-wrap" id="free-monster-wrap">
+                  <textarea class="ti-txt" rows="1" id="f-monster-free" placeholder="その他の属性…"></textarea>
+                </div>
+              </div>
+              <div>
+                <div class="q-lbl">⑥ 技名</div>
+                <textarea class="ti-txt" rows="2" id="f-skill" placeholder="例：無限自慢砲 / ため息バズーカ"></textarea>
+              </div>
+              <div>
+                <div class="q-lbl">⑦ 名前をつける</div>
+                <textarea class="ti-txt" rows="1" id="f-monster-name" placeholder="例：満員電車のヌシ / 終電おじさん"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ③EXPLOSION — 本音 -->
+        <div class="sec-card" id="card-exp">
+          <div class="sec-card-hdr" onclick="toggleCard('exp')">
+            <div class="sec-card-title">💥 EXPLOSION <span style="font-weight:300;color:var(--mu)">— 本音</span>
+              <span class="sec-card-badge" id="badge-exp">未記入</span>
+            </div>
+            <span class="sec-card-arrow" id="arrow-exp">▼</span>
+          </div>
+          <div class="sec-card-body" id="body-exp">
+            <div class="sec-card-inner">
+              <div>
+                <div class="q-lbl">⑧ 身体の反応<span class="q-hint">複数可</span></div>
+                <div class="chips-scroll" id="chips-body"></div>
+                <div class="free-input-wrap" id="free-body-wrap">
+                  <textarea class="ti-txt" rows="1" id="f-body-free" placeholder="その他の反応…"></textarea>
+                </div>
+              </div>
+              <div>
+                <div class="q-lbl">⑨ 捨て台詞</div>
+                <textarea class="ti-txt" rows="2" id="f-quote" placeholder="例：二度と話しかけんな / お前の常識、賞味期限切れだぞ"></textarea>
+              </div>
+              <div>
+                <div class="q-lbl">⑩ 制約なく解消するなら</div>
+                <textarea class="ti-txt" rows="2" id="f-fantasy" placeholder="例：顔面にパイを投げる / マイクで全社に論破する"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ④INSIGHT — 分析・創作 -->
+        <div class="sec-card" id="card-ana">
+          <div class="sec-card-hdr" onclick="toggleCard('ana')">
+            <div class="sec-card-title">🧠 INSIGHT <span style="font-weight:300;color:var(--mu)">— 分析・創作</span>
+              <span class="sec-card-badge" id="badge-ana">未記入</span>
+            </div>
+            <span class="sec-card-arrow" id="arrow-ana">▼</span>
+          </div>
+          <div class="sec-card-body" id="body-ana">
+            <div class="sec-card-inner">
+              <div>
+                <div class="q-lbl">⑪ 引き金パターン</div>
+                <div class="chips-scroll" id="chips-trigger"></div>
+                <div class="free-input-wrap" id="free-trigger-wrap">
+                  <textarea class="ti-txt" rows="1" id="f-trigger-free" placeholder="その他…"></textarea>
+                </div>
+              </div>
+              <div>
+                <div class="q-lbl">⑫ 怒りの前の状態<span class="q-hint">複数可</span></div>
+                <div class="chips-scroll" id="chips-before"></div>
+                <div class="free-input-wrap" id="free-before-wrap">
+                  <textarea class="ti-txt" rows="1" id="f-before-free" placeholder="その他…"></textarea>
+                </div>
+              </div>
+              <div>
+                <div class="q-lbl">⑬ 曲にするなら</div>
+                <div class="chips-scroll" id="chips-music"></div>
+              </div>
+              <div>
+                <div class="q-lbl">⑭ 事件タイトル</div>
+                <textarea class="ti-txt" rows="1" id="f-title" placeholder="例：品川駅・横入りおじさん討伐戦"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 補足（自由記述） -->
+        <div style="background:#1e1a14;border:1px solid #504030;border-radius:10px;padding:12px 14px">
+          <div class="q-lbl">補足・自由記述</div>
+          <textarea class="ti-txt" rows="3" id="f-note" placeholder="その他、記録しておきたいこと…"></textarea>
+        </div>
+
+      </div><!-- /padding wrapper -->
+    </div><!-- /scroll -->
+
+    <!-- フッターボタン -->
+    <div class="form-footer">
+      <button class="btn" onclick="goScreen('home')">キャンセル</button>
+      <button class="btn pri" id="btn-save-log">★ 記録して0P獲得</button>
     </div>
-
-    <!-- ②ENEMY -->
-    <div class="sec-card" id="card-enemy">
-      <div class="sec-card-hdr" onclick="toggleCard('enemy')">
-        <div class="sec-card-title">🎴 ENEMY <span style="font-weight:300;color:var(--mu)">— 敵キャラ</span>
-          <span class="sec-card-badge" id="badge-enemy">未記入</span>
-        </div>
-        <span class="sec-card-arrow" id="arrow-enemy">▼</span>
-      </div>
-      <div class="sec-card-body" id="body-enemy">
-        <div class="sec-card-inner">
-          <div>
-            <div class="q-lbl">⑤ 敵の属性<span class="q-hint">複数可</span></div>
-            <div class="chips-scroll" id="chips-monster"></div>
-            <div class="free-input-wrap" id="free-monster-wrap">
-              <textarea class="ti-txt" rows="1" id="f-monster-free" placeholder="その他の属性…"></textarea>
-            </div>
-          </div>
-          <div>
-            <div class="q-lbl">⑥ 技名（必殺技）</div>
-            <textarea class="ti-txt" rows="2" id="f-skill" placeholder="例：無限自慢砲 / ため息バズーカ"></textarea>
-          </div>
-          <div>
-            <div class="q-lbl">⑦ 弱点・ダサい所</div>
-            <textarea class="ti-txt" rows="2" id="f-weakness" placeholder="例：上にはペコペコ / 論理が破綻してる"></textarea>
-          </div>
-          <div>
-            <div class="q-lbl">📛 敵の名前</div>
-            <textarea class="ti-txt" rows="1" id="f-monster-name" placeholder="例：満員電車のヌシ / 終電おじさん"></textarea>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ③EXPLOSION -->
-    <div class="sec-card" id="card-exp">
-      <div class="sec-card-hdr" onclick="toggleCard('exp')">
-        <div class="sec-card-title">💥 EXPLOSION <span style="font-weight:300;color:var(--mu)">— 本音</span>
-          <span class="sec-card-badge" id="badge-exp">未記入</span>
-        </div>
-        <span class="sec-card-arrow" id="arrow-exp">▼</span>
-      </div>
-      <div class="sec-card-body" id="body-exp">
-        <div class="sec-card-inner">
-          <div>
-            <div class="q-lbl">⑧ 強度（1〜10）</div>
-            <div class="intr">
-              <span class="intv" id="intensity-val" style="color:var(--red)">7</span>
-              <input type="range" min="1" max="10" step="1" value="7" id="intensity-slider" class="slider" oninput="updateIntensity(this.value)">
-            </div>
-          </div>
-          <div>
-            <div class="q-lbl">⑨ 身体の反応<span class="q-hint">複数可</span></div>
-            <div class="chips-scroll" id="chips-body"></div>
-          </div>
-          <div>
-            <div class="q-lbl">⑩ 制約なく解消するなら？<span class="q-hint">法律無視OK</span></div>
-            <textarea class="ti-txt" rows="2" id="f-fantasy" placeholder="例：顔面にパイを投げる / マイクで全社に論破する"></textarea>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ④ANALYSIS -->
-    <div class="sec-card" id="card-ana">
-      <div class="sec-card-hdr" onclick="toggleCard('ana')">
-        <div class="sec-card-title">🧠 ANALYSIS <span style="font-weight:300;color:var(--mu)">— 自己分析</span>
-          <span class="sec-card-badge" id="badge-ana">未記入</span>
-        </div>
-        <span class="sec-card-arrow" id="arrow-ana">▼</span>
-      </div>
-      <div class="sec-card-body" id="body-ana">
-        <div class="sec-card-inner">
-          <div>
-            <div class="q-lbl">⑪ 引き金パターン</div>
-            <div class="chips-scroll" id="chips-trigger"></div>
-            <div class="free-input-wrap" id="free-trigger-wrap">
-              <textarea class="ti-txt" rows="1" id="f-trigger-free" placeholder="その他の引き金…"></textarea>
-            </div>
-          </div>
-          <div>
-            <div class="q-lbl">⑫ 怒りの前に感じていたこと<span class="q-hint">複数可</span></div>
-            <div class="chips-scroll" id="chips-before"></div>
-            <div class="free-input-wrap" id="free-before-wrap">
-              <textarea class="ti-txt" rows="1" id="f-before-free" placeholder="その他…"></textarea>
-            </div>
-          </div>
-          <div>
-            <div class="q-lbl">⑬ 自分が求めていたもの<span class="q-hint">複数可</span></div>
-            <div class="chips-scroll" id="chips-need"></div>
-            <div class="free-input-wrap" id="free-need-wrap">
-              <textarea class="ti-txt" rows="1" id="f-need-free" placeholder="その他…"></textarea>
-            </div>
-          </div>
-          <div>
-            <div class="q-lbl">⑭ 自分の思考のクセ<span class="q-hint">複数可</span></div>
-            <div class="chips-scroll" id="chips-habit"></div>
-            <div class="free-input-wrap" id="free-habit-wrap">
-              <textarea class="ti-txt" rows="1" id="f-habit-free" placeholder="その他…"></textarea>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ⑤CATHARSIS -->
-    <div class="sec-card" id="card-cat">
-      <div class="sec-card-hdr" onclick="toggleCard('cat')">
-        <div class="sec-card-title">🎯 CATHARSIS <span style="font-weight:300;color:var(--mu)">— 決着</span>
-          <span class="sec-card-badge" id="badge-cat">未記入</span>
-        </div>
-        <span class="sec-card-arrow" id="arrow-cat">▼</span>
-      </div>
-      <div class="sec-card-body" id="body-cat">
-        <div class="sec-card-inner">
-          <div>
-            <div class="q-lbl">⑮ 捨て台詞</div>
-            <textarea class="ti-txt" rows="2" id="f-quote" placeholder="例：二度と話しかけんな / お前の常識、賞味期限切れだぞ"></textarea>
-          </div>
-          <div>
-            <div class="q-lbl">⑯ 望む結末<span class="q-hint">複数可</span></div>
-            <div class="chips-scroll" id="chips-ending"></div>
-            <div class="free-input-wrap" id="free-ending-wrap">
-              <textarea class="ti-txt" rows="1" id="f-ending-free" placeholder="その他の結末…"></textarea>
-            </div>
-          </div>
-          <div>
-            <div class="q-lbl">⑰ 事件タイトル</div>
-            <textarea class="ti-txt" rows="1" id="f-title" placeholder="例：品川駅・横入りおじさん討伐戦"></textarea>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ⑥CREATION -->
-    <div class="sec-card" id="card-cre">
-      <div class="sec-card-hdr" onclick="toggleCard('cre')">
-        <div class="sec-card-title">🎵 CREATION <span style="font-weight:300;color:var(--mu)">— 創作・事後</span>
-          <span class="sec-card-badge" id="badge-cre">未記入</span>
-        </div>
-        <span class="sec-card-arrow" id="arrow-cre">▼</span>
-      </div>
-      <div class="sec-card-body" id="body-cre">
-        <div class="sec-card-inner">
-          <div>
-            <div class="q-lbl">⑱ この感情を曲にするなら</div>
-            <div class="chips-scroll" id="chips-music"></div>
-          </div>
-          <div>
-            <div class="q-lbl">⑲ 事後の自分の状態</div>
-            <div class="chips-scroll" id="chips-after"></div>
-          </div>
-          <div>
-            <div class="q-lbl">⑳ 今後どうするか<span class="q-hint">複数可</span></div>
-            <div class="chips-scroll" id="chips-next"></div>
-            <div class="free-input-wrap" id="free-next-wrap">
-              <textarea class="ti-txt" rows="1" id="f-next-free" placeholder="その他の対処…"></textarea>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </div><!-- /padding wrapper -->
-</div><!-- /scroll -->
-
-<!-- フッターボタン -->
-<div class="form-footer">
-  <button class="btn" onclick="goScreen('home')">キャンセル</button>
-  <button class="btn pri" id="btn-save-log">★ 記録して0P獲得</button>
-</div>
-```
-
   </div>
 
   <!-- SHOP -->
-
   <div class="screen" id="scr-shop">
     <div class="shdr"><h2>勝利ポイント & ご褒美</h2><p>乗り越えた分だけ、自分に贈る</p></div>
     <div class="scroll"><div class="scon">
@@ -590,14 +524,10 @@ display:flex;align-items:center;justify-content:space-between;gap:10px;
       </div>
       <div id="shop-list" style="display:flex;flex-direction:column;gap:7px"></div>
 
-```
-</div></div>
-```
-
+    </div></div>
   </div>
 
   <!-- LOGS -->
-
   <div class="screen" id="scr-logs">
     <div class="shdr"><h2>勝利ログ</h2><p>CSVをGeminiに渡して漫画・小説・Suno歌詞に変換</p></div>
     <div class="scroll"><div class="scon">
@@ -607,93 +537,80 @@ display:flex;align-items:center;justify-content:space-between;gap:10px;
         <button class="btn" style="padding:11px;font-size:11px;color:var(--mu)" onclick="importBackup()">⬆ 復元</button>
       </div>
 
-```
-  <div id="log-list" style="display:flex;flex-direction:column;gap:6px"></div>
-</div></div>
-```
-
+      <div id="log-list" style="display:flex;flex-direction:column;gap:6px"></div>
+    </div></div>
   </div>
 
   <!-- SETTINGS -->
-
   <div class="screen" id="scr-set">
-    <div class="shdr"><h2>設定</h2><p>ご褒美写真の管理</p></div>
+    <div class="shdr"><h2>設定</h2></div>
     <div class="scroll"><div class="scon">
 
-```
-  <!-- スプシ自動連携ステータス -->
-  <div style="background:rgba(106,159,216,.06);border:1px solid rgba(106,159,216,.14);border-radius:10px;padding:12px 14px">
-    <div style="font-size:12px;font-weight:700;margin-bottom:5px;display:flex;align-items:center;gap:7px">
-      📊 スプシ自動連携
-      <span id="sync-dot" style="width:7px;height:7px;border-radius:50%;background:var(--mu);flex-shrink:0"></span>
-    </div>
-    <div id="sync-info-box" style="font-size:11px;color:var(--mu);line-height:1.65">起動時に取得中…</div>
-    <div style="font-size:10px;color:var(--dim);margin-top:6px">スプシを編集 → アプリをリロードで自動反映</div>
-  </div>
+      <!-- スプシ自動連携ステータス -->
+      <div style="background:rgba(106,159,216,.06);border:1px solid rgba(106,159,216,.14);border-radius:10px;padding:12px 14px">
+        <div style="font-size:12px;font-weight:700;margin-bottom:5px;display:flex;align-items:center;gap:7px">
+          📊 スプシ自動連携
+          <span id="sync-dot" style="width:7px;height:7px;border-radius:50%;background:var(--mu);flex-shrink:0"></span>
+        </div>
+        <div id="sync-info-box" style="font-size:11px;color:var(--mu);line-height:1.65">起動時に取得中…</div>
+        <div style="font-size:10px;color:var(--dim);margin-top:6px">スプシを編集 → アプリをリロードで自動反映</div>
+      </div>
 
-  <!-- 写真管理 -->
-  <div class="set-section">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">
-      <div class="set-title">📸 ご褒美写真</div>
-      <span style="font-size:10px;color:var(--mu)" id="imgs-count">0枚</span>
-    </div>
-    <div class="set-desc">端末から直接選択。完全プライベート・外部サービス不要。自動圧縮。最大5枚。</div>
-    <div id="img-slots" style="display:flex;flex-direction:column;gap:7px;margin-bottom:10px"></div>
-    <button class="btn pri full" style="padding:11px;font-size:13px" onclick="addImgSlot()" id="btn-add-img">
-      ＋ 写真を追加（残り<span id="img-slots-remaining">5</span>枚）
-    </button>
-  </div>
+      <!-- 写真管理 -->
+      <div class="set-section">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">
+          <div class="set-title">📸 ご褒美写真</div>
+          <span style="font-size:10px;color:var(--mu)" id="imgs-count">0枚</span>
+        </div>
+        <div class="set-desc">端末から直接選択。完全プライベート・外部サービス不要。自動圧縮。最大5枚。</div>
+        <div id="img-slots" style="display:flex;flex-direction:column;gap:7px;margin-bottom:10px"></div>
+        <button class="btn pri full" style="padding:11px;font-size:13px" onclick="addImgSlot()" id="btn-add-img">
+          ＋ 写真を追加（残り<span id="img-slots-remaining">5</span>枚）
+        </button>
+      </div>
 
-  <!-- 設問カスタマイズ -->
-  <div class="set-section">
-    <div class="set-title">📝 設問カスタマイズ</div>
-    <div class="set-desc">選択肢の追加・削除・並び替えができます。</div>
-    <div style="display:flex;flex-direction:column;gap:8px">
-      <div>
-        <div style="font-size:10px;color:var(--mu);margin-bottom:5px">編集する設問を選ぶ</div>
-        <div class="chips-scroll" id="q-selector">
-          <span class="chip" onclick="openQEditor('time','① 発生時刻')">① 時刻</span>
-          <span class="chip" onclick="openQEditor('action','④ 実際の対応')">④ 対応</span>
-          <span class="chip" onclick="openQEditor('monster','⑤ 敵の属性')">⑤ 敵属性</span>
-          <span class="chip" onclick="openQEditor('body','⑩ 身体の反応')">⑩ 身体反応</span>
-          <span class="chip" onclick="openQEditor('trigger','⑫ 引き金パターン')">⑫ 引き金</span>
-          <span class="chip" onclick="openQEditor('before','⑬ 怒り前の感情')">⑬ 前の感情</span>
-          <span class="chip" onclick="openQEditor('need','⑭ 求めていたもの')">⑭ 欲求</span>
-          <span class="chip" onclick="openQEditor('habit','⑮ 思考のクセ')">⑮ 思考クセ</span>
-          <span class="chip" onclick="openQEditor('ending','⑰ 望む結末')">⑰ 結末</span>
-          <span class="chip" onclick="openQEditor('music','⑱ 曲スタイル')">⑱ 曲</span>
-          <span class="chip" onclick="openQEditor('after','⑲ 事後状態')">⑲ 事後</span>
-          <span class="chip" onclick="openQEditor('next','⑳ 今後')">⑳ 今後</span>
+      <!-- 設問カスタマイズ -->
+      <div class="set-section">
+        <div class="set-title">📝 設問カスタマイズ</div>
+        <div class="set-desc">選択肢の追加・削除・並び替えができます。</div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div>
+            <div style="font-size:10px;color:var(--mu);margin-bottom:5px">編集する設問を選ぶ</div>
+            <div class="chips-scroll" id="q-selector">
+              <span class="chip" onclick="openQEditor('time','① 時間帯')">① 時間帯</span>
+              <span class="chip" onclick="openQEditor('action','④ 自分の対応')">④ 対応</span>
+              <span class="chip" onclick="openQEditor('monster','⑤ 敵の属性')">⑤ 敵属性</span>
+              <span class="chip" onclick="openQEditor('body','⑦ 身体の反応')">⑦ 身体反応</span>
+              <span class="chip" onclick="openQEditor('trigger','⑩ 引き金パターン')">⑩ 引き金</span>
+              <span class="chip" onclick="openQEditor('before','⑪ 怒りの前の状態')">⑪ 前の状態</span>
+              <span class="chip" onclick="openQEditor('music','⑫ 曲にするなら')">⑫ 曲</span>
+            </div>
+          </div>
+          <div id="q-editor-area" style="display:none">
+            <div style="font-size:11px;font-weight:700;margin-bottom:6px" id="q-editor-title"></div>
+            <div id="q-editor-list" style="display:flex;flex-direction:column;gap:4px;max-height:200px;overflow-y:auto;margin-bottom:8px"></div>
+            <div style="display:flex;gap:6px">
+              <input class="sinp" id="q-new-opt" placeholder="新しい選択肢を追加…" style="flex:1">
+              <button class="btn pri" style="flex:none;padding:7px 12px;font-size:12px" onclick="addQOption()">＋</button>
+            </div>
+          </div>
         </div>
       </div>
-      <div id="q-editor-area" style="display:none">
-        <div style="font-size:11px;font-weight:700;margin-bottom:6px" id="q-editor-title"></div>
-        <div id="q-editor-list" style="display:flex;flex-direction:column;gap:4px;max-height:200px;overflow-y:auto;margin-bottom:8px"></div>
-        <div style="display:flex;gap:6px">
-          <input class="sinp" id="q-new-opt" placeholder="新しい選択肢を追加…" style="flex:1">
-          <button class="btn pri" style="flex:none;padding:7px 12px;font-size:12px" onclick="addQOption()">＋</button>
+
+      <!-- データ管理 -->
+      <div class="set-section">
+        <div class="set-title">🗂 データ管理</div>
+        <div class="set-desc">ログやポイントをリセットしたい場合に使います。元に戻せません。</div>
+        <div style="display:flex;gap:8px">
+          <button class="btn" style="font-size:11px;color:var(--red);border-color:rgba(220,85,85,.3)" onclick="if(confirm('ログ・勝利記録を全件削除しますか？ポイントもリセットされます。元に戻せません。')){logs=[];wins=[];shopPts=0;lsSet('af_logs',logs);lsSet('af_wins',wins);lsSet('af_shopPts',0);renderLogs();updateHeader();alert('削除しました');}">全データリセット</button>
+          <button class="btn" style="font-size:11px;color:var(--mu)" onclick="if(confirm('ポイント消費記録のみリセットしますか？')){shopPts=Math.min(shopPts,earned());lsSet('af_shopPts',shopPts);updateHeader();alert('リセットしました');}">P消費リセット</button>
         </div>
       </div>
-    </div>
-  </div>
 
-  <!-- データ管理 -->
-  <div class="set-section">
-    <div class="set-title">🗂 データ管理</div>
-    <div class="set-desc">ログやポイントをリセットしたい場合に使います。元に戻せません。</div>
-    <div style="display:flex;gap:8px">
-      <button class="btn" style="font-size:11px;color:var(--red);border-color:rgba(220,85,85,.3)" onclick="if(confirm('ログ・勝利記録を全件削除しますか？ポイントもリセットされます。元に戻せません。')){logs=[];wins=[];shopPts=0;lsSet('af_logs',logs);lsSet('af_wins',wins);lsSet('af_shopPts',0);renderLogs();updateHeader();alert('削除しました');}">全データリセット</button>
-      <button class="btn" style="font-size:11px;color:var(--mu)" onclick="if(confirm('ポイント消費記録のみリセットしますか？')){shopPts=Math.min(shopPts,earned());lsSet('af_shopPts',shopPts);updateHeader();alert('リセットしました');}">P消費リセット</button>
-    </div>
-  </div>
-
-</div></div>
-```
-
+    </div></div>
   </div>
 
   <!-- NAV -->
-
   <div class="nav">
     <button class="nb act" onclick="goScreen('home')" id="nav-home">
       <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>ホーム
@@ -712,14 +629,37 @@ display:flex;align-items:center;justify-content:space-between;gap:10px;
     </button>
   </div>
 
-  <!-- CONGRATS -->
-
+  <!-- CONGRATS（ショップ交換） -->
   <div class="overlay" id="congrats-overlay" style="display:none">
     <div class="ov-emoji">🎉</div>
     <div class="ov-title">おめでとう！</div>
     <div class="ov-sub" id="congrats-name"></div>
     <div class="ov-pts" id="congrats-pts"></div>
     <button class="btn pri" style="max-width:170px;margin-top:8px" onclick="document.getElementById('congrats-overlay').style.display='none'">閉じる</button>
+  </div>
+
+  <!-- RECORD COMPLETE（記録完了振り返り） -->
+  <div class="overlay" id="record-overlay" style="display:none">
+    <div style="font-size:36px;line-height:1">⚡</div>
+    <div style="font-family:var(--fb);font-size:32px;letter-spacing:3px;color:var(--tx)">記録しました</div>
+    <div style="background:#1e1a14;border:1px solid #504030;border-radius:10px;padding:14px 20px;text-align:center;width:100%">
+      <div style="font-size:11px;color:var(--mu);margin-bottom:6px">今回の獲得ポイント</div>
+      <div style="font-family:var(--fb);font-size:44px;color:var(--gld);line-height:1" id="rec-pts">0P</div>
+      <div style="font-size:10px;color:var(--mu);margin-top:4px" id="rec-pts-detail"></div>
+    </div>
+    <div style="background:#1e1a14;border:1px solid #504030;border-radius:10px;padding:12px 16px;width:100%;display:flex;justify-content:space-between">
+      <div style="text-align:center;flex:1">
+        <div style="font-family:var(--fb);font-size:26px;color:var(--grn)" id="rec-total-wins">0</div>
+        <div style="font-size:9px;color:var(--mu);margin-top:2px">累計勝利</div>
+      </div>
+      <div style="width:1px;background:var(--br)"></div>
+      <div style="text-align:center;flex:1">
+        <div style="font-family:var(--fb);font-size:26px;color:var(--gld)" id="rec-avail-pts">0</div>
+        <div style="font-size:9px;color:var(--mu);margin-top:2px">残りポイント</div>
+      </div>
+    </div>
+    <div style="font-size:11px;color:var(--mu)" id="rec-title-display"></div>
+    <button class="btn pri" style="max-width:200px" onclick="document.getElementById('record-overlay').style.display='none';goScreen('home')">ホームへ</button>
   </div>
 </div>
 
@@ -733,15 +673,10 @@ const SHEET_ID = "1Ifxf58OVebL7KcWvOBXSPwK7K_xkGfzk5cSJPumRI58";
 // ── 選択肢定数
 const O = {
   // ① 発生時刻
-  time: ["朝","昼","夕方","夜","深夜","起床直後","出勤・移動中","午前中","お昼休み","午後","帰宅中","就寝前"],
-  // ④ 実際の対応（添付資料に完全一致）
+  time: ["朝","昼","夕方","夜","深夜"],
+  // ④ 自分の対応（5つ＋その他）
   action: [
-    "無言で耐えた","愛想笑い","少し反論","離れた","深呼吸",
-    "スマホでやり過ごした","心の中で毒づいた","相手に合わせた・同調した",
-    "感情的に言い返した","冷静に事実・論理で詰めた","別の話題にすり替えた",
-    "舌打ち・ため息をついた","誰かに愚痴って発散した",
-    "証拠（ログ・スクショ等）を残した","作業や別のタスクに没頭して忘れようとした",
-    "完全に無視してフリーズした","その他"
+    "無言で耐えた","深呼吸した","その場を離れた","冷静に対応した","心の中で毒づいた","その他"
   ],
   // ⑤ 敵の属性（添付資料に完全一致）
   monster: [
@@ -751,30 +686,22 @@ const O = {
     "カメレオン（意見が変わる）","裸の王様（権力振りかざし）","バグ・エラー（システム的理不尽）",
     "寄生植物（養分を奪う）","bot（定型文しか言わない）","ノイズ（ただうるさい）","その他"
   ],
-  // ⑩ 身体の反応（添付資料に完全一致）
+  // ⑦ 身体の反応（5つ＋フリー）
   body: [
-    "胃がギュッとなった","呼吸が浅くなった・止まった","顔が熱くなった",
-    "拳や奥歯を食いしばった","心拍数が跳ね上がった","涙が出そうになった",
-    "手が震えた","頭に血が上ってクラクラした","喉が詰まった感じがした",
-    "変な汗が出た","声が震えた・上ずった","まばたきが増えた",
-    "血圧が上がるのを感じた","無表情になった（表情筋が死んだ）","特にない"
+    "胃がギュッとなった","顔が熱くなった",
+    "心拍数が跳ね上がった","手が震えた","無表情になった","その他"
   ],
-  // ⑫ 引き金パターン（添付資料に完全一致）
+  // ⑩ 引き金パターン（絞り込み版）
   trigger: [
-    "プライドを傷つけられた","期待を裏切られた","コントロールを奪われた",
-    "不公平を感じた","無視・軽視された","テリトリー(時間・空間)を侵された",
-    "価値観・信念を否定された","努力を無駄にされた","自由を制限された",
-    "嘘をつかれた・誤魔化された","前提条件を後からひっくり返された",
-    "無駄な作業・非効率を強要された","大切に育てているもの（時間・労力）を踏みにじられた",
-    "その他"
+    "プライドを傷つけられた","期待を裏切られた",
+    "不公平を感じた","無視・軽視された",
+    "価値観を否定された","努力を無駄にされた",
+    "嘘・誤魔化し","非効率を強要された","その他"
   ],
-  // ⑬ 怒りの前に感じていたこと（添付資料に完全一致）
+  // ⑪ 怒りの前の状態（絞り込み版）
   before: [
-    "不安","疲れ","悲しみ","恥ずかしさ","焦り","体調の悪さ・空腹",
-    "プレッシャー（重圧）","睡眠不足","孤独感","罪悪感",
-    "期待（ワクワク）からの落差","寒さ・暑さなどの環境ストレス",
-    "集中モードの阻害","情報過多による脳のキャパオーバー",
-    "順調に進んでいたことへの慢心","何も感じていなかった","その他"
+    "不安","疲れ","悲しみ","焦り",
+    "睡眠不足","空腹・体調不良","集中を邪魔された","何も感じてなかった","その他"
   ],
   // ⑭ 自分が求めていたもの（添付資料に完全一致）
   need: [
@@ -835,7 +762,7 @@ const lsSet=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v));}catch{}};
 const DEF_PRAISES=["お前、今日も勝った。","感情より知性が勝った瞬間。","不動の心、また一段強くなった。","衝動をいなした。それがワタベの強さ。","6秒やり過ごした。十分すごい。","今日の判断、5年後の自分が誇る。","静かに強い。それが本物。","電車ごときに不動の心は揺るがない。","修羅場で動じなかった男。","今日の我慢、スペアリブ1本分の価値がある。","感情じゃなく実力で返す。プロだ。","今日の怒り、のちに名曲になる。","あの相手、モンスターカードにしてやれ。","雑魚に反応しなかった。それが余裕。","外部環境に左右されない心、今日も育った。","勝った！","お前の勝ちだ。完全に。","今日の辛抱が、明日の余裕を作る。","怒りは燃料。今日も正しく使った。","今日もデータが増えた。それが成長の証明書。"];
 const DEF_LOSES=["信頼の修復に3ヶ月かかる","自分のエネルギーを無駄消費する","相手じゃなく自分が一番損する","「感情的な人」と一生記憶される","後から後悔する言動が出る","職場での評価が静かに下がる","怒った側が損をする世界の法則","冷静な人との差がさらに開く"];
 const DEF_IMGS=["https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=400&h=600&fit=crop","https://images.unsplash.com/photo-1601979031925-424e53b6caaa?w=400&h=600&fit=crop","https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=400&h=600&fit=crop"];
-const DEF_SHOP=[{id:1,name:"コーヒー☕",pts:100,exchangeCount:0},{id:2,name:"ケーキ🍰",pts:600,exchangeCount:0},{id:3,name:"スペアリブ🍖",pts:800,exchangeCount:0},{id:4,name:"外ランチ🍜",pts:1200,exchangeCount:0},{id:5,name:"新しい植木🌱",pts:2000,exchangeCount:0},{id:6,name:"旅行✈️",pts:100000,exchangeCount:0}];
+const DEF_SHOP=[]; // デフォルトアイテムなし（ユーザーが自分で追加）
 const BREATH=[
   {label:"鼻から吸う",  dur:2, scaleStart:1.0, scaleEnd:1.2,  hint:"👃 鼻からゆっくり吸う",      easing:"ease-in"},
   {label:"もう一口",    dur:1, scaleStart:1.2,  scaleEnd:1.45, hint:"👃 もう一口、追加で吸い込む",  easing:"ease-in"},
@@ -1008,7 +935,7 @@ document.getElementById("btn-done").onclick=endEmergency;
 // formState: 全設問の回答を保持
 let formState={
   reacted:false, intensity:7,
-  time:[], action:[], monster:[], body:[], trigger:[], before:[], need:[], habit:[], ending:[], music:[], after:[], next:[],
+  time:[], action:[], monster:[], body:[], trigger:[], before:[], music:[],
 };
 
 // ── カード折りたたみ
@@ -1113,18 +1040,13 @@ function initFormChips(){
   makeChips("chips-body",    get("body"),    "body",    true, "sel-pur");
   makeChips("chips-trigger", get("trigger"), "trigger", false,"sel-gld");
   makeChips("chips-before",  get("before"),  "before",  true, "sel");
-  makeChips("chips-need",    get("need"),    "need",    true, "sel-blu");
-  makeChips("chips-habit",   get("habit"),   "habit",   true, "sel-red");
-  makeChips("chips-ending",  get("ending"),  "ending",  true, "sel-pur");
   makeChips("chips-music",   get("music"),   "music",   false,"sel-gld");
-  makeChips("chips-after",   get("after"),   "after",   false,"sel-grn");
-  makeChips("chips-next",    get("next"),    "next",    true, "sel");
 
-  // テキスト入力バッジ監視
+  // テキスト入力バッジ監視（現行フォームの設問のみ）
   ["f-place","f-fact"].forEach(id=>setupTextBadge(id,"fact"));
-  ["f-skill","f-weakness","f-monster-name"].forEach(id=>setupTextBadge(id,"enemy"));
-  ["f-fantasy"].forEach(id=>setupTextBadge(id,"exp"));
-  ["f-quote","f-title"].forEach(id=>setupTextBadge(id,"cat"));
+  ["f-skill","f-monster-name"].forEach(id=>setupTextBadge(id,"enemy"));
+  ["f-body-free","f-fantasy","f-quote"].forEach(id=>setupTextBadge(id,"exp"));
+  ["f-title"].forEach(id=>setupTextBadge(id,"ana"));
 }
 
 function setReacted(v){
@@ -1157,7 +1079,7 @@ function resetForm(){
   // チップリセット
   document.querySelectorAll(".chip").forEach(c=>{c.className="chip";});
   document.querySelectorAll(".free-input-wrap").forEach(w=>{w.className="free-input-wrap";});
-  ["f-place","f-fact","f-skill","f-weakness","f-monster-name","f-fantasy","f-quote","f-title","f-action-free","f-monster-free","f-trigger-free","f-before-free","f-need-free","f-habit-free","f-ending-free","f-next-free"].forEach(id=>{const el=document.getElementById(id);if(el)el.value="";});
+  ["f-place","f-fact","f-skill","f-monster-name","f-fantasy","f-quote","f-title","f-note","f-action-free","f-monster-free","f-body-free","f-trigger-free","f-before-free"].forEach(id=>{const el=document.getElementById(id);if(el)el.value="";});
   document.querySelectorAll(".sec-card-badge").forEach(b=>{b.textContent="未記入";b.className="sec-card-badge";});
   document.getElementById("ropt-win").className="ropt win sel";
   document.getElementById("ropt-lose").className="ropt lose";
@@ -1176,9 +1098,10 @@ document.getElementById("btn-save-log").onclick=()=>{
     place:f("f-place"),fact:f("f-fact"),
     action:[...formState.action,f("f-action-free")].filter(Boolean).join("/"),
     monster:[...formState.monster,f("f-monster-free")].filter(Boolean).join("/"),
-    monsterName:f("f-monster-name"),skill:f("f-skill"),weakness:f("f-weakness"),
+    skill:f("f-skill"),
+    monsterName:f("f-monster-name"),
     intensity:formState.intensity,
-    body:formState.body.join("/"),
+    body:[...formState.body,f("f-body-free")].filter(Boolean).join("/"),
     fantasy:f("f-fantasy"),
     trigger:formState.trigger[0]||"",before:formState.before.join("/"),
     need:formState.need.join("/"),habit:formState.habit.join("/"),
@@ -1187,7 +1110,8 @@ document.getElementById("btn-save-log").onclick=()=>{
     title:f("f-title"),
     music:formState.music[0]||"",after:formState.after[0]||"",
     next:[...formState.next,f("f-next-free")].filter(Boolean).join("/"),
-    reacted:false, // 既に「心を整える」で勝利済みのため常にtrue
+    note:f("f-note"),
+    reacted:false,
     date:Date.now()
   };
   logs.unshift(log);lsSet("af_logs",logs);
@@ -1200,8 +1124,19 @@ document.getElementById("btn-save-log").onclick=()=>{
     lsSet("af_wins",wins);
   }
   currentWinId=null;
-  resetForm();goScreen("home");
+  // 振り返りオーバーレイ表示
+  const totalP = wins.reduce((s,w)=>s+w.pts,0) - shopPts;
+  const thisWin = wins.find(x=>x.logId===logId);
+  const earnedThis = thisWin ? thisWin.pts : WIN_BASE_PTS;
+  document.getElementById("rec-pts").textContent = earnedThis.toLocaleString()+"P";
+  document.getElementById("rec-pts-detail").textContent = "150P（勝利）+ "+calcBonus(formState.intensity||7).toLocaleString()+"P（記録ボーナス）";
+  document.getElementById("rec-total-wins").textContent = totalWins();
+  document.getElementById("rec-avail-pts").textContent = Math.max(0,totalP).toLocaleString();
+  const t=document.getElementById("f-title")?document.getElementById("f-title").value:"";
+  document.getElementById("rec-title-display").textContent = t ? "「"+t+"」" : "";
+  resetForm();
   updateHeader();
+  document.getElementById("record-overlay").style.display="flex";
 };
 
 // ══════════════════════════════════════════════════════
@@ -1283,13 +1218,13 @@ function renderLogs(){
   }).join("")||`<div style="text-align:center;color:var(--mu);padding:24px;font-size:13px">まだ記録がありません</div>`;
 }
 function downloadCSV(){
-  const h="日時,時刻,場所,事実,対応,敵属性,技名,弱点,強度,身体反応,制約なく解消,引き金,前の感情,求めていたもの,思考のクセ,捨て台詞,望む結末,タイトル,曲スタイル,事後状態,今後,結果,P";
+  const h="日時,時刻,場所,事実,対応,敵属性,技名,強度,身体反応,捨て台詞,制約なく解消,引き金,前の感情,曲スタイル,タイトル,補足,結果,P";
   const rows=logs.map(l=>[
     new Date(l.date).toLocaleString("ja-JP"),l.time,esc(l.place),esc(l.fact),
-    esc(l.action),esc(l.monster),esc(l.skill),esc(l.weakness),l.intensity,
-    esc(l.body),esc(l.fantasy),esc(l.trigger),esc(l.before),esc(l.need),esc(l.habit),
-    esc(l.quote),esc(l.ending),esc(l.title),esc(l.music),esc(l.after),esc(l.next),
-    l.reacted?"行動した":"勝利",calcPts(l)
+    esc(l.action),esc(l.monster),esc(l.skill),l.intensity,
+    esc(l.body),esc(l.quote),esc(l.fantasy),esc(l.trigger),esc(l.before),
+    esc(l.music),esc(l.title),esc(l.note),
+    l.reacted?"記録のみ":"勝利",calcPts(l)
   ].join(","));
   const b=new Blob([[h,...rows].join("\n"),"\uFEFF"],{type:"text/csv;charset=utf-8;"});
   const a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="hybrs_log.csv";a.click();
@@ -1514,6 +1449,5 @@ renderImgSlots();
 updatePtsPreview();
 loadFromSheet(); // スプシから自動取得（非同期）
 </script>
-
 </body>
 </html>
