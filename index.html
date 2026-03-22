@@ -1,15 +1,16 @@
 <!DOCTYPE html>
+
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
-<meta name="apple-mobile-web-app-title" content="IRA DEI">
+<meta name="apple-mobile-web-app-title" content="HYBRS">
 <meta name="theme-color" content="#0d0f14">
-<title>IRA DEI</title>
+<title>HYBRS</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@400;500&family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%230d0f14'/><polygon points='58,10 35,52 52,52 42,90 68,44 50,44' fill='%239ac8f0' opacity='.95'/><polygon points='58,10 35,52 52,52 42,90 68,44 50,44' fill='none' stroke='%23c8e8ff' stroke-width='1.5'/></svg>">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230a0c10'/%3E%3Cdefs%3E%3ClinearGradient id='lg' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23b8e4ff'/%3E%3Cstop offset='1' stop-color='%235ba8e0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpolygon points='62,8 32,54 54,54 38,92 72,42 48,42' fill='url(%23lg)'/%3E%3C/svg%3E">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -33,17 +34,17 @@ html,body{height:100%;overflow:hidden;background:#0e0c0a;color:var(--tx)}
 ::-webkit-scrollbar{width:2px}::-webkit-scrollbar-thumb{background:var(--br)}
 
 /* ── HDR */
-.hdr{display:flex;justify-content:space-between;align-items:center;padding:10px 16px;border-bottom:1px solid var(--br);background:var(--s1);flex-shrink:0}
-.logo{font-family:var(--fb);font-size:20px;letter-spacing:3px;color:#9ac8f0;text-shadow:0 0 12px rgba(120,180,255,.4)}
+.hdr{display:flex;justify-content:space-between;align-items:center;padding:10px 16px;border-bottom:1px solid var(–br);background:var(–s1);flex-shrink:0}
+.logo{font-family:var(–fb);font-size:20px;letter-spacing:3px;color:#e84040;text-shadow:0 0 14px rgba(232,64,64,.35)}
 .hdr-r{display:flex;gap:7px}
-.bdg{font-family:var(--fm);font-size:11px;border-radius:20px;padding:3px 10px;border:1px solid}
-.bdg.g{color:var(--gld);background:rgba(200,152,46,.08);border-color:rgba(200,152,46,.22)}
-.bdg.v{color:var(--grn);background:rgba(72,180,114,.06);border-color:rgba(72,180,114,.2)}
+.bdg{font-family:var(–fm);font-size:11px;border-radius:20px;padding:3px 10px;border:1px solid}
+.bdg.g{color:var(–gld);background:rgba(200,152,46,.08);border-color:rgba(200,152,46,.22)}
+.bdg.v{color:var(–grn);background:rgba(72,180,114,.06);border-color:rgba(72,180,114,.2)}
 
 /* ── NAV */
-.nav{display:flex;background:var(--s1);border-top:1px solid var(--br);flex-shrink:0;padding-bottom:var(--safe-bot)}
-.nb{flex:1;padding:9px 2px 5px;background:none;border:none;color:var(--mu);font-family:var(--fn);font-size:9px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;transition:color .2s;min-height:52px}
-.nb.act{color:var(--blu)}
+.nav{display:flex;background:var(–s1);border-top:1px solid var(–br);flex-shrink:0;padding-bottom:var(–safe-bot)}
+.nb{flex:1;padding:9px 2px 5px;background:none;border:none;color:var(–mu);font-family:var(–fn);font-size:9px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;transition:color .2s;min-height:52px}
+.nb.act{color:var(–blu)}
 .nb svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:2}
 
 /* ── SCREEN — overflow:hidden必須でnavが押し出されない */
@@ -56,106 +57,106 @@ html,body{height:100%;overflow:hidden;background:#0e0c0a;color:var(--tx)}
 /* ──────── HOME ──────── */
 .home-body{display:flex;flex-direction:column;align-items:center;padding:24px 18px 32px;gap:22px}
 .pbtn{
-  width:168px;height:168px;border-radius:50%;border:none;cursor:pointer;
-  background:conic-gradient(from 200deg,#4a1a0a,#8c2a10,#c04020,#8c2a10,#4a1a0a);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;
-  animation:hbp 3s ease-in-out infinite;transition:transform .12s;
+width:168px;height:168px;border-radius:50%;border:none;cursor:pointer;
+background:conic-gradient(from 200deg,#4a1a0a,#8c2a10,#c04020,#8c2a10,#4a1a0a);
+display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;
+animation:hbp 3s ease-in-out infinite;transition:transform .12s;
 }
 .pbtn:active{transform:scale(.9)}
 @keyframes hbp{0%,100%{box-shadow:0 0 60px rgba(200,60,40,.18)}50%{box-shadow:0 0 90px rgba(200,60,40,.3)}}
-.pb-main{font-family:var(--fb);font-size:26px;letter-spacing:3px;color:#fff;line-height:1}
+.pb-main{font-family:var(–fb);font-size:26px;letter-spacing:3px;color:#fff;line-height:1}
 .pb-sub{font-size:10px;color:rgba(255,255,255,.38)}
 .lose-wrap{display:flex;flex-direction:column;gap:6px;width:100%}
 .lose-item{display:flex;align-items:center;gap:11px;background:rgba(200,70,60,.04);border:1px solid rgba(200,70,60,.1);border-radius:9px;padding:9px 13px}
-.lose-n{font-family:var(--fb);font-size:24px;color:rgba(200,80,60,.2);flex-shrink:0;width:18px;line-height:1}
+.lose-n{font-family:var(–fb);font-size:24px;color:rgba(200,80,60,.2);flex-shrink:0;width:18px;line-height:1}
 .lose-t{font-size:12px;color:rgba(230,220,200,.65);line-height:1.4}
 .hstats{display:flex;gap:7px;width:100%}
-.hsc{flex:1;background:var(--s1);border:1px solid var(--br);border-radius:9px;padding:9px 5px;text-align:center;min-width:0}
-.hscv{font-family:var(--fb);font-size:24px;letter-spacing:1px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.hscl{font-size:8px;color:var(--mu);margin-top:2px}
+.hsc{flex:1;background:var(–s1);border:1px solid var(–br);border-radius:9px;padding:9px 5px;text-align:center;min-width:0}
+.hscv{font-family:var(–fb);font-size:24px;letter-spacing:1px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hscl{font-size:8px;color:var(–mu);margin-top:2px}
 
 /* ──────── EMERGENCY ──────── */
 .emrg-inner{flex:1;min-height:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px 22px;gap:24px;text-align:center;overflow-y:auto;-webkit-overflow-scrolling:touch}
-.cnt-num{font-family:var(--fb);font-size:120px;line-height:1;color:var(--red);animation:flk .9s ease-in-out infinite}
+.cnt-num{font-family:var(–fb);font-size:120px;line-height:1;color:var(–red);animation:flk .9s ease-in-out infinite}
 @keyframes flk{0%,100%{opacity:1}50%{opacity:.55}}
-.cnt-bar-wrap{width:180px;height:3px;background:var(--s2);border-radius:2px;overflow:hidden}
-.cnt-bar{height:100%;background:var(--red);transition:width 1s linear}
+.cnt-bar-wrap{width:180px;height:3px;background:var(–s2);border-radius:2px;overflow:hidden}
+.cnt-bar{height:100%;background:var(–red);transition:width 1s linear}
 .cnt-msg{font-size:14px;color:rgba(230,220,200,.45);line-height:2}
-.cnt-msg b{color:var(--tx)}
+.cnt-msg b{color:var(–tx)}
 .bc{width:126px;height:126px;border-radius:50%;background:rgba(106,159,216,.1);border:2px solid rgba(106,159,216,.25);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;transition:none}
-.bc-ph{font-family:var(--fb);font-size:14px;letter-spacing:2px;color:#90b8e0}
-.bc-t{font-family:var(--fm);font-size:30px;color:var(--blu)}
-.bc-hint{font-size:12px;color:var(--mu);max-width:240px;line-height:1.9}
+.bc-ph{font-family:var(–fb);font-size:14px;letter-spacing:2px;color:#90b8e0}
+.bc-t{font-family:var(–fm);font-size:30px;color:var(–blu)}
+.bc-hint{font-size:12px;color:var(–mu);max-width:240px;line-height:1.9}
 .bc-dots{display:flex;gap:7px}
-.bcd{width:32px;height:3px;background:var(--br);border-radius:2px;transition:background .4s}
-.bcd.done{background:var(--blu)}
-.skip-lnk{background:none;border:none;color:var(--dim);font-size:11px;cursor:pointer;font-family:var(--fn);text-decoration:underline}
+.bcd{width:32px;height:3px;background:var(–br);border-radius:2px;transition:background .4s}
+.bcd.done{background:var(–blu)}
+.skip-lnk{background:none;border:none;color:var(–dim);font-size:11px;cursor:pointer;font-family:var(–fn);text-decoration:underline}
 
 /* ──────── REWARD ──────── */
-.rew-img-zone{width:100%;height:240px;overflow:hidden;flex-shrink:0;background:var(--s2);position:relative}
+.rew-img-zone{width:100%;height:240px;overflow:hidden;flex-shrink:0;background:var(–s2);position:relative}
 .rew-img{width:100%;height:100%;object-fit:cover;display:block}
-.rew-fallback{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:72px;background:var(--s1)}
+.rew-fallback{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:72px;background:var(–s1)}
 .rew-overlay{position:absolute;bottom:0;left:0;right:0;padding:12px 16px;background:linear-gradient(transparent,rgba(14,12,10,.95))}
-.rew-crown{font-family:var(--fb);font-size:12px;letter-spacing:3px;color:var(--gld)}
+.rew-crown{font-family:var(–fb);font-size:12px;letter-spacing:3px;color:var(–gld)}
 .praise-zone{padding:14px 16px 10px;flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;min-height:0}
 .praise-txt{font-size:19px;font-weight:700;line-height:1.65;margin-bottom:10px}
-.praise-pts{display:inline-flex;align-items:center;gap:5px;background:rgba(200,152,46,.08);border:1px solid rgba(200,152,46,.22);border-radius:20px;padding:3px 11px;font-family:var(--fm);font-size:11px;color:var(--gld)}
+.praise-pts{display:inline-flex;align-items:center;gap:5px;background:rgba(200,152,46,.08);border:1px solid rgba(200,152,46,.22);border-radius:20px;padding:3px 11px;font-family:var(–fm);font-size:11px;color:var(–gld)}
 .rew-acts{display:flex;gap:6px;padding:10px 16px 16px;flex-shrink:0}
 
 /* ──────── FORM — 新設問UI ──────── */
-.form-hdr{padding:12px 16px 10px;border-bottom:1px solid var(--br);flex-shrink:0}
+.form-hdr{padding:12px 16px 10px;border-bottom:1px solid var(–br);flex-shrink:0}
 .form-hdr h2{font-size:15px;font-weight:700}
-.form-hdr p{font-size:10px;color:var(--mu);margin-top:2px}
+.form-hdr p{font-size:10px;color:var(–mu);margin-top:2px}
 
 /* 結果バー（常時表示） */
-.result-bar{padding:10px 16px;background:var(--s1);border-bottom:1px solid var(--br);flex-shrink:0;display:flex;align-items:center;gap:8px}
+.result-bar{padding:10px 16px;background:var(–s1);border-bottom:1px solid var(–br);flex-shrink:0;display:flex;align-items:center;gap:8px}
 .rtog{display:flex;gap:6px;flex:1}
-.ropt{flex:1;padding:8px;text-align:center;background:var(--s2);border:1px solid var(--br);border-radius:7px;font-size:12px;cursor:pointer;transition:all .15s;user-select:none}
-.ropt.win{background:rgba(72,180,114,.07);border-color:var(--grn);color:var(--grn)}
-.ropt.lose{background:var(--rlo);border-color:var(--red);color:#e08080}
-.pts-pill{background:rgba(200,152,46,.08);border:1px solid rgba(200,152,46,.2);border-radius:12px;padding:5px 10px;font-family:var(--fm);font-size:11px;color:var(--gld);flex-shrink:0;white-space:nowrap}
+.ropt{flex:1;padding:8px;text-align:center;background:var(–s2);border:1px solid var(–br);border-radius:7px;font-size:12px;cursor:pointer;transition:all .15s;user-select:none}
+.ropt.win{background:rgba(72,180,114,.07);border-color:var(–grn);color:var(–grn)}
+.ropt.lose{background:var(–rlo);border-color:var(–red);color:#e08080}
+.pts-pill{background:rgba(200,152,46,.08);border:1px solid rgba(200,152,46,.2);border-radius:12px;padding:5px 10px;font-family:var(–fm);font-size:11px;color:var(–gld);flex-shrink:0;white-space:nowrap}
 
 /* セクションカード（折りたたみ） */
-.sec-card{background:var(--s1);border:1px solid var(--br);border-radius:10px;overflow:hidden}
+.sec-card{background:var(–s1);border:1px solid var(–br);border-radius:10px;overflow:hidden}
 .sec-card+.sec-card{margin-top:8px}
 .sec-card-hdr{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;cursor:pointer;user-select:none;transition:background .15s}
-.sec-card-hdr:active{background:var(--s2)}
+.sec-card-hdr:active{background:var(–s2)}
 .sec-card-title{font-size:12px;font-weight:700;display:flex;align-items:center;gap:7px}
-.sec-card-badge{font-size:9px;color:var(--mu);background:var(--s2);border:1px solid var(--br);border-radius:10px;padding:2px 7px}
-.sec-card-badge.filled{color:var(--grn);background:rgba(72,180,114,.08);border-color:rgba(72,180,114,.25)}
-.sec-card-arrow{color:var(--dim);font-size:11px;transition:transform .25s;flex-shrink:0}
+.sec-card-badge{font-size:9px;color:var(–mu);background:var(–s2);border:1px solid var(–br);border-radius:10px;padding:2px 7px}
+.sec-card-badge.filled{color:var(–grn);background:rgba(72,180,114,.08);border-color:rgba(72,180,114,.25)}
+.sec-card-arrow{color:var(–dim);font-size:11px;transition:transform .25s;flex-shrink:0}
 .sec-card-arrow.open{transform:rotate(180deg)}
 .sec-card-body{height:0;overflow:hidden;transition:height .3s ease}
 .sec-card-body.open{/* height set by JS */}
 .sec-card-inner{padding:12px 14px;display:flex;flex-direction:column;gap:10px}
 
 /* 設問ラベル */
-.q-lbl{font-size:9px;font-weight:700;letter-spacing:2px;color:var(--mu);text-transform:uppercase;margin-bottom:5px}
-.q-hint{font-size:10px;color:var(--dim);letter-spacing:0;text-transform:none;font-weight:400;margin-left:5px}
+.q-lbl{font-size:9px;font-weight:700;letter-spacing:2px;color:var(–mu);text-transform:uppercase;margin-bottom:5px}
+.q-hint{font-size:10px;color:var(–dim);letter-spacing:0;text-transform:none;font-weight:400;margin-left:5px}
 
 /* 横スクロールチップ（長い選択肢向け） */
 .chips-scroll{display:flex;gap:5px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:3px;scrollbar-width:none}
 .chips-scroll::-webkit-scrollbar{display:none}
-.chip{flex-shrink:0;padding:6px 11px;background:var(--s2);border:1px solid var(--br);border-radius:20px;font-size:11px;cursor:pointer;transition:all .15s;user-select:none;white-space:nowrap;line-height:1}
-.chip.sel{background:var(--blo);border-color:var(--blu);color:#a8c8f0}
-.chip.sel-red{background:var(--rlo);border-color:var(--red);color:#e09090}
-.chip.sel-gld{background:rgba(200,152,46,.1);border-color:var(--gld);color:var(--gld)}
-.chip.sel-pur{background:rgba(144,112,192,.1);border-color:var(--pur);color:#c0a0e8}
-.chip.sel-grn{background:rgba(72,180,114,.08);border-color:var(--grn);color:var(--grn)}
-.chip.sel-blu{background:rgba(106,159,216,.12);border-color:var(--blu);color:#a8c8f0}
-.chip.sel-blu{background:rgba(106,159,216,.12);border-color:var(--blu);color:#a8c8f0}
+.chip{flex-shrink:0;padding:6px 11px;background:var(–s2);border:1px solid var(–br);border-radius:20px;font-size:11px;cursor:pointer;transition:all .15s;user-select:none;white-space:nowrap;line-height:1}
+.chip.sel{background:var(–blo);border-color:var(–blu);color:#a8c8f0}
+.chip.sel-red{background:var(–rlo);border-color:var(–red);color:#e09090}
+.chip.sel-gld{background:rgba(200,152,46,.1);border-color:var(–gld);color:var(–gld)}
+.chip.sel-pur{background:rgba(144,112,192,.1);border-color:var(–pur);color:#c0a0e8}
+.chip.sel-grn{background:rgba(72,180,114,.08);border-color:var(–grn);color:var(–grn)}
+.chip.sel-blu{background:rgba(106,159,216,.12);border-color:var(–blu);color:#a8c8f0}
+.chip.sel-blu{background:rgba(106,159,216,.12);border-color:var(–blu);color:#a8c8f0}
 
 /* グリッドチップ（短い選択肢向け） */
 .chips-grid{display:flex;flex-wrap:wrap;gap:5px}
 
 /* テキスト入力 */
-.ti-txt{width:100%;background:var(--s2);border:1px solid var(--br);border-radius:8px;padding:8px 11px;color:var(--tx);font-family:var(--fn);font-size:13px;resize:none;outline:none;transition:border-color .2s;line-height:1.6}
-.ti-txt:focus{border-color:var(--blu)}
-.ti-txt::placeholder{color:var(--dim)}
+.ti-txt{width:100%;background:var(–s2);border:1px solid var(–br);border-radius:8px;padding:8px 11px;color:var(–tx);font-family:var(–fn);font-size:13px;resize:none;outline:none;transition:border-color .2s;line-height:1.6}
+.ti-txt:focus{border-color:var(–blu)}
+.ti-txt::placeholder{color:var(–dim)}
 
 /* 強度スライダー */
 .intr{display:flex;align-items:center;gap:10px}
-.intv{font-family:var(--fb);font-size:32px;min-width:36px;text-align:center}
+.intv{font-family:var(–fb);font-size:32px;min-width:36px;text-align:center}
 .slider{flex:1;-webkit-appearance:none;height:4px;border-radius:2px;outline:none;cursor:pointer}
 .slider::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:#fff;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,.3)}
 
@@ -164,86 +165,88 @@ html,body{height:100%;overflow:hidden;background:#0e0c0a;color:var(--tx)}
 .free-input-wrap.show{display:block}
 
 /* フォームフッター */
-.form-footer{padding:10px 16px 14px;display:flex;gap:8px;flex-shrink:0;border-top:1px solid var(--br);background:var(--s1)}
+.form-footer{padding:10px 16px 14px;display:flex;gap:8px;flex-shrink:0;border-top:1px solid var(–br);background:var(–s1)}
 
 /* ──────── SHOP ──────── */
-.pts-hero{background:var(--s1);border:1px solid var(--br);border-radius:12px;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.pts-hero{background:var(–s1);border:1px solid var(–br);border-radius:12px;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;gap:10px}
 .pts-hero-left{min-width:0;flex:1}
-.pts-hero-num{font-family:var(--fb);font-size:48px;letter-spacing:1px;color:var(--gld);line-height:1;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.pts-hero-lbl{font-size:9px;color:var(--mu);margin-top:4px}
-.pts-hero-sub{font-size:9px;color:var(--mu);margin-top:2px}
+.pts-hero-num{font-family:var(–fb);font-size:48px;letter-spacing:1px;color:var(–gld);line-height:1;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pts-hero-lbl{font-size:9px;color:var(–mu);margin-top:4px}
+.pts-hero-sub{font-size:9px;color:var(–mu);margin-top:2px}
 .pts-hero-right{display:flex;flex-direction:column;gap:5px;flex-shrink:0}
-.pts-mini{background:var(--s2);border:1px solid var(--br);border-radius:7px;padding:7px 10px;text-align:center;min-width:66px}
-.pts-mini-v{font-family:var(--fb);font-size:20px;display:block}
-.pts-mini-l{font-size:8px;color:var(--mu);margin-top:1px}
-.shop-item{background:var(--s1);border:1px solid var(--br);border-radius:9px;padding:11px 13px}
+.pts-mini{background:var(–s2);border:1px solid var(–br);border-radius:7px;padding:7px 10px;text-align:center;min-width:66px}
+.pts-mini-v{font-family:var(–fb);font-size:20px;display:block}
+.pts-mini-l{font-size:8px;color:var(–mu);margin-top:1px}
+.shop-item{background:var(–s1);border:1px solid var(–br);border-radius:9px;padding:11px 13px}
 .si-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px;gap:8px}
 .si-name{font-size:13px;font-weight:700;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.si-pts{font-family:var(--fm);font-size:11px;color:var(--gld);flex-shrink:0}
-.si-bar{height:3px;background:var(--s2);border-radius:2px;overflow:hidden;margin-bottom:4px}
-.si-fi{height:100%;background:linear-gradient(to right,var(--gld),var(--ora));border-radius:2px;transition:width .8s ease}
+.si-pts{font-family:var(–fm);font-size:11px;color:var(–gld);flex-shrink:0}
+.si-bar{height:3px;background:var(–s2);border-radius:2px;overflow:hidden;margin-bottom:4px}
+.si-fi{height:100%;background:linear-gradient(to right,var(–gld),var(–ora));border-radius:2px;transition:width .8s ease}
 .si-bot{display:flex;justify-content:space-between;align-items:center;gap:8px}
-.si-pct{font-size:10px;color:var(--mu);flex:1;min-width:0}
+.si-pct{font-size:10px;color:var(–mu);flex:1;min-width:0}
 .si-actions{display:flex;gap:4px;flex-shrink:0}
-.si-btn{background:none;border:1px solid var(--br);border-radius:5px;color:var(--mu);font-size:10px;cursor:pointer;padding:3px 7px;font-family:var(--fn);white-space:nowrap;transition:all .15s}
-.si-btn.ex{border-color:rgba(200,152,46,.4);color:var(--gld);background:rgba(200,152,46,.06)}
+.si-btn{background:none;border:1px solid var(–br);border-radius:5px;color:var(–mu);font-size:10px;cursor:pointer;padding:3px 7px;font-family:var(–fn);white-space:nowrap;transition:all .15s}
+.si-btn.ex{border-color:rgba(200,152,46,.4);color:var(–gld);background:rgba(200,152,46,.06)}
 .si-btn:disabled{opacity:.28;cursor:not-allowed}
-.add-form{background:var(--s1);border:1px solid var(--br);border-radius:9px;padding:11px}
+.add-form{background:var(–s1);border:1px solid var(–br);border-radius:9px;padding:11px}
 .add-row{display:flex;gap:7px;margin-bottom:7px}
-.sinp{flex:1;background:var(--s2);border:1px solid var(--br);border-radius:6px;padding:7px 9px;color:var(--tx);font-family:var(--fn);font-size:12px;outline:none;min-width:0;transition:border-color .2s}
-.sinp:focus{border-color:var(--blu)}
-.sinp::placeholder{color:var(--dim)}
-.sinp.pi{width:76px;flex:none;font-family:var(--fm)}
+.sinp{flex:1;background:var(–s2);border:1px solid var(–br);border-radius:6px;padding:7px 9px;color:var(–tx);font-family:var(–fn);font-size:12px;outline:none;min-width:0;transition:border-color .2s}
+.sinp:focus{border-color:var(–blu)}
+.sinp::placeholder{color:var(–dim)}
+.sinp.pi{width:76px;flex:none;font-family:var(–fm)}
 
 /* ──────── CONGRATS ──────── */
 .overlay{position:absolute;inset:0;background:rgba(10,9,8,.92);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;z-index:100;text-align:center;padding:32px}
 .ov-emoji{font-size:68px;line-height:1}
-.ov-title{font-family:var(--fb);font-size:40px;letter-spacing:3px;color:var(--gld)}
-.ov-sub{font-size:15px;color:var(--tx);line-height:1.7}
-.ov-pts{font-family:var(--fm);font-size:11px;color:var(--mu)}
+.ov-title{font-family:var(–fb);font-size:40px;letter-spacing:3px;color:var(–gld)}
+.ov-sub{font-size:15px;color:var(–tx);line-height:1.7}
+.ov-pts{font-family:var(–fm);font-size:11px;color:var(–mu)}
 
 /* ──────── LOGS ──────── */
-.log-item{background:var(--s1);border:1px solid var(--br);border-radius:8px;padding:9px 11px;display:flex;align-items:flex-start;gap:9px}
-.ib{width:32px;height:32px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-family:var(--fb);font-size:12px;flex-shrink:0}
+.log-item{background:var(–s1);border:1px solid var(–br);border-radius:8px;padding:9px 11px;display:flex;align-items:flex-start;gap:9px}
+.ib{width:32px;height:32px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-family:var(–fb);font-size:12px;flex-shrink:0}
 .ldet{flex:1;min-width:0}
 .lt{font-size:12px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.lm{font-size:10px;color:var(--mu);margin-top:2px;line-height:1.5}
-.ltag{font-size:9px;padding:2px 6px;border-radius:8px;background:var(--s2);color:var(--mu);border:1px solid var(--br);display:inline-block;margin:2px 2px 0 0}
+.lm{font-size:10px;color:var(–mu);margin-top:2px;line-height:1.5}
+.ltag{font-size:9px;padding:2px 6px;border-radius:8px;background:var(–s2);color:var(–mu);border:1px solid var(–br);display:inline-block;margin:2px 2px 0 0}
 .rtag{font-size:10px;padding:2px 6px;border-radius:9px;flex-shrink:0;margin-top:1px;white-space:nowrap}
 
 /* ──────── SETTINGS ──────── */
-.set-section{background:var(--s1);border:1px solid var(--br);border-radius:10px;padding:14px}
+.set-section{background:var(–s1);border:1px solid var(–br);border-radius:10px;padding:14px}
 .set-section+.set-section{margin-top:8px}
 .set-title{font-size:13px;font-weight:700;margin-bottom:4px}
-.set-desc{font-size:11px;color:var(--mu);line-height:1.65;margin-bottom:12px}
-.img-slot{display:flex;align-items:center;gap:9px;background:var(--s2);border:1px solid var(--br);border-radius:7px;padding:7px 9px}
-.img-thumb{width:42px;height:42px;object-fit:cover;border-radius:5px;flex-shrink:0;background:var(--s1)}
+.set-desc{font-size:11px;color:var(–mu);line-height:1.65;margin-bottom:12px}
+.img-slot{display:flex;align-items:center;gap:9px;background:var(–s2);border:1px solid var(–br);border-radius:7px;padding:7px 9px}
+.img-thumb{width:42px;height:42px;object-fit:cover;border-radius:5px;flex-shrink:0;background:var(–s1)}
 .img-info{flex:1;min-width:0}
 .img-name{font-size:11px;font-weight:700}
-.img-type{font-size:10px;color:var(--mu);margin-top:2px}
-.img-chg{background:var(--s2);border:1px solid var(--br);border-radius:5px;color:var(--mu);font-size:11px;cursor:pointer;padding:3px 8px;white-space:nowrap}
-.img-del{background:none;border:none;color:var(--dim);font-size:15px;cursor:pointer;padding:0 2px}
+.img-type{font-size:10px;color:var(–mu);margin-top:2px}
+.img-chg{background:var(–s2);border:1px solid var(–br);border-radius:5px;color:var(–mu);font-size:11px;cursor:pointer;padding:3px 8px;white-space:nowrap}
+.img-del{background:none;border:none;color:var(–dim);font-size:15px;cursor:pointer;padding:0 2px}
 .sync-status-box{background:rgba(106,159,216,.06);border:1px solid rgba(106,159,216,.15);border-radius:8px;padding:10px 12px;margin-bottom:10px}
 
 /* ──────── SHARED BUTTONS ──────── */
-.btn{flex:1;padding:10px 6px;border-radius:8px;border:1px solid var(--br);background:var(--s2);color:var(--tx);font-family:var(--fn);font-size:12px;font-weight:500;cursor:pointer;transition:all .15s}
-.btn.pri{background:var(--blu);border-color:var(--blu);color:#fff}
-.btn.gld{background:rgba(200,152,46,.1);border-color:var(--gld);color:var(--gld)}
+.btn{flex:1;padding:10px 6px;border-radius:8px;border:1px solid var(–br);background:var(–s2);color:var(–tx);font-family:var(–fn);font-size:12px;font-weight:500;cursor:pointer;transition:all .15s}
+.btn.pri{background:var(–blu);border-color:var(–blu);color:#fff}
+.btn.gld{background:rgba(200,152,46,.1);border-color:var(–gld);color:var(–gld)}
 .btn.full{width:100%;flex:none;display:block}
 .acts{display:flex;gap:7px}
 .scon{padding:14px 16px 32px;display:flex;flex-direction:column;gap:10px}
-.shdr{padding:12px 16px 10px;border-bottom:1px solid var(--br);flex-shrink:0}
+.shdr{padding:12px 16px 10px;border-bottom:1px solid var(–br);flex-shrink:0}
 .shdr h2{font-size:15px;font-weight:700}
-.shdr p{font-size:10px;color:var(--mu);margin-top:2px}
-.divider{border:none;border-top:1px solid var(--br);margin:2px 0}
+.shdr p{font-size:10px;color:var(–mu);margin-top:2px}
+.divider{border:none;border-top:1px solid var(–br);margin:2px 0}
 </style>
+
 </head>
 <body>
 <div class="app" id="app">
 
   <!-- HDR -->
+
   <div class="hdr">
-    <span class="logo" id="app-logo"><svg width="14" height="18" viewBox="0 0 14 22" style="vertical-align:-3px;margin-right:4px;opacity:.85"><polygon points="10,1 3,11 7,11 4,21 12,9 7,9" fill="#9ac8f0"/></svg>IRA DEI</span>
+    <span class="logo" id="app-logo"><svg width="12" height="16" viewBox="0 0 12 20" style="vertical-align:-2px;margin-right:5px"><defs><linearGradient id="lg2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff8080"/><stop offset="1" stop-color="#e03030"/></linearGradient></defs><polygon points="9,1 2,10 6,10 3,19 11,8 6,8" fill="url(#lg2)"/></svg>HYBRS</span>
     <div class="hdr-r">
       <span class="bdg g" id="hdr-pts">★ 0P</span>
       <span class="bdg v" id="hdr-wins">今日 0勝</span>
@@ -251,11 +254,12 @@ html,body{height:100%;overflow:hidden;background:#0e0c0a;color:var(--tx)}
   </div>
 
   <!-- HOME -->
+
   <div class="screen active" id="scr-home">
     <div class="scroll"><div class="home-body">
       <button class="pbtn" id="panic-btn">
         <span class="pb-main">心を整える</span>
-        <span class="pb-sub">タップで介入開始</span>
+        <span class="pb-sub">人と関わらない対応を開始</span>
       </button>
       <div class="lose-wrap" id="lose-list"></div>
       <div class="hstats">
@@ -267,6 +271,7 @@ html,body{height:100%;overflow:hidden;background:#0e0c0a;color:var(--tx)}
   </div>
 
   <!-- EMERGENCY -->
+
   <div class="screen" id="scr-emergency">
     <div id="phase-count" class="emrg-inner">
       <div style="font-size:10px;letter-spacing:3px;color:var(--mu);font-weight:700">HOLD ON</div>
@@ -306,227 +311,229 @@ html,body{height:100%;overflow:hidden;background:#0e0c0a;color:var(--tx)}
   </div>
 
   <!-- FORM：新設問 -->
+
   <div class="screen" id="scr-form">
     <!-- 固定ヘッダー -->
     <div class="form-hdr"><h2>事件を記録する</h2><p>各セクションをタップして展開 — スクロールで下まで進む</p></div>
-    <!-- 結果・強度バー（常時表示） -->
-    <div class="result-bar">
-      <div class="rtog">
-        <div class="ropt win sel" id="ropt-win" onclick="setReacted(false)">✓ 乗り越えた</div>
-        <div class="ropt" id="ropt-lose" onclick="setReacted(true)">次は勝てる</div>
-      </div>
-      <span class="pts-pill" id="pts-preview">0P</span>
+    <!-- 強度バー（常時表示） -->
+    <div class="result-bar" style="justify-content:space-between">
+      <div style="font-size:11px;color:var(--mu)">強度で獲得ポイントが変わります</div>
+      <span class="pts-pill" id="pts-preview">★ 250P</span>
     </div>
     <!-- スクロールエリア -->
     <div class="scroll" id="form-scroll">
       <div style="padding:10px 14px 40px;display:flex;flex-direction:column;gap:8px">
 
-        <!-- ①FACT -->
-        <div class="sec-card" id="card-fact">
-          <div class="sec-card-hdr" onclick="toggleCard('fact')">
-            <div class="sec-card-title">📋 FACT <span style="font-weight:300;color:var(--mu)">— 事実</span>
-              <span class="sec-card-badge" id="badge-fact">未記入</span>
-            </div>
-            <span class="sec-card-arrow" id="arrow-fact">▼</span>
+```
+    <!-- ①FACT -->
+    <div class="sec-card" id="card-fact">
+      <div class="sec-card-hdr" onclick="toggleCard('fact')">
+        <div class="sec-card-title">📋 FACT <span style="font-weight:300;color:var(--mu)">— 事実</span>
+          <span class="sec-card-badge" id="badge-fact">未記入</span>
+        </div>
+        <span class="sec-card-arrow" id="arrow-fact">▼</span>
+      </div>
+      <div class="sec-card-body" id="body-fact">
+        <div class="sec-card-inner">
+          <div>
+            <div class="q-lbl">① 発生時刻</div>
+            <div class="chips-scroll" id="chips-time"></div>
           </div>
-          <div class="sec-card-body" id="body-fact">
-            <div class="sec-card-inner">
-              <div>
-                <div class="q-lbl">① 発生時刻</div>
-                <div class="chips-scroll" id="chips-time"></div>
-              </div>
-              <div>
-                <div class="q-lbl">② 場所・状況</div>
-                <textarea class="ti-txt" rows="2" id="f-place" placeholder="例：品川駅ホーム 満員電車内"></textarea>
-              </div>
-              <div>
-                <div class="q-lbl">③ トリガーの事実</div>
-                <textarea class="ti-txt" rows="2" id="f-fact" placeholder="例：横入りされた・手柄を横取られた"></textarea>
-              </div>
-              <div>
-                <div class="q-lbl">④ 実際の対応<span class="q-hint">複数可</span></div>
-                <div class="chips-scroll" id="chips-action"></div>
-                <div class="free-input-wrap" id="free-action-wrap">
-                  <textarea class="ti-txt" rows="1" id="f-action-free" placeholder="その他の対応…"></textarea>
-                </div>
-              </div>
+          <div>
+            <div class="q-lbl">② 場所・状況</div>
+            <textarea class="ti-txt" rows="2" id="f-place" placeholder="例：品川駅ホーム 満員電車内"></textarea>
+          </div>
+          <div>
+            <div class="q-lbl">③ トリガーの事実</div>
+            <textarea class="ti-txt" rows="2" id="f-fact" placeholder="例：横入りされた・手柄を横取られた"></textarea>
+          </div>
+          <div>
+            <div class="q-lbl">④ 実際の対応<span class="q-hint">複数可</span></div>
+            <div class="chips-scroll" id="chips-action"></div>
+            <div class="free-input-wrap" id="free-action-wrap">
+              <textarea class="ti-txt" rows="1" id="f-action-free" placeholder="その他の対応…"></textarea>
             </div>
           </div>
         </div>
-
-        <!-- ②ENEMY -->
-        <div class="sec-card" id="card-enemy">
-          <div class="sec-card-hdr" onclick="toggleCard('enemy')">
-            <div class="sec-card-title">🎴 ENEMY <span style="font-weight:300;color:var(--mu)">— 敵キャラ</span>
-              <span class="sec-card-badge" id="badge-enemy">未記入</span>
-            </div>
-            <span class="sec-card-arrow" id="arrow-enemy">▼</span>
-          </div>
-          <div class="sec-card-body" id="body-enemy">
-            <div class="sec-card-inner">
-              <div>
-                <div class="q-lbl">⑤ 敵の属性<span class="q-hint">複数可</span></div>
-                <div class="chips-scroll" id="chips-monster"></div>
-                <div class="free-input-wrap" id="free-monster-wrap">
-                  <textarea class="ti-txt" rows="1" id="f-monster-free" placeholder="その他の属性…"></textarea>
-                </div>
-              </div>
-              <div>
-                <div class="q-lbl">⑥ 技名（必殺技）</div>
-                <textarea class="ti-txt" rows="2" id="f-skill" placeholder="例：無限自慢砲 / ため息バズーカ"></textarea>
-              </div>
-              <div>
-                <div class="q-lbl">⑦ 弱点・ダサい所</div>
-                <textarea class="ti-txt" rows="2" id="f-weakness" placeholder="例：上にはペコペコ / 論理が破綻してる"></textarea>
-              </div>
-              <div>
-                <div class="q-lbl">📛 敵の名前</div>
-                <textarea class="ti-txt" rows="1" id="f-monster-name" placeholder="例：満員電車のヌシ / 終電おじさん"></textarea>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- ③EXPLOSION -->
-        <div class="sec-card" id="card-exp">
-          <div class="sec-card-hdr" onclick="toggleCard('exp')">
-            <div class="sec-card-title">💥 EXPLOSION <span style="font-weight:300;color:var(--mu)">— 本音</span>
-              <span class="sec-card-badge" id="badge-exp">未記入</span>
-            </div>
-            <span class="sec-card-arrow" id="arrow-exp">▼</span>
-          </div>
-          <div class="sec-card-body" id="body-exp">
-            <div class="sec-card-inner">
-              <div>
-                <div class="q-lbl">⑧ 強度（1〜10）</div>
-                <div class="intr">
-                  <span class="intv" id="intensity-val" style="color:var(--red)">7</span>
-                  <input type="range" min="1" max="10" step="1" value="7" id="intensity-slider" class="slider" oninput="updateIntensity(this.value)">
-                </div>
-              </div>
-              <div>
-                <div class="q-lbl">⑨ 身体の反応<span class="q-hint">複数可</span></div>
-                <div class="chips-scroll" id="chips-body"></div>
-              </div>
-              <div>
-                <div class="q-lbl">⑩ 制約なく解消するなら？<span class="q-hint">法律無視OK</span></div>
-                <textarea class="ti-txt" rows="2" id="f-fantasy" placeholder="例：顔面にパイを投げる / マイクで全社に論破する"></textarea>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- ④ANALYSIS -->
-        <div class="sec-card" id="card-ana">
-          <div class="sec-card-hdr" onclick="toggleCard('ana')">
-            <div class="sec-card-title">🧠 ANALYSIS <span style="font-weight:300;color:var(--mu)">— 自己分析</span>
-              <span class="sec-card-badge" id="badge-ana">未記入</span>
-            </div>
-            <span class="sec-card-arrow" id="arrow-ana">▼</span>
-          </div>
-          <div class="sec-card-body" id="body-ana">
-            <div class="sec-card-inner">
-              <div>
-                <div class="q-lbl">⑪ 引き金パターン</div>
-                <div class="chips-scroll" id="chips-trigger"></div>
-                <div class="free-input-wrap" id="free-trigger-wrap">
-                  <textarea class="ti-txt" rows="1" id="f-trigger-free" placeholder="その他の引き金…"></textarea>
-                </div>
-              </div>
-              <div>
-                <div class="q-lbl">⑫ 怒りの前に感じていたこと<span class="q-hint">複数可</span></div>
-                <div class="chips-scroll" id="chips-before"></div>
-                <div class="free-input-wrap" id="free-before-wrap">
-                  <textarea class="ti-txt" rows="1" id="f-before-free" placeholder="その他…"></textarea>
-                </div>
-              </div>
-              <div>
-                <div class="q-lbl">⑬ 自分が求めていたもの<span class="q-hint">複数可</span></div>
-                <div class="chips-scroll" id="chips-need"></div>
-                <div class="free-input-wrap" id="free-need-wrap">
-                  <textarea class="ti-txt" rows="1" id="f-need-free" placeholder="その他…"></textarea>
-                </div>
-              </div>
-              <div>
-                <div class="q-lbl">⑭ 自分の思考のクセ<span class="q-hint">複数可</span></div>
-                <div class="chips-scroll" id="chips-habit"></div>
-                <div class="free-input-wrap" id="free-habit-wrap">
-                  <textarea class="ti-txt" rows="1" id="f-habit-free" placeholder="その他…"></textarea>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- ⑤CATHARSIS -->
-        <div class="sec-card" id="card-cat">
-          <div class="sec-card-hdr" onclick="toggleCard('cat')">
-            <div class="sec-card-title">🎯 CATHARSIS <span style="font-weight:300;color:var(--mu)">— 決着</span>
-              <span class="sec-card-badge" id="badge-cat">未記入</span>
-            </div>
-            <span class="sec-card-arrow" id="arrow-cat">▼</span>
-          </div>
-          <div class="sec-card-body" id="body-cat">
-            <div class="sec-card-inner">
-              <div>
-                <div class="q-lbl">⑮ 捨て台詞</div>
-                <textarea class="ti-txt" rows="2" id="f-quote" placeholder="例：二度と話しかけんな / お前の常識、賞味期限切れだぞ"></textarea>
-              </div>
-              <div>
-                <div class="q-lbl">⑯ 望む結末<span class="q-hint">複数可</span></div>
-                <div class="chips-scroll" id="chips-ending"></div>
-                <div class="free-input-wrap" id="free-ending-wrap">
-                  <textarea class="ti-txt" rows="1" id="f-ending-free" placeholder="その他の結末…"></textarea>
-                </div>
-              </div>
-              <div>
-                <div class="q-lbl">⑰ 事件タイトル</div>
-                <textarea class="ti-txt" rows="1" id="f-title" placeholder="例：品川駅・横入りおじさん討伐戦"></textarea>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- ⑥CREATION -->
-        <div class="sec-card" id="card-cre">
-          <div class="sec-card-hdr" onclick="toggleCard('cre')">
-            <div class="sec-card-title">🎵 CREATION <span style="font-weight:300;color:var(--mu)">— 創作・事後</span>
-              <span class="sec-card-badge" id="badge-cre">未記入</span>
-            </div>
-            <span class="sec-card-arrow" id="arrow-cre">▼</span>
-          </div>
-          <div class="sec-card-body" id="body-cre">
-            <div class="sec-card-inner">
-              <div>
-                <div class="q-lbl">⑱ この感情を曲にするなら</div>
-                <div class="chips-scroll" id="chips-music"></div>
-              </div>
-              <div>
-                <div class="q-lbl">⑲ 事後の自分の状態</div>
-                <div class="chips-scroll" id="chips-after"></div>
-              </div>
-              <div>
-                <div class="q-lbl">⑳ 今後どうするか<span class="q-hint">複数可</span></div>
-                <div class="chips-scroll" id="chips-next"></div>
-                <div class="free-input-wrap" id="free-next-wrap">
-                  <textarea class="ti-txt" rows="1" id="f-next-free" placeholder="その他の対処…"></textarea>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div><!-- /padding wrapper -->
-    </div><!-- /scroll -->
-
-    <!-- フッターボタン -->
-    <div class="form-footer">
-      <button class="btn" onclick="goScreen('home')">キャンセル</button>
-      <button class="btn pri" id="btn-save-log">★ 記録して0P獲得</button>
+      </div>
     </div>
+
+    <!-- ②ENEMY -->
+    <div class="sec-card" id="card-enemy">
+      <div class="sec-card-hdr" onclick="toggleCard('enemy')">
+        <div class="sec-card-title">🎴 ENEMY <span style="font-weight:300;color:var(--mu)">— 敵キャラ</span>
+          <span class="sec-card-badge" id="badge-enemy">未記入</span>
+        </div>
+        <span class="sec-card-arrow" id="arrow-enemy">▼</span>
+      </div>
+      <div class="sec-card-body" id="body-enemy">
+        <div class="sec-card-inner">
+          <div>
+            <div class="q-lbl">⑤ 敵の属性<span class="q-hint">複数可</span></div>
+            <div class="chips-scroll" id="chips-monster"></div>
+            <div class="free-input-wrap" id="free-monster-wrap">
+              <textarea class="ti-txt" rows="1" id="f-monster-free" placeholder="その他の属性…"></textarea>
+            </div>
+          </div>
+          <div>
+            <div class="q-lbl">⑥ 技名（必殺技）</div>
+            <textarea class="ti-txt" rows="2" id="f-skill" placeholder="例：無限自慢砲 / ため息バズーカ"></textarea>
+          </div>
+          <div>
+            <div class="q-lbl">⑦ 弱点・ダサい所</div>
+            <textarea class="ti-txt" rows="2" id="f-weakness" placeholder="例：上にはペコペコ / 論理が破綻してる"></textarea>
+          </div>
+          <div>
+            <div class="q-lbl">📛 敵の名前</div>
+            <textarea class="ti-txt" rows="1" id="f-monster-name" placeholder="例：満員電車のヌシ / 終電おじさん"></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ③EXPLOSION -->
+    <div class="sec-card" id="card-exp">
+      <div class="sec-card-hdr" onclick="toggleCard('exp')">
+        <div class="sec-card-title">💥 EXPLOSION <span style="font-weight:300;color:var(--mu)">— 本音</span>
+          <span class="sec-card-badge" id="badge-exp">未記入</span>
+        </div>
+        <span class="sec-card-arrow" id="arrow-exp">▼</span>
+      </div>
+      <div class="sec-card-body" id="body-exp">
+        <div class="sec-card-inner">
+          <div>
+            <div class="q-lbl">⑧ 強度（1〜10）</div>
+            <div class="intr">
+              <span class="intv" id="intensity-val" style="color:var(--red)">7</span>
+              <input type="range" min="1" max="10" step="1" value="7" id="intensity-slider" class="slider" oninput="updateIntensity(this.value)">
+            </div>
+          </div>
+          <div>
+            <div class="q-lbl">⑨ 身体の反応<span class="q-hint">複数可</span></div>
+            <div class="chips-scroll" id="chips-body"></div>
+          </div>
+          <div>
+            <div class="q-lbl">⑩ 制約なく解消するなら？<span class="q-hint">法律無視OK</span></div>
+            <textarea class="ti-txt" rows="2" id="f-fantasy" placeholder="例：顔面にパイを投げる / マイクで全社に論破する"></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ④ANALYSIS -->
+    <div class="sec-card" id="card-ana">
+      <div class="sec-card-hdr" onclick="toggleCard('ana')">
+        <div class="sec-card-title">🧠 ANALYSIS <span style="font-weight:300;color:var(--mu)">— 自己分析</span>
+          <span class="sec-card-badge" id="badge-ana">未記入</span>
+        </div>
+        <span class="sec-card-arrow" id="arrow-ana">▼</span>
+      </div>
+      <div class="sec-card-body" id="body-ana">
+        <div class="sec-card-inner">
+          <div>
+            <div class="q-lbl">⑪ 引き金パターン</div>
+            <div class="chips-scroll" id="chips-trigger"></div>
+            <div class="free-input-wrap" id="free-trigger-wrap">
+              <textarea class="ti-txt" rows="1" id="f-trigger-free" placeholder="その他の引き金…"></textarea>
+            </div>
+          </div>
+          <div>
+            <div class="q-lbl">⑫ 怒りの前に感じていたこと<span class="q-hint">複数可</span></div>
+            <div class="chips-scroll" id="chips-before"></div>
+            <div class="free-input-wrap" id="free-before-wrap">
+              <textarea class="ti-txt" rows="1" id="f-before-free" placeholder="その他…"></textarea>
+            </div>
+          </div>
+          <div>
+            <div class="q-lbl">⑬ 自分が求めていたもの<span class="q-hint">複数可</span></div>
+            <div class="chips-scroll" id="chips-need"></div>
+            <div class="free-input-wrap" id="free-need-wrap">
+              <textarea class="ti-txt" rows="1" id="f-need-free" placeholder="その他…"></textarea>
+            </div>
+          </div>
+          <div>
+            <div class="q-lbl">⑭ 自分の思考のクセ<span class="q-hint">複数可</span></div>
+            <div class="chips-scroll" id="chips-habit"></div>
+            <div class="free-input-wrap" id="free-habit-wrap">
+              <textarea class="ti-txt" rows="1" id="f-habit-free" placeholder="その他…"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ⑤CATHARSIS -->
+    <div class="sec-card" id="card-cat">
+      <div class="sec-card-hdr" onclick="toggleCard('cat')">
+        <div class="sec-card-title">🎯 CATHARSIS <span style="font-weight:300;color:var(--mu)">— 決着</span>
+          <span class="sec-card-badge" id="badge-cat">未記入</span>
+        </div>
+        <span class="sec-card-arrow" id="arrow-cat">▼</span>
+      </div>
+      <div class="sec-card-body" id="body-cat">
+        <div class="sec-card-inner">
+          <div>
+            <div class="q-lbl">⑮ 捨て台詞</div>
+            <textarea class="ti-txt" rows="2" id="f-quote" placeholder="例：二度と話しかけんな / お前の常識、賞味期限切れだぞ"></textarea>
+          </div>
+          <div>
+            <div class="q-lbl">⑯ 望む結末<span class="q-hint">複数可</span></div>
+            <div class="chips-scroll" id="chips-ending"></div>
+            <div class="free-input-wrap" id="free-ending-wrap">
+              <textarea class="ti-txt" rows="1" id="f-ending-free" placeholder="その他の結末…"></textarea>
+            </div>
+          </div>
+          <div>
+            <div class="q-lbl">⑰ 事件タイトル</div>
+            <textarea class="ti-txt" rows="1" id="f-title" placeholder="例：品川駅・横入りおじさん討伐戦"></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ⑥CREATION -->
+    <div class="sec-card" id="card-cre">
+      <div class="sec-card-hdr" onclick="toggleCard('cre')">
+        <div class="sec-card-title">🎵 CREATION <span style="font-weight:300;color:var(--mu)">— 創作・事後</span>
+          <span class="sec-card-badge" id="badge-cre">未記入</span>
+        </div>
+        <span class="sec-card-arrow" id="arrow-cre">▼</span>
+      </div>
+      <div class="sec-card-body" id="body-cre">
+        <div class="sec-card-inner">
+          <div>
+            <div class="q-lbl">⑱ この感情を曲にするなら</div>
+            <div class="chips-scroll" id="chips-music"></div>
+          </div>
+          <div>
+            <div class="q-lbl">⑲ 事後の自分の状態</div>
+            <div class="chips-scroll" id="chips-after"></div>
+          </div>
+          <div>
+            <div class="q-lbl">⑳ 今後どうするか<span class="q-hint">複数可</span></div>
+            <div class="chips-scroll" id="chips-next"></div>
+            <div class="free-input-wrap" id="free-next-wrap">
+              <textarea class="ti-txt" rows="1" id="f-next-free" placeholder="その他の対処…"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /padding wrapper -->
+</div><!-- /scroll -->
+
+<!-- フッターボタン -->
+<div class="form-footer">
+  <button class="btn" onclick="goScreen('home')">キャンセル</button>
+  <button class="btn pri" id="btn-save-log">★ 記録して0P獲得</button>
+</div>
+```
+
   </div>
 
   <!-- SHOP -->
+
   <div class="screen" id="scr-shop">
     <div class="shdr"><h2>勝利ポイント & ご褒美</h2><p>乗り越えた分だけ、自分に贈る</p></div>
     <div class="scroll"><div class="scon">
@@ -550,97 +557,111 @@ html,body{height:100%;overflow:hidden;background:#0e0c0a;color:var(--tx)}
         <button class="btn pri full" style="padding:8px;font-size:12px" onclick="addShopItem()">追加する</button>
       </div>
       <div id="shop-list" style="display:flex;flex-direction:column;gap:7px"></div>
-      <div style="background:rgba(106,159,216,.05);border:1px solid rgba(106,159,216,.12);border-radius:9px;padding:11px;font-size:11px;color:var(--mu);line-height:1.75">
-        💡 強度÷10×10P（最大100P）/ 6回乗り越えると≈ 600P
-      </div>
-    </div></div>
+
+```
+</div></div>
+```
+
   </div>
 
   <!-- LOGS -->
+
   <div class="screen" id="scr-logs">
     <div class="shdr"><h2>勝利ログ</h2><p>CSVをGeminiに渡して漫画・小説・Suno歌詞に変換</p></div>
     <div class="scroll"><div class="scon">
-      <button class="btn full" style="padding:11px" onclick="downloadCSV()">📥 CSVダウンロード</button>
+      <div style="display:flex;gap:7px">
+        <button class="btn" style="padding:11px" onclick="downloadCSV()">📥 CSV</button>
+        <button class="btn" style="padding:11px;color:var(--blu);border-color:rgba(106,159,216,.3)" onclick="downloadBackup()">💾 バックアップ</button>
+        <button class="btn" style="padding:11px;font-size:11px;color:var(--mu)" onclick="importBackup()">⬆ 復元</button>
+      </div>
 
-      <div id="log-list" style="display:flex;flex-direction:column;gap:6px"></div>
-    </div></div>
+```
+  <div id="log-list" style="display:flex;flex-direction:column;gap:6px"></div>
+</div></div>
+```
+
   </div>
 
   <!-- SETTINGS -->
+
   <div class="screen" id="scr-set">
     <div class="shdr"><h2>設定</h2><p>ご褒美写真の管理</p></div>
     <div class="scroll"><div class="scon">
 
-      <!-- スプシ自動連携ステータス -->
-      <div style="background:rgba(106,159,216,.06);border:1px solid rgba(106,159,216,.14);border-radius:10px;padding:12px 14px">
-        <div style="font-size:12px;font-weight:700;margin-bottom:5px;display:flex;align-items:center;gap:7px">
-          📊 スプシ自動連携
-          <span id="sync-dot" style="width:7px;height:7px;border-radius:50%;background:var(--mu);flex-shrink:0"></span>
-        </div>
-        <div id="sync-info-box" style="font-size:11px;color:var(--mu);line-height:1.65">起動時に取得中…</div>
-        <div style="font-size:10px;color:var(--dim);margin-top:6px">スプシを編集 → アプリをリロードで自動反映</div>
-      </div>
+```
+  <!-- スプシ自動連携ステータス -->
+  <div style="background:rgba(106,159,216,.06);border:1px solid rgba(106,159,216,.14);border-radius:10px;padding:12px 14px">
+    <div style="font-size:12px;font-weight:700;margin-bottom:5px;display:flex;align-items:center;gap:7px">
+      📊 スプシ自動連携
+      <span id="sync-dot" style="width:7px;height:7px;border-radius:50%;background:var(--mu);flex-shrink:0"></span>
+    </div>
+    <div id="sync-info-box" style="font-size:11px;color:var(--mu);line-height:1.65">起動時に取得中…</div>
+    <div style="font-size:10px;color:var(--dim);margin-top:6px">スプシを編集 → アプリをリロードで自動反映</div>
+  </div>
 
-      <!-- 写真管理 -->
-      <div class="set-section">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">
-          <div class="set-title">📸 ご褒美写真</div>
-          <span style="font-size:10px;color:var(--mu)" id="imgs-count">0枚</span>
-        </div>
-        <div class="set-desc">端末から直接選択。完全プライベート・外部サービス不要。自動圧縮。最大5枚。</div>
-        <div id="img-slots" style="display:flex;flex-direction:column;gap:7px;margin-bottom:10px"></div>
-        <button class="btn pri full" style="padding:11px;font-size:13px" onclick="addImgSlot()" id="btn-add-img">
-          ＋ 写真を追加（残り<span id="img-slots-remaining">5</span>枚）
-        </button>
-      </div>
+  <!-- 写真管理 -->
+  <div class="set-section">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">
+      <div class="set-title">📸 ご褒美写真</div>
+      <span style="font-size:10px;color:var(--mu)" id="imgs-count">0枚</span>
+    </div>
+    <div class="set-desc">端末から直接選択。完全プライベート・外部サービス不要。自動圧縮。最大5枚。</div>
+    <div id="img-slots" style="display:flex;flex-direction:column;gap:7px;margin-bottom:10px"></div>
+    <button class="btn pri full" style="padding:11px;font-size:13px" onclick="addImgSlot()" id="btn-add-img">
+      ＋ 写真を追加（残り<span id="img-slots-remaining">5</span>枚）
+    </button>
+  </div>
 
-      <!-- 設問カスタマイズ -->
-      <div class="set-section">
-        <div class="set-title">📝 設問カスタマイズ</div>
-        <div class="set-desc">選択肢の追加・削除・並び替えができます。</div>
-        <div style="display:flex;flex-direction:column;gap:8px">
-          <div>
-            <div style="font-size:10px;color:var(--mu);margin-bottom:5px">編集する設問を選ぶ</div>
-            <div class="chips-scroll" id="q-selector">
-              <span class="chip" onclick="openQEditor('time','① 発生時刻')">① 時刻</span>
-              <span class="chip" onclick="openQEditor('action','④ 実際の対応')">④ 対応</span>
-              <span class="chip" onclick="openQEditor('monster','⑤ 敵の属性')">⑤ 敵属性</span>
-              <span class="chip" onclick="openQEditor('body','⑩ 身体の反応')">⑩ 身体反応</span>
-              <span class="chip" onclick="openQEditor('trigger','⑫ 引き金パターン')">⑫ 引き金</span>
-              <span class="chip" onclick="openQEditor('before','⑬ 怒り前の感情')">⑬ 前の感情</span>
-              <span class="chip" onclick="openQEditor('need','⑭ 求めていたもの')">⑭ 欲求</span>
-              <span class="chip" onclick="openQEditor('habit','⑮ 思考のクセ')">⑮ 思考クセ</span>
-              <span class="chip" onclick="openQEditor('ending','⑰ 望む結末')">⑰ 結末</span>
-              <span class="chip" onclick="openQEditor('music','⑱ 曲スタイル')">⑱ 曲</span>
-              <span class="chip" onclick="openQEditor('after','⑲ 事後状態')">⑲ 事後</span>
-              <span class="chip" onclick="openQEditor('next','⑳ 今後')">⑳ 今後</span>
-            </div>
-          </div>
-          <div id="q-editor-area" style="display:none">
-            <div style="font-size:11px;font-weight:700;margin-bottom:6px" id="q-editor-title"></div>
-            <div id="q-editor-list" style="display:flex;flex-direction:column;gap:4px;max-height:200px;overflow-y:auto;margin-bottom:8px"></div>
-            <div style="display:flex;gap:6px">
-              <input class="sinp" id="q-new-opt" placeholder="新しい選択肢を追加…" style="flex:1">
-              <button class="btn pri" style="flex:none;padding:7px 12px;font-size:12px" onclick="addQOption()">＋</button>
-            </div>
-          </div>
+  <!-- 設問カスタマイズ -->
+  <div class="set-section">
+    <div class="set-title">📝 設問カスタマイズ</div>
+    <div class="set-desc">選択肢の追加・削除・並び替えができます。</div>
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <div>
+        <div style="font-size:10px;color:var(--mu);margin-bottom:5px">編集する設問を選ぶ</div>
+        <div class="chips-scroll" id="q-selector">
+          <span class="chip" onclick="openQEditor('time','① 発生時刻')">① 時刻</span>
+          <span class="chip" onclick="openQEditor('action','④ 実際の対応')">④ 対応</span>
+          <span class="chip" onclick="openQEditor('monster','⑤ 敵の属性')">⑤ 敵属性</span>
+          <span class="chip" onclick="openQEditor('body','⑩ 身体の反応')">⑩ 身体反応</span>
+          <span class="chip" onclick="openQEditor('trigger','⑫ 引き金パターン')">⑫ 引き金</span>
+          <span class="chip" onclick="openQEditor('before','⑬ 怒り前の感情')">⑬ 前の感情</span>
+          <span class="chip" onclick="openQEditor('need','⑭ 求めていたもの')">⑭ 欲求</span>
+          <span class="chip" onclick="openQEditor('habit','⑮ 思考のクセ')">⑮ 思考クセ</span>
+          <span class="chip" onclick="openQEditor('ending','⑰ 望む結末')">⑰ 結末</span>
+          <span class="chip" onclick="openQEditor('music','⑱ 曲スタイル')">⑱ 曲</span>
+          <span class="chip" onclick="openQEditor('after','⑲ 事後状態')">⑲ 事後</span>
+          <span class="chip" onclick="openQEditor('next','⑳ 今後')">⑳ 今後</span>
         </div>
       </div>
-
-      <!-- データ管理 -->
-      <div class="set-section">
-        <div class="set-title">🗂 データ管理</div>
-        <div class="set-desc">ログやポイントをリセットしたい場合に使います。元に戻せません。</div>
-        <div style="display:flex;gap:8px">
-          <button class="btn" style="font-size:11px;color:var(--red);border-color:rgba(220,85,85,.3)" onclick="if(confirm('ログを全件削除しますか？元に戻せません。')){logs=[];lsSet('af_logs',logs);renderLogs();updateHeader();alert('削除しました');}">ログ削除</button>
-          <button class="btn" style="font-size:11px;color:var(--mu)" onclick="if(confirm('ポイント消費記録をリセットしますか？')){shopPts=0;lsSet('af_shopPts',0);updateHeader();alert('リセットしました');}">P消費リセット</button>
+      <div id="q-editor-area" style="display:none">
+        <div style="font-size:11px;font-weight:700;margin-bottom:6px" id="q-editor-title"></div>
+        <div id="q-editor-list" style="display:flex;flex-direction:column;gap:4px;max-height:200px;overflow-y:auto;margin-bottom:8px"></div>
+        <div style="display:flex;gap:6px">
+          <input class="sinp" id="q-new-opt" placeholder="新しい選択肢を追加…" style="flex:1">
+          <button class="btn pri" style="flex:none;padding:7px 12px;font-size:12px" onclick="addQOption()">＋</button>
         </div>
       </div>
+    </div>
+  </div>
 
-    </div></div>
+  <!-- データ管理 -->
+  <div class="set-section">
+    <div class="set-title">🗂 データ管理</div>
+    <div class="set-desc">ログやポイントをリセットしたい場合に使います。元に戻せません。</div>
+    <div style="display:flex;gap:8px">
+      <button class="btn" style="font-size:11px;color:var(--red);border-color:rgba(220,85,85,.3)" onclick="if(confirm('ログ・勝利記録を全件削除しますか？ポイントもリセットされます。元に戻せません。')){logs=[];wins=[];shopPts=0;lsSet('af_logs',logs);lsSet('af_wins',wins);lsSet('af_shopPts',0);renderLogs();updateHeader();alert('削除しました');}">全データリセット</button>
+      <button class="btn" style="font-size:11px;color:var(--mu)" onclick="if(confirm('ポイント消費記録のみリセットしますか？')){shopPts=Math.min(shopPts,earned());lsSet('af_shopPts',shopPts);updateHeader();alert('リセットしました');}">P消費リセット</button>
+    </div>
+  </div>
+
+</div></div>
+```
+
   </div>
 
   <!-- NAV -->
+
   <div class="nav">
     <button class="nb act" onclick="goScreen('home')" id="nav-home">
       <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>ホーム
@@ -660,6 +681,7 @@ html,body{height:100%;overflow:hidden;background:#0e0c0a;color:var(--tx)}
   </div>
 
   <!-- CONGRATS -->
+
   <div class="overlay" id="congrats-overlay" style="display:none">
     <div class="ov-emoji">🎉</div>
     <div class="ov-title">おめでとう！</div>
@@ -781,7 +803,7 @@ const lsSet=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v));}catch{}};
 const DEF_PRAISES=["お前、今日も勝った。","感情より知性が勝った瞬間。","不動の心、また一段強くなった。","衝動をいなした。それがワタベの強さ。","6秒やり過ごした。十分すごい。","今日の判断、5年後の自分が誇る。","静かに強い。それが本物。","電車ごときに不動の心は揺るがない。","修羅場で動じなかった男。","今日の我慢、スペアリブ1本分の価値がある。","感情じゃなく実力で返す。プロだ。","今日の怒り、のちに名曲になる。","あの相手、モンスターカードにしてやれ。","雑魚に反応しなかった。それが余裕。","外部環境に左右されない心、今日も育った。","勝った！","お前の勝ちだ。完全に。","今日の辛抱が、明日の余裕を作る。","怒りは燃料。今日も正しく使った。","今日もデータが増えた。それが成長の証明書。"];
 const DEF_LOSES=["信頼の修復に3ヶ月かかる","自分のエネルギーを無駄消費する","相手じゃなく自分が一番損する","「感情的な人」と一生記憶される","後から後悔する言動が出る","職場での評価が静かに下がる","怒った側が損をする世界の法則","冷静な人との差がさらに開く"];
 const DEF_IMGS=["https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=400&h=600&fit=crop","https://images.unsplash.com/photo-1601979031925-424e53b6caaa?w=400&h=600&fit=crop","https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=400&h=600&fit=crop"];
-const DEF_SHOP=[{id:1,name:"コーヒー☕",pts:100},{id:2,name:"ケーキ🍰",pts:600},{id:3,name:"スペアリブ🍖",pts:800},{id:4,name:"外ランチ🍜",pts:1200},{id:5,name:"新しい植木🌱",pts:2000},{id:6,name:"旅行✈️",pts:100000}];
+const DEF_SHOP=[{id:1,name:"コーヒー☕",pts:100,exchangeCount:0},{id:2,name:"ケーキ🍰",pts:600,exchangeCount:0},{id:3,name:"スペアリブ🍖",pts:800,exchangeCount:0},{id:4,name:"外ランチ🍜",pts:1200,exchangeCount:0},{id:5,name:"新しい植木🌱",pts:2000,exchangeCount:0},{id:6,name:"旅行✈️",pts:100000,exchangeCount:0}];
 const BREATH=[
   {label:"鼻から吸う",  dur:2, scaleStart:1.0, scaleEnd:1.2,  hint:"👃 鼻からゆっくり吸う",      easing:"ease-in"},
   {label:"もう一口",    dur:1, scaleStart:1.2,  scaleEnd:1.45, hint:"👃 もう一口、追加で吸い込む",  easing:"ease-in"},
@@ -789,10 +811,12 @@ const BREATH=[
 ];
 
 let logs    = lsGet("af_logs",[],a=>Array.isArray(a)?a.map(l=>({...l,date:Number(l.date)})):[]);
+let wins    = lsGet("af_wins",[],a=>Array.isArray(a)?a.map(w=>({...w,date:Number(w.date)})):[]); // セッション勝利記録
 let shop    = lsGet("af_shop",DEF_SHOP);
 let shopPts = lsGet("af_shopPts",0);
 let praises = lsGet("af_praises",DEF_PRAISES);
 let loses   = lsGet("af_loses",DEF_LOSES);
+let currentWinId = null; // 現在のセッションID（ボタン押下後・記録前）
 let imgs    = (()=>{
   const n=lsGet("af_imgs_count",0);
   if(n===0)return[...DEF_IMGS];
@@ -802,15 +826,21 @@ let imgs    = (()=>{
 })();
 
 // ── CALC
-// ポイントロジック: 1P≒1円 / 強度5=100P / 強度10=1000P（指数スケール）
-const calcPts=l=>{
-  if(l.reacted) return 0;
-  const i=Math.max(1,Math.min(10,l.intensity||7));
-  return Math.round(10 * Math.pow(10, i/5));
-};
-const earned=()=>logs.reduce((s,l)=>s+calcPts(l),0);
-const avail=()=>earned()-shopPts;
-const todayWins=()=>{const t=new Date();t.setHours(0,0,0,0);return logs.filter(l=>{const d=new Date(l.date);d.setHours(0,0,0,0);return d.getTime()===t.getTime()&&!l.reacted;}).length;};
+// ポイントロジック:
+//   デフォルト勝利(ボタン押下): 150P
+//   記録ボーナス(強度i): round(850 * (i/10)^1.3) → i=10: 850P, 合計1000P
+//   合計: 150 + bonus(i) → max 1000P
+const WIN_BASE_PTS = 150;
+const calcBonus = i => Math.round(850 * Math.pow(Math.max(1,Math.min(10,i))/10, 1.3));
+const calcPts = l => l.reacted ? 0 : WIN_BASE_PTS + calcBonus(l.intensity||7);
+// 勝利セッション合計P（wins配列から）
+const earned=()=>wins.reduce((s,w)=>s+w.pts,0);
+// 最低0P保証
+const avail=()=>Math.max(0, earned()-shopPts);
+// 今日の勝利数 = 今日のセッション数
+const todayWins=()=>{const t=new Date();t.setHours(0,0,0,0);return wins.filter(w=>{const d=new Date(w.date);d.setHours(0,0,0,0);return d.getTime()===t.getTime();}).length;};
+// 全勝利数
+const totalWins=()=>wins.length;
 const ago=d=>{const n=Math.floor((Date.now()-d)/86400000);return n===0?"今日":n===1?"昨日":n+"日前";};
 const rnd=a=>a[Math.floor(Math.random()*a.length)];
 const s3=a=>{const c=[...a],r=[];for(let i=0;i<Math.min(3,c.length);i++){const j=Math.floor(Math.random()*(c.length-i));r.push(c.splice(j,1)[0]);}return r;};
@@ -831,12 +861,12 @@ function goScreen(id){
   updateHeader();
 }
 function updateHeader(){
-  const a=avail(),e=earned(),tw=todayWins(),aw=logs.filter(l=>!l.reacted).length;
+  const a=avail(),e=earned(),tw=todayWins(),aw=totalWins();
   document.getElementById("hdr-pts").textContent="★ "+a.toLocaleString()+"P";
   document.getElementById("hdr-wins").textContent="今日 "+tw+"勝";
   document.getElementById("stat-today").textContent=tw;
   document.getElementById("stat-total").textContent=aw;
-  document.getElementById("stat-pts").textContent=e.toLocaleString(); // 累計=全獲得合計
+  document.getElementById("stat-pts").textContent=e.toLocaleString();
 }
 
 // ── HOME
@@ -848,11 +878,16 @@ function renderHomeLoses(){
 let cntT=null,breathT=null,bPhIdx=0,bTimer=0,bCycle=0;
 function startEmergency(){
   renderHomeLoses();
-  document.getElementById("main-nav")==null||null;
+  // セッション開始: ボタン押下で1勝利+150P確定
+  const winId = Date.now();
+  currentWinId = winId;
+  wins.push({id:winId, date:Date.now(), pts:WIN_BASE_PTS, logId:null});
+  lsSet("af_wins", wins);
   document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
   document.getElementById("scr-emergency").classList.add("active");
   document.querySelectorAll(".nb").forEach(b=>b.classList.remove("act"));
   showPhase("count");startCountdown();
+  updateHeader();
 }
 function showPhase(p){
   ["count","breathe","reward"].forEach(id=>{
@@ -912,8 +947,8 @@ function runBreath(){
 function showReward(){
   clearInterval(breathT);
   document.getElementById("praise-txt").textContent=rnd(praises);
-  const pv2=formState.reacted?0:Math.round(10*Math.pow(10,(formState.intensity||7)/5));
-  document.getElementById("praise-pts").textContent="★ +"+pv2.toLocaleString()+"P 獲得見込み";
+  const pv2=WIN_BASE_PTS+calcBonus(formState.intensity||7);
+  document.getElementById("praise-pts").textContent="★ "+pv2.toLocaleString()+"P 獲得（記録でさらにボーナス）";
   const imgArr=imgs.length?imgs:DEF_IMGS;
   const imgEl=document.getElementById("rew-img");
   const fbEl=document.getElementById("rew-fallback");
@@ -1076,11 +1111,12 @@ function updateIntensity(v){
 }
 function updatePtsPreview(){
   const i=formState.intensity||7;
-  const p=formState.reacted?0:Math.round(10*Math.pow(10,i/5));
+  const bonus=calcBonus(i);
+  const total=WIN_BASE_PTS+bonus;
   const el=document.getElementById("pts-preview");
-  el.textContent=(p>0?"★ "+p.toLocaleString():"0")+"P";
-  el.style.color=p>0?"var(--gld)":"var(--mu)";
-  document.getElementById("btn-save-log").textContent="★ 記録して"+(p>0?p.toLocaleString()+"P":"0P")+"獲得";
+  el.textContent="★ "+total.toLocaleString()+"P";
+  el.style.color="var(--gld)";
+  document.getElementById("btn-save-log").textContent="記録する";
 }
 
 // フォームリセット
@@ -1101,8 +1137,9 @@ function resetForm(){
 // 保存
 document.getElementById("btn-save-log").onclick=()=>{
   const f=v=>document.getElementById(v)?document.getElementById(v).value:"";
+  const logId=Date.now();
   const log={
-    id:Date.now(),
+    id:logId,
     time:formState.time[0]||"",
     place:f("f-place"),fact:f("f-fact"),
     action:[...formState.action,f("f-action-free")].filter(Boolean).join("/"),
@@ -1118,17 +1155,30 @@ document.getElementById("btn-save-log").onclick=()=>{
     title:f("f-title"),
     music:formState.music[0]||"",after:formState.after[0]||"",
     next:[...formState.next,f("f-next-free")].filter(Boolean).join("/"),
-    reacted:formState.reacted,date:Date.now()
+    reacted:false, // 既に「心を整える」で勝利済みのため常にtrue
+    date:Date.now()
   };
   logs.unshift(log);lsSet("af_logs",logs);
+  // 現在のセッションにボーナスPTを追加（2重勝利にならないよう既存セッションを更新）
+  const bonus=calcBonus(formState.intensity||7);
+  if(currentWinId){
+    const w=wins.find(x=>x.id===currentWinId);
+    if(w){w.pts=WIN_BASE_PTS+bonus;w.logId=logId;}
+  }else{
+    // セッションなし（直接記録タブから）→新セッション作成
+    wins.push({id:logId,date:Date.now(),pts:WIN_BASE_PTS+bonus,logId});
+  }
+  lsSet("af_wins",wins);
+  currentWinId=null;
   resetForm();goScreen("home");
+  updateHeader();
 };
 
 // ══════════════════════════════════════════════════════
 //  SHOP
 // ══════════════════════════════════════════════════════
 function renderShop(){
-  const a=avail(),e=earned(),tw=todayWins(),aw=logs.filter(l=>!l.reacted).length;
+  const a=avail(),e=earned(),tw=todayWins(),aw=totalWins(); // wins配列を唯一のソースに統一
   document.getElementById("shop-pts-num").textContent=a.toLocaleString();
   document.getElementById("shop-pts-sub").textContent="獲得 "+e.toLocaleString()+"P − 消費 "+shopPts.toLocaleString()+"P";
   document.getElementById("shop-today").textContent=tw;
@@ -1136,8 +1186,15 @@ function renderShop(){
   document.getElementById("shop-list").innerHTML=shop.map(item=>{
     const pct=Math.min(100,Math.round(a/item.pts*100));
     const can=a>=item.pts;
+    const cnt=item.exchangeCount||0;
     return `<div class="shop-item">
-      <div class="si-top"><span class="si-name">${item.name}</span><span class="si-pts">${item.pts.toLocaleString()}P</span></div>
+      <div class="si-top">
+        <span class="si-name">${item.name}</span>
+        <div style="display:flex;align-items:center;gap:7px">
+          ${cnt>0?`<span style="font-size:9px;color:var(--mu);background:var(--s2);border:1px solid var(--br);border-radius:10px;padding:1px 7px">${cnt}回交換済</span>`:""}
+          <span class="si-pts">${item.pts.toLocaleString()}P</span>
+        </div>
+      </div>
       <div class="si-bar"><div class="si-fi" style="width:${pct}%"></div></div>
       <div class="si-bot">
         <span class="si-pct">${can?"🎉 交換できる！":a.toLocaleString()+" / "+item.pts.toLocaleString()+"P ("+pct+"%)"}</span>
@@ -1168,6 +1225,7 @@ function editItem(id){
 function exchangeItem(id){
   const item=shop.find(i=>i.id===id);if(!item||avail()<item.pts)return;
   shopPts+=item.pts;lsSet("af_shopPts",shopPts);
+  item.exchangeCount=(item.exchangeCount||0)+1;lsSet("af_shop",shop);
   document.getElementById("congrats-name").textContent=item.name+"と交換しました";
   document.getElementById("congrats-pts").textContent="-"+item.pts.toLocaleString()+"P · 残り "+avail().toLocaleString()+"P";
   document.getElementById("congrats-overlay").style.display="flex";
@@ -1204,7 +1262,54 @@ function downloadCSV(){
     l.reacted?"行動した":"勝利",calcPts(l)
   ].join(","));
   const b=new Blob([[h,...rows].join("\n"),"\uFEFF"],{type:"text/csv;charset=utf-8;"});
-  const a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="angerforge.csv";a.click();
+  const a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="hybrs_log.csv";a.click();
+}
+
+// バックアップ（全データ JSON）
+function downloadBackup(){
+  const data={
+    version:1,
+    exportedAt:new Date().toISOString(),
+    logs, wins, shop, shopPts, praises, loses,
+    imgs_count: lsGet("af_imgs_count",0),
+    custom_opts: Object.fromEntries(
+      ["time","action","monster","body","trigger","before","need","habit","ending","music","after","next"]
+        .map(k=>[k, lsGet("af_q_"+k, null)]).filter(([,v])=>v!==null)
+    ),
+  };
+  const b=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(b);
+  a.download="hybrs_backup_"+new Date().toLocaleDateString("ja-JP").replace(/\//g,"-")+".json";
+  a.click();
+}
+function importBackup(){
+  const inp=document.createElement("input");inp.type="file";inp.accept=".json";
+  inp.onchange=e=>{
+    const file=e.target.files[0];if(!file)return;
+    const reader=new FileReader();
+    reader.onload=ev=>{
+      try{
+        const data=JSON.parse(ev.target.result);
+        if(!data.version){alert("無効なバックアップファイルです");return;}
+        if(!confirm("現在のデータをすべて上書きしますか？ログ・勝利記録・ショップ・設定がすべて上書きされます。"))return;
+        if(data.logs){logs=data.logs.map(l=>({...l,date:Number(l.date)}));lsSet("af_logs",logs);}
+        if(data.wins){wins=data.wins.map(w=>({...w,date:Number(w.date)}));lsSet("af_wins",wins);}
+        if(data.shop){shop=data.shop;lsSet("af_shop",shop);}
+        if(data.shopPts!==undefined){shopPts=data.shopPts;lsSet("af_shopPts",shopPts);}
+        if(data.praises){praises=data.praises;lsSet("af_praises",praises);}
+        if(data.loses){loses=data.loses;lsSet("af_loses",loses);}
+        if(data.custom_opts){
+          Object.entries(data.custom_opts).forEach(([k,v])=>{if(v)lsSet("af_q_"+k,v);});
+          restoreCustomOpts();
+        }
+        renderHomeLoses();updateHeader();renderLogs();renderImgSlots();initFormChips();
+        alert("復元完了しました！");
+      }catch(err){alert("読み込みエラー："+err.message);}
+    };
+    reader.readAsText(file);
+  };
+  inp.click();
 }
 
 // ══════════════════════════════════════════════════════
@@ -1360,6 +1465,18 @@ async function loadFromSheet(){
 //  INIT
 // ══════════════════════════════════════════════════════
 restoreCustomOpts(); // カスタム選択肢復元（initFormChipsの前）
+
+// ── マイグレーション: 旧logsデータからwinsを再構築
+// winsが空でlogsがある場合、logsからwinsを復元して一貫性を保つ
+if(wins.length===0 && logs.length>0){
+  wins = logs.filter(l=>!l.reacted).map(l=>({
+    id:l.id, date:l.date,
+    pts: WIN_BASE_PTS + calcBonus(l.intensity||7),
+    logId:l.id
+  }));
+  lsSet("af_wins", wins);
+}
+
 initFormChips();
 renderHomeLoses();
 updateHeader();
@@ -1367,5 +1484,6 @@ renderImgSlots();
 updatePtsPreview();
 loadFromSheet(); // スプシから自動取得（非同期）
 </script>
+
 </body>
 </html>
