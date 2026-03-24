@@ -748,10 +748,30 @@ const earned=()=>wins.reduce((s,w)=>s+w.pts,0);
 // 最低0P保証
 const avail=()=>Math.max(0, earned()-shopPts);
 // 今日の勝利数 = 今日のセッション数
-const todayWins=()=>{const t=new Date();t.setHours(0,0,0,0);return wins.filter(w=>{const d=new Date(w.date);d.setHours(0,0,0,0);return d.getTime()===t.getTime();}).length;};
+const todayWins=()=>{
+  const now = new Date();
+  const jstNow = new Date(now.getTime() + (now.getTimezoneOffset() + 540) * 60000);
+  const t = new Date(jstNow.getFullYear(), jstNow.getMonth(), jstNow.getDate()).getTime();
+  return wins.filter(w=>{
+    const d = new Date(w.date);
+    const jd = new Date(d.getTime() + (d.getTimezoneOffset() + 540) * 60000);
+    const dt = new Date(jd.getFullYear(), jd.getMonth(), jd.getDate()).getTime();
+    return dt === t;
+  }).length;
+};
 // 全勝利数
 const totalWins=()=>wins.length;
-const ago=d=>{const n=Math.floor((Date.now()-d)/86400000);return n===0?"今日":n===1?"昨日":n+"日前";};
+const ago=d=>{
+  const now = new Date();
+  const jstNow = new Date(now.getTime() + (now.getTimezoneOffset() + 540) * 60000);
+  const today = new Date(jstNow.getFullYear(), jstNow.getMonth(), jstNow.getDate()).getTime();
+  const target = new Date(d);
+  const jstTarget = new Date(target.getTime() + (target.getTimezoneOffset() + 540) * 60000);
+  const targetDay = new Date(jstTarget.getFullYear(), jstTarget.getMonth(), jstTarget.getDate()).getTime();
+  const n = Math.floor((today - targetDay) / 86400000);
+  if (n < 0) return "今日";
+  return n===0?"今日":n===1?"昨日":n+"日前";
+};
 const rnd=a=>a[Math.floor(Math.random()*a.length)];
 const s3=a=>{const c=[...a],r=[];for(let i=0;i<Math.min(3,c.length);i++){const j=Math.floor(Math.random()*(c.length-i));r.push(c.splice(j,1)[0]);}return r;};
 const esc=s=>`"${(s||"").replace(/"/g,'""').replace(/\r?\n/g,' ')}"`;
@@ -1014,9 +1034,9 @@ function updatePtsPreview(){
   const bonus=calcBonus(i);
   const total=WIN_BASE_PTS+bonus;
   const el=document.getElementById("pts-preview");
-  el.textContent="★ "+total.toLocaleString()+"P";
-  el.style.color="var(--gld)";
-  document.getElementById("btn-save-log").textContent="記録する";
+el.textContent="★ "+total.toLocaleString()+"P";
+	  el.style.color="var(--gld)";
+	  document.getElementById("btn-save-log").textContent="★ 記録して"+bonus.toLocaleString()+"P獲得";
 }
 
 // フォームリセット
@@ -1146,27 +1166,43 @@ function exchangeItem(id){
 // ══════════════════════════════════════════════════════
 //  LOGS
 // ══════════════════════════════════════════════════════
+function deleteLog(id){
+  if(!confirm("この記録を削除しますか？"))return;
+  const log = logs.find(l=>l.id===id);
+  if(log && !log.reacted){
+    // 勝利記録に紐付いている場合は、winsからも削除してポイントを無効化
+    wins = wins.filter(w=>w.logId!==id);
+    lsSet("af_wins", wins);
+  }
+  logs = logs.filter(l=>l.id!==id);
+  lsSet("af_logs", logs);
+  renderLogs();
+  updateHeader();
+}
 function renderLogs(){
   document.getElementById("log-list").innerHTML=logs.map(l=>{
     const p=calcPts(l);
     const col=l.intensity>=8?"rgba(220,85,85,.15)":l.intensity>=5?"rgba(200,152,46,.12)":"rgba(72,180,114,.1)";
     const tc=l.intensity>=8?"#e09090":l.intensity>=5?"var(--gld)":"var(--grn)";
-    return `<div class="log-item">
-      <div class="ib" style="background:${col};color:${tc}">${l.intensity||"?"}</div>
-      <div class="ldet">
-        <div class="lt">${l.title||l.fact||"記録"}</div>
-        <div class="lm">${ago(l.date)}${l.time?" · "+l.time:""}${l.place?" · "+l.place:""}</div>
-        ${l.quote?`<div class="lm" style="color:rgba(230,220,200,.45)">「${l.quote.slice(0,22)}…」</div>`:""}
-        <div>${l.monster?`<span class="ltag">🎴${l.monster.split("/")[0]}</span>`:""}${p>0?`<span class="ltag" style="color:var(--gld)">★${p}P</span>`:""}</div>
-      </div>
-      <span class="rtag" style="background:${l.reacted?"var(--rlo)":"rgba(72,180,114,.07)"};color:${l.reacted?"#e08080":"var(--grn)"}">${l.reacted?"次は勝つ":"✓勝利"}</span>
-    </div>`;
+return `<div class="log-item">
+	      <div class="ib" style="background:${col};color:${tc}">${l.intensity||"?"}</div>
+	      <div class="ldet">
+	        <div class="lt">${l.title||l.fact||"記録"}</div>
+	        <div class="lm">${ago(l.date)}${l.time?" · "+l.time:""}${l.place?" · "+l.place:""}</div>
+	        ${l.quote?`<div class="lm" style="color:rgba(230,220,200,.45)">「${l.quote.slice(0,22)}…」</div>`:""}
+	        <div style="display:flex;justify-content:space-between;align-items:center">
+	          <div>${l.monster?`<span class="ltag">🎴${l.monster.split("/")[0]}</span>`:""}${p>0?`<span class="ltag" style="color:var(--gld)">★${p}P</span>`:""}</div>
+	          <button onclick="deleteLog(${l.id})" style="background:none;border:none;color:var(--dim);font-size:11px;padding:4px">削除</button>
+	        </div>
+	      </div>
+	      <span class="rtag" style="background:${l.reacted?"var(--rlo)":"rgba(72,180,114,.07)"};color:${l.reacted?"#e08080":"var(--grn)"}">${l.reacted?"次は勝つ":"✓勝利"}</span>
+	    </div>`;
   }).join("")||`<div style="text-align:center;color:var(--mu);padding:24px;font-size:13px">まだ記録がありません</div>`;
 }
 function downloadCSV(){
   const h="日時,時刻,場所,事実,対応,敵属性,技名,強度,身体反応,捨て台詞,制約なく解消,引き金,前の感情,曲スタイル,タイトル,補足,結果,P";
   const rows=logs.map(l=>[
-    new Date(l.date).toLocaleString("ja-JP"),l.time,esc(l.place),esc(l.fact),
+    new Date(l.date + (new Date().getTimezoneOffset() + 540) * 60000).toLocaleString("ja-JP"),l.time,esc(l.place),esc(l.fact),
     esc(l.action),esc(l.monster),esc(l.skill),l.intensity,
     esc(l.body),esc(l.quote),esc(l.fantasy),esc(l.trigger),esc(l.before),
     esc(l.music),esc(l.title),esc(l.note),
