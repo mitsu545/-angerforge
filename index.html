@@ -45,7 +45,7 @@ html,body{height:100%;overflow:hidden;background:#0e0c0a;color:var(--tx)}
 .nb.act{color:var(--blu)}
 .nb svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:2}
 
-/* ── SCREEN — overflow:hidden必須でnavが押し出されない */
+/* ── SCREEN */
 .screen{display:none}
 .screen.active{display:flex;flex-direction:column;flex:1;min-height:0;overflow:hidden}
 
@@ -101,15 +101,13 @@ html,body{height:100%;overflow:hidden;background:#0e0c0a;color:var(--tx)}
 .praise-pts{display:inline-flex;align-items:center;gap:5px;background:rgba(200,152,46,.08);border:1px solid rgba(200,152,46,.22);border-radius:20px;padding:3px 11px;font-family:var(--fm);font-size:11px;color:var(--gld)}
 .rew-acts{display:flex;gap:6px;padding:10px 16px 16px;flex-shrink:0}
 
-/* ──────── FORM — 新設問UI ──────── */
+/* ──────── FORM ──────── */
 .form-hdr{padding:12px 16px 10px;border-bottom:1px solid var(--br);flex-shrink:0}
 .form-hdr h2{font-size:15px;font-weight:700}
 .form-hdr p{font-size:10px;color:var(--mu);margin-top:2px}
 
-/* 結果バー（常時表示） */
 .pts-pill{background:rgba(200,152,46,.08);border:1px solid rgba(200,152,46,.2);border-radius:12px;padding:5px 10px;font-family:var(--fm);font-size:11px;color:var(--gld);flex-shrink:0;white-space:nowrap}
 
-/* セクションカード（折りたたみ） */
 .sec-card{background:#1e1a14;border:1px solid #504030;border-radius:10px;overflow:hidden}
 .sec-card+.sec-card{margin-top:8px}
 .sec-card-hdr{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;cursor:pointer;user-select:none;transition:background .15s}
@@ -120,14 +118,12 @@ html,body{height:100%;overflow:hidden;background:#0e0c0a;color:var(--tx)}
 .sec-card-arrow{color:var(--dim);font-size:11px;transition:transform .25s;flex-shrink:0}
 .sec-card-arrow.open{transform:rotate(180deg)}
 .sec-card-body{height:0;overflow:hidden;transition:height .3s ease}
-.sec-card-body.open{/* height set by JS */}
+.sec-card-body.open{}
 .sec-card-inner{padding:12px 14px;display:flex;flex-direction:column;gap:10px}
 
-/* 設問ラベル */
 .q-lbl{font-size:9px;font-weight:700;letter-spacing:2px;color:var(--mu);text-transform:uppercase;margin-bottom:5px}
 .q-hint{font-size:10px;color:var(--dim);letter-spacing:0;text-transform:none;font-weight:400;margin-left:5px}
 
-/* 横スクロールチップ（長い選択肢向け） */
 .chips-scroll{display:flex;gap:5px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:3px;scrollbar-width:none}
 .chips-scroll::-webkit-scrollbar{display:none}
 .chip{
@@ -137,62 +133,30 @@ html,body{height:100%;overflow:hidden;background:#0e0c0a;color:var(--tx)}
   transition:background .12s,border-color .12s,color .12s,box-shadow .12s;
   user-select:none;white-space:nowrap;line-height:1;color:var(--mu);
 }
-/* 未選択にホバー効果 */
 .chip:active{opacity:.7}
-/* 選択状態: カラーごとに不透明な背景で視認性確保 */
-.chip.sel{
-  background:#2a4a6a;border-color:#5a9fd0;color:#d8eeff;
-  box-shadow:0 0 0 1px #3a6a90;
-}
-.chip.sel-red{
-  background:#5a2020;border-color:#c84040;color:#ffb8b8;
-  box-shadow:0 0 0 1px #8a3030;
-}
-.chip.sel-gld{
-  background:#4a3800;border-color:#c8982e;color:#ffe090;
-  box-shadow:0 0 0 1px #7a5a10;
-}
-.chip.sel-pur{
-  background:#3a2858;border-color:#9070c0;color:#d8b8ff;
-  box-shadow:0 0 0 1px #6040a0;
-}
-.chip.sel-grn{
-  background:#1a3a28;border-color:#48b472;color:#a0e8c0;
-  box-shadow:0 0 0 1px #2a6040;
-}
-.chip.sel-blu{
-  background:#1a3850;border-color:#5090c8;color:#b0d8ff;
-  box-shadow:0 0 0 1px #2a5878;
-}
+.chip.sel{background:#2a4a6a;border-color:#5a9fd0;color:#d8eeff;box-shadow:0 0 0 1px #3a6a90}
+.chip.sel-red{background:#5a2020;border-color:#c84040;color:#ffb8b8;box-shadow:0 0 0 1px #8a3030}
+.chip.sel-gld{background:#4a3800;border-color:#c8982e;color:#ffe090;box-shadow:0 0 0 1px #7a5a10}
+.chip.sel-pur{background:#3a2858;border-color:#9070c0;color:#d8b8ff;box-shadow:0 0 0 1px #6040a0}
+.chip.sel-grn{background:#1a3a28;border-color:#48b472;color:#a0e8c0;box-shadow:0 0 0 1px #2a6040}
+.chip.sel-blu{background:#1a3850;border-color:#5090c8;color:#b0d8ff;box-shadow:0 0 0 1px #2a5878}
 
-/* グリッドチップ（短い選択肢向け） */
-
-
-/* テキスト入力 */
 .ti-txt{width:100%;background:var(--s2);border:1px solid var(--br);border-radius:8px;padding:8px 11px;color:var(--tx);font-family:var(--fn);font-size:13px;resize:none;outline:none;transition:border-color .2s;line-height:1.6}
 .ti-txt:focus{border-color:var(--blu)}
 .ti-txt::placeholder{color:var(--dim)}
 
-/* 強度スライダー */
 .intr{display:flex;align-items:center;gap:10px}
 .intv{font-family:var(--fb);font-size:32px;min-width:36px;text-align:center}
 .slider{flex:1;-webkit-appearance:none;height:4px;border-radius:2px;outline:none;cursor:pointer}
 .slider::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:#fff;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,.3)}
 
-/* その他入力（chip選択後に展開） */
 .free-input-wrap{display:none;margin-top:5px}
 .free-input-wrap.show{display:block}
 
-/* フォームフッター */
 .form-footer{padding:10px 16px 14px;display:flex;gap:8px;flex-shrink:0;border-top:1px solid var(--br);background:var(--s1)}
 
 /* ──────── SHOP ──────── */
-.pts-hero{
-  background:#1e1a14;  /* s1より少し明るく、必ず視認できる */
-  border:1px solid #504030;  /* brより明るいボーダー */
-  border-radius:12px;padding:14px 16px;
-  display:flex;align-items:center;justify-content:space-between;gap:10px;
-}
+.pts-hero{background:#1e1a14;border:1px solid #504030;border-radius:12px;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;gap:10px}
 .pts-hero-left{min-width:0;flex:1}
 .pts-hero-num{font-family:var(--fb);font-size:48px;letter-spacing:1px;color:var(--gld);line-height:1;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .pts-hero-lbl{font-size:9px;color:var(--mu);margin-top:4px}
@@ -248,7 +212,6 @@ html,body{height:100%;overflow:hidden;background:#0e0c0a;color:var(--tx)}
 .img-type{font-size:10px;color:var(--mu);margin-top:2px}
 .img-chg{background:var(--s2);border:1px solid var(--br);border-radius:5px;color:var(--mu);font-size:11px;cursor:pointer;padding:3px 8px;white-space:nowrap}
 .img-del{background:none;border:none;color:var(--dim);font-size:15px;cursor:pointer;padding:0 2px}
-
 
 /* ──────── SHARED BUTTONS ──────── */
 .btn{flex:1;padding:10px 6px;border-radius:8px;border:1px solid var(--br);background:var(--s2);color:var(--tx);font-family:var(--fn);font-size:12px;font-weight:500;cursor:pointer;transition:all .15s}
@@ -329,16 +292,12 @@ html,body{height:100%;overflow:hidden;background:#0e0c0a;color:var(--tx)}
     </div>
   </div>
 
-  <!-- FORM：新設問 -->
+  <!-- FORM -->
   <div class="screen" id="scr-form">
-    <!-- 固定ヘッダー -->
     <div class="form-hdr"><h2>事件を記録する</h2></div>
-
-    <!-- スクロールエリア -->
     <div class="scroll" id="form-scroll">
       <div style="padding:10px 14px 40px;display:flex;flex-direction:column;gap:8px">
 
-        <!-- 強度（常時表示・折りたたみなし） -->
         <div style="background:#1e1a14;border:1px solid #504030;border-radius:10px;padding:12px 14px">
           <div class="q-lbl">強度（1〜10）</div>
           <div class="intr">
@@ -348,7 +307,6 @@ html,body{height:100%;overflow:hidden;background:#0e0c0a;color:var(--tx)}
           </div>
         </div>
 
-        <!-- ①FACT — 何が起きたか -->
         <div class="sec-card" id="card-fact">
           <div class="sec-card-hdr" onclick="toggleCard('fact')">
             <div class="sec-card-title">📋 FACT <span style="font-weight:300;color:var(--mu)">— 何が起きたか</span>
@@ -381,7 +339,6 @@ html,body{height:100%;overflow:hidden;background:#0e0c0a;color:var(--tx)}
           </div>
         </div>
 
-        <!-- ②ENEMY — 相手キャラ -->
         <div class="sec-card" id="card-enemy">
           <div class="sec-card-hdr" onclick="toggleCard('enemy')">
             <div class="sec-card-title">🎴 ENEMY <span style="font-weight:300;color:var(--mu)">— 相手キャラ</span>
@@ -410,7 +367,6 @@ html,body{height:100%;overflow:hidden;background:#0e0c0a;color:var(--tx)}
           </div>
         </div>
 
-        <!-- ③EXPLOSION — 本音 -->
         <div class="sec-card" id="card-exp">
           <div class="sec-card-hdr" onclick="toggleCard('exp')">
             <div class="sec-card-title">💥 EXPLOSION <span style="font-weight:300;color:var(--mu)">— 本音</span>
@@ -439,7 +395,6 @@ html,body{height:100%;overflow:hidden;background:#0e0c0a;color:var(--tx)}
           </div>
         </div>
 
-        <!-- ④INSIGHT — 分析・創作 -->
         <div class="sec-card" id="card-ana">
           <div class="sec-card-hdr" onclick="toggleCard('ana')">
             <div class="sec-card-title">🧠 INSIGHT <span style="font-weight:300;color:var(--mu)">— 分析・創作</span>
@@ -475,16 +430,14 @@ html,body{height:100%;overflow:hidden;background:#0e0c0a;color:var(--tx)}
           </div>
         </div>
 
-        <!-- 補足（自由記述） -->
         <div style="background:#1e1a14;border:1px solid #504030;border-radius:10px;padding:12px 14px">
           <div class="q-lbl">補足・自由記述</div>
           <textarea class="ti-txt" rows="3" id="f-note" placeholder="その他、記録しておきたいこと…"></textarea>
         </div>
 
-      </div><!-- /padding wrapper -->
-    </div><!-- /scroll -->
+      </div>
+    </div>
 
-    <!-- フッターボタン -->
     <div class="form-footer">
       <button class="btn" onclick="goScreen('home')">キャンセル</button>
       <button class="btn pri" id="btn-save-log">★ 記録して0P獲得</button>
@@ -515,7 +468,6 @@ html,body{height:100%;overflow:hidden;background:#0e0c0a;color:var(--tx)}
         <button class="btn pri full" style="padding:8px;font-size:12px" onclick="addShopItem()">追加する</button>
       </div>
       <div id="shop-list" style="display:flex;flex-direction:column;gap:7px"></div>
-
     </div></div>
   </div>
 
@@ -528,7 +480,6 @@ html,body{height:100%;overflow:hidden;background:#0e0c0a;color:var(--tx)}
         <button class="btn" style="padding:11px;color:var(--blu);border-color:rgba(106,159,216,.3)" onclick="downloadBackup()">💾 バックアップ</button>
         <button class="btn" style="padding:11px;font-size:11px;color:var(--mu)" onclick="importBackup()">⬆ 復元</button>
       </div>
-
       <div id="log-list" style="display:flex;flex-direction:column;gap:6px"></div>
     </div></div>
   </div>
@@ -546,6 +497,31 @@ html,body{height:100%;overflow:hidden;background:#0e0c0a;color:var(--tx)}
         </div>
         <div id="sync-info-box" style="font-size:11px;color:var(--mu);line-height:1.65">起動時に取得中…</div>
         <div style="font-size:10px;color:var(--dim);margin-top:6px">スプシを編集 → アプリをリロードで自動反映</div>
+      </div>
+
+      <!-- ★ 追加：スプシ自動バックアップ設定 -->
+      <div class="set-section">
+        <div class="set-title">☁️ スプシ自動バックアップ</div>
+        <div class="set-desc">
+          GAS Web AppのURLを登録すると、記録するたびに自動でスプシの「バックアップ」シートに追記されます。
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <input
+            class="sinp"
+            id="gas-url-input"
+            placeholder="https://script.google.com/macros/s/..."
+            style="width:100%;font-size:11px"
+          >
+          <div style="display:flex;gap:8px">
+            <button class="btn pri" style="flex:1;font-size:12px;padding:9px" onclick="saveGasUrl()">
+              💾 URLを保存
+            </button>
+            <button class="btn" id="btn-bulk-gas" style="flex:1;font-size:12px;padding:9px" onclick="bulkSendToGAS()">
+              📤 全ログ一括送信
+            </button>
+          </div>
+          <div id="gas-url-status" style="font-size:10px;color:var(--mu)"></div>
+        </div>
       </div>
 
       <!-- 写真管理 -->
@@ -621,7 +597,7 @@ html,body{height:100%;overflow:hidden;background:#0e0c0a;color:var(--tx)}
     </button>
   </div>
 
-  <!-- CONGRATS（ショップ交換） -->
+  <!-- CONGRATS -->
   <div class="overlay" id="congrats-overlay" style="display:none">
     <div class="ov-emoji">🎉</div>
     <div class="ov-title">おめでとう！</div>
@@ -630,7 +606,7 @@ html,body{height:100%;overflow:hidden;background:#0e0c0a;color:var(--tx)}
     <button class="btn pri" style="max-width:170px;margin-top:8px" onclick="document.getElementById('congrats-overlay').style.display='none'">閉じる</button>
   </div>
 
-  <!-- RECORD COMPLETE（記録完了振り返り） -->
+  <!-- RECORD COMPLETE -->
   <div class="overlay" id="record-overlay" style="display:none">
     <div style="font-size:36px;line-height:1">⚡</div>
     <div style="font-family:var(--fb);font-size:32px;letter-spacing:3px;color:var(--tx)">記録しました</div>
@@ -657,20 +633,15 @@ html,body{height:100%;overflow:hidden;background:#0e0c0a;color:var(--tx)}
 
 <script>
 // ══════════════════════════════════════════════════════
-//  HYBRS — JS v1.0
+//  HYBRS — JS v1.1 (GASバックアップ機能追加)
 // ══════════════════════════════════════════════════════
 
 const SHEET_ID = "1Ifxf58OVebL7KcWvOBXSPwK7K_xkGfzk5cSJPumRI58";
 
 // ── 選択肢定数
 const O = {
-  // ① 発生時刻
   time: ["朝","昼","夕方","夜","深夜"],
-  // ④ 自分の対応（5つ＋その他）
-  action: [
-    "無言で耐えた","深呼吸した","その場を離れた","冷静に対応した","心の中で毒づいた","その他"
-  ],
-  // ⑤ 敵の属性（添付資料に完全一致）
+  action: ["無言で耐えた","深呼吸した","その場を離れた","冷静に対応した","心の中で毒づいた","その他"],
   monster: [
     "きぐるい","ゾンビ","妖怪","機械","害虫","自然災害","ボス系モンスター","幽霊","毒キノコ","臭悪",
     "エイリアン(理解不能)","スライム(粘着質)","猛獣(攻撃的)","吸血鬼（時間・気力を吸う）",
@@ -678,24 +649,14 @@ const O = {
     "カメレオン（意見が変わる）","裸の王様（権力振りかざし）","バグ・エラー（システム的理不尽）",
     "寄生植物（養分を奪う）","bot（定型文しか言わない）","ノイズ（ただうるさい）","その他"
   ],
-  // ⑦ 身体の反応（5つ＋フリー）
-  body: [
-    "胃がギュッとなった","顔が熱くなった",
-    "心拍数が跳ね上がった","手が震えた","無表情になった","その他"
-  ],
-  // ⑩ 引き金パターン（絞り込み版）
+  body: ["胃がギュッとなった","顔が熱くなった","心拍数が跳ね上がった","手が震えた","無表情になった","その他"],
   trigger: [
-    "プライドを傷つけられた","期待を裏切られた",
-    "不公平を感じた","無視・軽視された",
-    "価値観を否定された","努力を無駄にされた",
-    "嘘・誤魔化し","非効率を強要された","その他"
+    "プライドを傷つけられた","期待を裏切られた","不公平を感じた","無視・軽視された",
+    "価値観を否定された","努力を無駄にされた","嘘・誤魔化し","非効率を強要された","その他"
   ],
-  // ⑪ 怒りの前の状態（絞り込み版）
   before: [
-    "不安","疲れ","悲しみ","焦り",
-    "睡眠不足","空腹・体調不良","集中を邪魔された","何も感じてなかった","その他"
+    "不安","疲れ","悲しみ","焦り","睡眠不足","空腹・体調不良","集中を邪魔された","何も感じてなかった","その他"
   ],
-  // ⑬ 曲にするなら
   music: [
     "激しく叫ぶ","静かに語りかける","皮肉っぽく歌う","泣きながら歌う","リズムで刻む",
     "壮大なオーケストラで絶望を表現","ポップで明るく狂気を歌う",
@@ -709,11 +670,73 @@ const O = {
 const lsGet=(k,d,r)=>{try{const v=localStorage.getItem(k);if(v===null)return d;const p=JSON.parse(v);return r?r(p):p;}catch{return d;}};
 const lsSet=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v));}catch{}};
 
+// ══════════════════════════════════════════════════════
+//  GAS バックアップ機能
+// ══════════════════════════════════════════════════════
+let GAS_BACKUP_URL = lsGet("af_gas_url", "");
+
+// 1件をGASに送信（fire-and-forget：失敗してもアプリは止まらない）
+async function sendToGAS(log) {
+  if (!GAS_BACKUP_URL) return;
+  const d = new Date(log.date);
+  const jst = new Date(d.getTime() + (d.getTimezoneOffset() + 540) * 60000);
+  const payload = {
+    datetime:    jst.toLocaleString("ja-JP"),
+    time:        log.time        || "",
+    place:       log.place       || "",
+    fact:        log.fact        || "",
+    action:      log.action      || "",
+    monster:     log.monster     || "",
+    skill:       log.skill       || "",
+    monsterName: log.monsterName || "",
+    intensity:   log.intensity   || "",
+    body:        log.body        || "",
+    quote:       log.quote       || "",
+    fantasy:     log.fantasy     || "",
+    trigger:     log.trigger     || "",
+    before:      log.before      || "",
+    music:       log.music       || "",
+    title:       log.title       || "",
+    note:        log.note        || "",
+    result:      log.reacted ? "記録のみ" : "勝利",
+    pts:         calcPts(log)
+  };
+  try {
+    await fetch(GAS_BACKUP_URL, {
+      method: "POST",
+      body: JSON.stringify(payload)
+    });
+  } catch(e) {
+    console.warn("GAS backup failed:", e);
+  }
+}
+
+// 全ログを一括送信（設定画面から手動実行）
+async function bulkSendToGAS() {
+  if (!GAS_BACKUP_URL) { alert("GAS URLを先に設定してください"); return; }
+  if (!confirm("全 " + logs.length + " 件をスプシに送信しますか？\n（件数が多い場合は少し時間がかかります）")) return;
+  const btn = document.getElementById("btn-bulk-gas");
+  if (btn) { btn.disabled = true; btn.textContent = "送信中…"; }
+  for (const log of logs) { await sendToGAS(log); }
+  if (btn) { btn.disabled = false; btn.textContent = "📤 全ログ一括送信"; }
+  alert("✅ 全件送信完了しました");
+}
+
+// GAS URL を保存
+function saveGasUrl() {
+  const val = document.getElementById("gas-url-input").value.trim();
+  GAS_BACKUP_URL = val;
+  lsSet("af_gas_url", val);
+  const st = document.getElementById("gas-url-status");
+  if (st) st.textContent = val ? "✅ URL設定済み — 次回記録から自動送信されます" : "URLをクリアしました";
+  alert(val ? "✅ GAS URLを保存しました" : "URLをクリアしました");
+}
+
 // ── STATE
 const DEF_PRAISES=["お前、今日も勝った。","感情より知性が勝った瞬間。","不動の心、また一段強くなった。","衝動をいなした。それがワタベの強さ。","6秒やり過ごした。十分すごい。","今日の判断、5年後の自分が誇る。","静かに強い。それが本物。","電車ごときに不動の心は揺るがない。","修羅場で動じなかった男。","今日の我慢、スペアリブ1本分の価値がある。","感情じゃなく実力で返す。プロだ。","今日の怒り、のちに名曲になる。","あの相手、モンスターカードにしてやれ。","雑魚に反応しなかった。それが余裕。","外部環境に左右されない心、今日も育った。","勝った！","お前の勝ちだ。完全に。","今日の辛抱が、明日の余裕を作る。","怒りは燃料。今日も正しく使った。","今日もデータが増えた。それが成長の証明書。"];
 const DEF_LOSES=["信頼の修復に3ヶ月かかる","自分のエネルギーを無駄消費する","相手じゃなく自分が一番損する","「感情的な人」と一生記憶される","後から後悔する言動が出る","職場での評価が静かに下がる","怒った側が損をする世界の法則","冷静な人との差がさらに開く"];
 const DEF_IMGS=["https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=400&h=600&fit=crop","https://images.unsplash.com/photo-1601979031925-424e53b6caaa?w=400&h=600&fit=crop","https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=400&h=600&fit=crop"];
-const DEF_SHOP=[]; // デフォルトアイテムなし（ユーザーが自分で追加）
+const DEF_SHOP=[];
 const BREATH=[
   {label:"鼻から吸う",  dur:2, scaleStart:1.0, scaleEnd:1.2,  hint:"👃 鼻からゆっくり吸う",      easing:"ease-in"},
   {label:"もう一口",    dur:1, scaleStart:1.2,  scaleEnd:1.45, hint:"👃 もう一口、追加で吸い込む",  easing:"ease-in"},
@@ -721,12 +744,12 @@ const BREATH=[
 ];
 
 let logs    = lsGet("af_logs",[],a=>Array.isArray(a)?a.map(l=>({...l,date:Number(l.date)})):[]);
-let wins    = lsGet("af_wins",[],a=>Array.isArray(a)?a.map(w=>({...w,date:Number(w.date)})):[]); // セッション勝利記録
+let wins    = lsGet("af_wins",[],a=>Array.isArray(a)?a.map(w=>({...w,date:Number(w.date)})):[]);
 let shop    = lsGet("af_shop",DEF_SHOP);
 let shopPts = lsGet("af_shopPts",0);
 let praises = lsGet("af_praises",DEF_PRAISES);
 let loses   = lsGet("af_loses",DEF_LOSES);
-let currentWinId = null; // 現在のセッションID（ボタン押下後・記録前）
+let currentWinId = null;
 let imgs    = (()=>{
   const n=lsGet("af_imgs_count",0);
   if(n===0)return[...DEF_IMGS];
@@ -736,18 +759,11 @@ let imgs    = (()=>{
 })();
 
 // ── CALC
-// ポイントロジック:
-//   デフォルト勝利(ボタン押下): 150P
-//   記録ボーナス(強度i): round(850 * (i/10)^1.3) → i=10: 850P, 合計1000P
-//   合計: 150 + bonus(i) → max 1000P
 const WIN_BASE_PTS = 150;
 const calcBonus = i => Math.round(850 * Math.pow(Math.max(1,Math.min(10,i))/10, 1.3));
 const calcPts = l => l.reacted ? 0 : WIN_BASE_PTS + calcBonus(l.intensity||7);
-// 勝利セッション合計P（wins配列から）
 const earned=()=>wins.reduce((s,w)=>s+w.pts,0);
-// 最低0P保証
 const avail=()=>Math.max(0, earned()-shopPts);
-// 今日の勝利数 = 今日のセッション数
 const todayWins=()=>{
   const now = new Date();
   const jstNow = new Date(now.getTime() + (now.getTimezoneOffset() + 540) * 60000);
@@ -759,7 +775,6 @@ const todayWins=()=>{
     return dt === t;
   }).length;
 };
-// 全勝利数
 const totalWins=()=>wins.length;
 const ago=d=>{
   const now = new Date();
@@ -808,7 +823,6 @@ function renderHomeLoses(){
 let cntT=null,breathT=null,bPhIdx=0,bTimer=0,bCycle=0;
 function startEmergency(){
   renderHomeLoses();
-  // セッション開始: ボタン押下で1勝利+150P確定
   const winId = Date.now();
   currentWinId = winId;
   wins.push({id:winId, date:Date.now(), pts:WIN_BASE_PTS, logId:null});
@@ -823,7 +837,7 @@ function showPhase(p){
   ["count","breathe","reward"].forEach(id=>{
     const el=document.getElementById("phase-"+id);
     if(!el)return;
-    if(id===p){el.style.display=(id==="reward")?"flex":"flex";}
+    if(id===p){el.style.display="flex";}
     else{el.style.display="none";}
   });
   if(p==="reward"){
@@ -850,10 +864,8 @@ function runBreath(){
   document.getElementById("breath-label").textContent=ph.label;
   document.getElementById("breath-timer").textContent=bTimer;
   document.getElementById("breath-hint").textContent=ph.hint;
-  // 開始スケールを即座にセット（transitionなし）
   circle.style.transition="none";
   circle.style.transform="scale("+ph.scaleStart+")";
-  // 1フレーム後にtransitionを設定してアニメーション開始
   requestAnimationFrame(()=>{
     requestAnimationFrame(()=>{
       circle.style.transition="transform "+ph.dur+"s "+ph.easing;
@@ -900,16 +912,13 @@ document.getElementById("btn-to-log").onclick=()=>{endEmergency();goScreen("form
 document.getElementById("btn-done").onclick=endEmergency;
 
 // ══════════════════════════════════════════════════════
-//  FORM — 新設問システム
+//  FORM
 // ══════════════════════════════════════════════════════
-
-// formState: 全設問の回答を保持
 let formState={
   reacted:false, intensity:7,
   time:[], action:[], monster:[], body:[], trigger:[], before:[], music:[],
 };
 
-// ── カード折りたたみ
 function toggleCard(id){
   const body=document.getElementById("body-"+id);
   const arrow=document.getElementById("arrow-"+id);
@@ -930,7 +939,6 @@ function toggleCard(id){
   }
 }
 
-// ── チップレンダリング
 function makeChips(containerId, opts, stateKey, multi, colorClass){
   const el=document.getElementById(containerId);
   if(!el)return;
@@ -944,7 +952,6 @@ function makeChips(containerId, opts, stateKey, multi, colorClass){
 function toggleChip(el, key, multi, cls){
   const val=el.dataset.val;
   if(!multi){
-    // single select
     formState[key]=[val];
     document.querySelectorAll(`[data-key="${key}"]`).forEach(c=>{
       c.className="chip"+(c.dataset.val===val?" "+cls:"");
@@ -956,7 +963,6 @@ function toggleChip(el, key, multi, cls){
     else{arr.push(val);el.className="chip "+cls;}
     formState[key]=arr;
   }
-  // その他 入力欄の表示制御
   const freeWrap=document.getElementById("free-"+key+"-wrap");
   if(freeWrap){
     const hasOther=(formState[key]||[]).includes("その他");
@@ -967,18 +973,15 @@ function toggleChip(el, key, multi, cls){
 }
 
 function updateBadge(key){
-  // カードのバッジ更新（入力済み表示）
   const cardMap={time:"fact",action:"fact",monster:"enemy",skill:"enemy",body:"exp",fantasy:"exp",quote:"exp",trigger:"ana",before:"ana",music:"ana"};
   const cardId=cardMap[key];
   if(!cardId)return;
-  // カード内の設問が1つでも入力されていればfilled
   const cardKeys=Object.entries(cardMap).filter(([k,v])=>v===cardId).map(([k])=>k);
   const filled=cardKeys.some(k=>{
     const v=formState[k];
     if(Array.isArray(v))return v.length>0;
     return false;
   });
-  // テキスト入力も確認
   const textIds={fact:["f-place","f-fact"],enemy:["f-skill","f-monster-name"],exp:["f-body-free","f-fantasy","f-quote"],ana:["f-title","f-note"]};
   const tFilled=(textIds[cardId]||[]).some(id=>{const el=document.getElementById(id);return el&&el.value.trim();});
   const badge=document.getElementById("badge-"+cardId);
@@ -988,11 +991,9 @@ function updateBadge(key){
   }
 }
 
-// テキスト入力時のバッジ更新
 function setupTextBadge(id,cardId){
   const el=document.getElementById(id);
   if(el)el.addEventListener("input",()=>{
-    // 全テキスト入力をチェック
     const textIds={fact:["f-place","f-fact"],enemy:["f-skill","f-monster-name"],exp:["f-body-free","f-fantasy","f-quote"],ana:["f-title","f-note"]};
     const tFilled=(textIds[cardId]||[]).some(tid=>{const te=document.getElementById(tid);return te&&te.value.trim();});
     const badge=document.getElementById("badge-"+cardId);
@@ -1001,9 +1002,7 @@ function setupTextBadge(id,cardId){
   });
 }
 
-// 全チップ初期化
 function initFormChips(){
-  // カスタム選択肢（localStorage保存済み）を使用
   const get=k=>getQOpts(k);
   makeChips("chips-time",    get("time"),    "time",    false,"sel");
   makeChips("chips-action",  get("action"),  "action",  true, "sel-grn");
@@ -1012,14 +1011,11 @@ function initFormChips(){
   makeChips("chips-trigger", get("trigger"), "trigger", false,"sel-gld");
   makeChips("chips-before",  get("before"),  "before",  true, "sel");
   makeChips("chips-music",   get("music"),   "music",   false,"sel-gld");
-
-  // テキスト入力バッジ監視（現行フォームの設問のみ）
   ["f-place","f-fact"].forEach(id=>setupTextBadge(id,"fact"));
   ["f-skill","f-monster-name"].forEach(id=>setupTextBadge(id,"enemy"));
   ["f-body-free","f-fantasy","f-quote"].forEach(id=>setupTextBadge(id,"exp"));
   ["f-title"].forEach(id=>setupTextBadge(id,"ana"));
 }
-
 
 function updateIntensity(v){
   formState.intensity=+v;
@@ -1034,30 +1030,23 @@ function updatePtsPreview(){
   const bonus=calcBonus(i);
   const total=WIN_BASE_PTS+bonus;
   const el=document.getElementById("pts-preview");
-el.textContent="★ "+total.toLocaleString()+"P";
-	  el.style.color="var(--gld)";
-	  document.getElementById("btn-save-log").textContent="★ 記録して"+bonus.toLocaleString()+"P獲得";
+  el.textContent="★ "+total.toLocaleString()+"P";
+  el.style.color="var(--gld)";
+  document.getElementById("btn-save-log").textContent="★ 記録して"+bonus.toLocaleString()+"P獲得";
 }
 
-// フォームリセット
 function resetForm(){
   formState={reacted:false,intensity:7,time:[],action:[],monster:[],body:[],trigger:[],before:[],music:[]};
-  // チップリセット
   document.querySelectorAll(".chip").forEach(c=>{c.className="chip";});
   document.querySelectorAll(".free-input-wrap").forEach(w=>{w.className="free-input-wrap";});
   ["f-place","f-fact","f-skill","f-monster-name","f-fantasy","f-quote","f-title","f-note","f-action-free","f-monster-free","f-body-free","f-trigger-free","f-before-free"].forEach(id=>{const el=document.getElementById(id);if(el)el.value="";});
   document.querySelectorAll(".sec-card-badge").forEach(b=>{b.textContent="未記入";b.className="sec-card-badge";});
-  // ropt-win/lose は非表示UIのため条件付き
-  const rw=document.getElementById("ropt-win");
-  const rl=document.getElementById("ropt-lose");
-  if(rw)rw.className="ropt win sel";
-  if(rl)rl.className="ropt lose";
   document.getElementById("intensity-slider").value=7;
   updateIntensity(7);
   updatePtsPreview();
 }
 
-// 保存
+// 保存 ＋ GAS自動送信
 document.getElementById("btn-save-log").onclick=()=>{
   const f=v=>document.getElementById(v)?document.getElementById(v).value:"";
   const logId=Date.now();
@@ -1080,9 +1069,10 @@ document.getElementById("btn-save-log").onclick=()=>{
     reacted:false,
     date:Date.now()
   };
-  logs.unshift(log);lsSet("af_logs",logs);
-  // ホームボタンを押したセッションにボーナスPTを追加
-  // currentWinIdがない（直接記録タブから来た）場合はポイントなし
+  logs.unshift(log);
+  lsSet("af_logs",logs);
+  sendToGAS(log); // ★ スプシに自動バックアップ（GAS URL未設定時は何もしない）
+
   if(currentWinId){
     const bonus=calcBonus(formState.intensity||7);
     const w=wins.find(x=>x.id===currentWinId);
@@ -1090,7 +1080,7 @@ document.getElementById("btn-save-log").onclick=()=>{
     lsSet("af_wins",wins);
   }
   currentWinId=null;
-  // 振り返りオーバーレイ表示
+
   const totalP = wins.reduce((s,w)=>s+w.pts,0) - shopPts;
   const thisWin = wins.find(x=>x.logId===logId);
   const earnedThis = thisWin ? thisWin.pts : WIN_BASE_PTS;
@@ -1109,7 +1099,7 @@ document.getElementById("btn-save-log").onclick=()=>{
 //  SHOP
 // ══════════════════════════════════════════════════════
 function renderShop(){
-  const a=avail(),e=earned(),tw=todayWins(),aw=totalWins(); // wins配列を唯一のソースに統一
+  const a=avail(),e=earned(),tw=todayWins(),aw=totalWins();
   document.getElementById("shop-pts-num").textContent=a.toLocaleString();
   document.getElementById("shop-pts-sub").textContent="獲得 "+e.toLocaleString()+"P − 消費 "+shopPts.toLocaleString()+"P";
   document.getElementById("shop-today").textContent=tw;
@@ -1170,7 +1160,6 @@ function deleteLog(id){
   if(!confirm("この記録を削除しますか？"))return;
   const log = logs.find(l=>l.id===id);
   if(log && !log.reacted){
-    // 勝利記録に紐付いている場合は、winsからも削除してポイントを無効化
     wins = wins.filter(w=>w.logId!==id);
     lsSet("af_wins", wins);
   }
@@ -1184,19 +1173,19 @@ function renderLogs(){
     const p=calcPts(l);
     const col=l.intensity>=8?"rgba(220,85,85,.15)":l.intensity>=5?"rgba(200,152,46,.12)":"rgba(72,180,114,.1)";
     const tc=l.intensity>=8?"#e09090":l.intensity>=5?"var(--gld)":"var(--grn)";
-return `<div class="log-item">
-	      <div class="ib" style="background:${col};color:${tc}">${l.intensity||"?"}</div>
-	      <div class="ldet">
-	        <div class="lt">${l.title||l.fact||"記録"}</div>
-	        <div class="lm">${ago(l.date)}${l.time?" · "+l.time:""}${l.place?" · "+l.place:""}</div>
-	        ${l.quote?`<div class="lm" style="color:rgba(230,220,200,.45)">「${l.quote.slice(0,22)}…」</div>`:""}
-	        <div style="display:flex;justify-content:space-between;align-items:center">
-	          <div>${l.monster?`<span class="ltag">🎴${l.monster.split("/")[0]}</span>`:""}${p>0?`<span class="ltag" style="color:var(--gld)">★${p}P</span>`:""}</div>
-	          <button onclick="deleteLog(${l.id})" style="background:none;border:none;color:var(--dim);font-size:11px;padding:4px">削除</button>
-	        </div>
-	      </div>
-	      <span class="rtag" style="background:${l.reacted?"var(--rlo)":"rgba(72,180,114,.07)"};color:${l.reacted?"#e08080":"var(--grn)"}">${l.reacted?"次は勝つ":"✓勝利"}</span>
-	    </div>`;
+    return `<div class="log-item">
+      <div class="ib" style="background:${col};color:${tc}">${l.intensity||"?"}</div>
+      <div class="ldet">
+        <div class="lt">${l.title||l.fact||"記録"}</div>
+        <div class="lm">${ago(l.date)}${l.time?" · "+l.time:""}${l.place?" · "+l.place:""}</div>
+        ${l.quote?`<div class="lm" style="color:rgba(230,220,200,.45)">「${l.quote.slice(0,22)}…」</div>`:""}
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div>${l.monster?`<span class="ltag">🎴${l.monster.split("/")[0]}</span>`:""}${p>0?`<span class="ltag" style="color:var(--gld)">★${p}P</span>`:""}</div>
+          <button onclick="deleteLog(${l.id})" style="background:none;border:none;color:var(--dim);font-size:11px;padding:4px">削除</button>
+        </div>
+      </div>
+      <span class="rtag" style="background:${l.reacted?"var(--rlo)":"rgba(72,180,114,.07)"};color:${l.reacted?"#e08080":"var(--grn)"}">${l.reacted?"次は勝つ":"✓勝利"}</span>
+    </div>`;
   }).join("")||`<div style="text-align:center;color:var(--mu);padding:24px;font-size:13px">まだ記録がありません</div>`;
 }
 function downloadCSV(){
@@ -1212,7 +1201,6 @@ function downloadCSV(){
   const a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="hybrs_log.csv";a.click();
 }
 
-// バックアップ（全データ JSON）
 function downloadBackup(){
   const data={
     version:1,
@@ -1260,7 +1248,7 @@ function importBackup(){
 }
 
 // ══════════════════════════════════════════════════════
-//  SETTINGS — 画像のみ
+//  SETTINGS — 画像管理
 // ══════════════════════════════════════════════════════
 function saveImgsIndividually(){
   for(let i=0;i<5;i++){
@@ -1288,6 +1276,14 @@ function renderImgSlots(){
       <button class="img-del" onclick="removeImg(${i})">✕</button>
     </div>`;
   }).join("");
+
+  // ★ GAS URL を input に反映（設定画面を開くたびに最新値を表示）
+  const gasInput = document.getElementById("gas-url-input");
+  if (gasInput) {
+    gasInput.value = GAS_BACKUP_URL;
+    const st = document.getElementById("gas-url-status");
+    if (st) st.textContent = GAS_BACKUP_URL ? "✅ URL設定済み — 記録時に自動送信されます" : "未設定（URLを貼り付けて保存してください）";
+  }
 }
 function compressAndPush(file,callback){
   const img2=new Image(),url=URL.createObjectURL(file);
@@ -1319,7 +1315,6 @@ function removeImg(i){imgs.splice(i,1);saveImgsIndividually();renderImgSlots();}
 // ══════════════════════════════════════════════════════
 let currentQKey = null;
 
-// カスタム選択肢はlocalStorageに保存
 function getQOpts(key){ return lsGet("af_q_"+key, O[key]||[]); }
 function setQOpts(key, arr){ lsSet("af_q_"+key, arr); O[key]=[...arr]; }
 
@@ -1344,7 +1339,6 @@ function addQOption(){
   const val = inp.value.trim();
   if(!val) return;
   const opts = getQOpts(currentQKey);
-  // 「その他」の直前に追加（末尾が「その他」なら1個前に）
   const last = opts[opts.length-1];
   if(last==="その他"||last==="なし"){
     opts.splice(opts.length-1, 0, val);
@@ -1354,7 +1348,6 @@ function addQOption(){
   setQOpts(currentQKey, opts);
   inp.value="";
   renderQEditorList(currentQKey);
-  // フォームのチップを再描画
   initFormChips();
 }
 function removeQOption(i){
@@ -1367,7 +1360,6 @@ function removeQOption(i){
   initFormChips();
 }
 
-// 起動時にカスタム選択肢を復元
 function restoreCustomOpts(){
   const keys=["time","action","monster","body","trigger","before","need","habit","ending","music","after","next"];
   keys.forEach(k=>{
@@ -1411,10 +1403,9 @@ async function loadFromSheet(){
 // ══════════════════════════════════════════════════════
 //  INIT
 // ══════════════════════════════════════════════════════
-restoreCustomOpts(); // カスタム選択肢復元（initFormChipsの前）
+restoreCustomOpts();
 
-// ── マイグレーション: 旧logsデータからwinsを再構築
-// winsが空でlogsがある場合、logsからwinsを復元して一貫性を保つ
+// マイグレーション: 旧logsデータからwinsを再構築
 if(wins.length===0 && logs.length>0){
   wins = logs.filter(l=>!l.reacted).map(l=>({
     id:l.id, date:l.date,
@@ -1429,7 +1420,7 @@ renderHomeLoses();
 updateHeader();
 renderImgSlots();
 updatePtsPreview();
-loadFromSheet(); // スプシから自動取得（非同期）
+loadFromSheet();
 </script>
 </body>
 </html>
