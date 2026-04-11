@@ -85,107 +85,150 @@ async function sendToGAS(log) {
   };
   try {
     await fetch(GAS_BACKUP_URL, { method: "POST", body: JSON.stringify(payload) });
+    log.gasSynced = true;
+    lsSet("af_logs", logs);
   } catch (e) {
     console.warn("GAS backup failed:", e);
   }
 }
 
-// 全ログを一括送信
-async function bulkSendToGAS() {
-  if (!GAS_BACKUP_URL) { alert("GAS URLを先に設定してください"); return; }
-  if (!confirm("全 " + logs.length + " 件をスプシに送信しますか？\n（件数が多いと時間がかかります）")) return;
-  const btn = document.getElementById("btn-bulk-gas");
+// 未送信ログだけをスプシに追記
+async function syncToGAS() {
+  if (!GAS_BACKUP_URL) { alert("設定タブでGAS URLを先に登録してください"); return; }
+  var unsent = logs.filter(function(l) { return !l.gasSynced; });
+  if (unsent.length === 0) { alert("すべて同期済みです ✓"); return; }
+  if (!confirm(unsent.length + "件の未送信ログをスプシに送信しますか？")) return;
+  var btn = document.getElementById("btn-sync-gas");
   if (btn) { btn.disabled = true; btn.textContent = "送信中…"; }
-  for (const log of logs) { await sendToGAS(log); }
-  if (btn) { btn.disabled = false; btn.textContent = "📤 全ログ一括送信"; }
-  alert("✅ 全件送信完了しました");
+  var ok = 0;
+  // 古い順に送信（スプシの行順を時系列にする）
+  var sorted = unsent.slice().sort(function(a, b) { return a.date - b.date; });
+  for (var i = 0; i < sorted.length; i++) {
+    try {
+      await sendToGAS(sorted[i]);
+      sorted[i].gasSynced = true;
+      ok++;
+    } catch (e) { console.warn("sync fail:", e); }
+  }
+  lsSet("af_logs", logs);
+  if (btn) { btn.disabled = false; btn.textContent = "☁️ スプシに同期"; }
+  alert("✅ " + ok + "/" + unsent.length + "件を送信しました");
 }
 
-// ★ 新機能: スプシから復元
-async function restoreFromGAS() {
-  if (!GAS_BACKUP_URL) {
-    alert("設定タブでGAS URLを先に登録してください");
-    return;
+// ★ スプシから復元（CSV公開エンドポイント経由 — CORS問題なし）
+// 簡易CSVパーサー（ダブルクォート・カンマ・改行対応）
+function parseCSV(text) {
+  var rows = [];
+  var row = [];
+  var field = "";
+  var inQuote = false;
+  for (var i = 0; i < text.length; i++) {
+    var c = text[i];
+    if (inQuote) {
+      if (c === '"') {
+        if (i + 1 < text.length && text[i + 1] === '"') { field += '"'; i++; }
+        else { inQuote = false; }
+      } else { field += c; }
+    } else {
+      if (c === '"') { inQuote = true; }
+      else if (c === ',') { row.push(field); field = ""; }
+      else if (c === '\n' || (c === '\r' && text[i + 1] === '\n')) {
+        if (c === '\r') i++;
+        row.push(field); field = "";
+        if (row.length > 1 || row[0] !== "") rows.push(row);
+        row = [];
+      } else { field += c; }
+    }
   }
-  if (!confirm("スプシのバックアップデータでアプリを復元しますか？\n現在のローカルデータは上書きされます。")) return;
+  if (field || row.length) { row.push(field); rows.push(row); }
+  return rows;
+}
 
-  const btn = document.getElementById("btn-restore-gas");
+async function restoreFromGAS() {
+  if (!confirm("スプシのバックアップシートからデータを復元しますか？\n現在のローカルデータは上書きされます。")) return;
+
+  var btn = document.getElementById("btn-restore-gas");
   if (btn) { btn.disabled = true; btn.textContent = "復元中…"; }
 
   try {
-    // GASのdoGetを呼び出し（GETリクエスト）
-    const res = await fetch(GAS_BACKUP_URL);
-    const data = await res.json();
+    // スプシの「バックアップ」シートをCSVで直接取得（褒め言葉と同じ仕組み）
+    var csvUrl = "https://docs.google.com/spreadsheets/d/" + SHEET_ID + "/gviz/tq?tqx=out:csv&sheet=" + encodeURIComponent("バックアップ");
+    var res = await fetch(csvUrl);
+    if (!res.ok) throw new Error("スプシの取得に失敗しました（" + res.status + "）");
+    var text = await res.text();
 
-    if (data.status !== "ok") {
-      alert("取得エラー: " + (data.message || "不明なエラー"));
+    var parsed = parseCSV(text);
+    if (parsed.length <= 1) { alert("スプシにデータがありません"); return; }
+
+    // 1行目=ヘッダー、2行目以降=データ
+    var headers = parsed[0];
+    var dataRows = parsed.slice(1);
+
+    // ヘッダー名 → インデックスのマップ
+    var col = {};
+    headers.forEach(function(h, i) { col[h.trim()] = i; });
+
+    // 必須列チェック
+    if (col["日時"] === undefined) {
+      alert("「日時」列が見つかりません。バックアップシートのヘッダーを確認してください。");
       return;
     }
 
-    if (!data.rows || data.rows.length === 0) {
-      alert("スプシにデータがありません");
-      return;
-    }
+    var get = function(row, key) { return col[key] !== undefined ? (row[col[key]] || "") : ""; };
 
-    // スプシの行データ → logs配列に変換
-    const restored = data.rows.map((row, i) => {
-      // 日時文字列からDateを復元（JSTとして解釈）
-      let dateMs = Date.now() - (data.rows.length - i) * 60000; // フォールバック
-      if (row["日時"]) {
-        const parsed = new Date(row["日時"]);
-        if (!isNaN(parsed.getTime())) {
-          // JSTで入力されているのでUTCに戻す
-          dateMs = parsed.getTime() - 540 * 60000;
+    var restored = dataRows.map(function(row, i) {
+      // 日時文字列からタイムスタンプを復元
+      var dateMs = Date.now() - (dataRows.length - i) * 60000; // フォールバック
+      var dtStr = get(row, "日時");
+      if (dtStr) {
+        // "2025/4/11 18:30:00" 形式をパース
+        var parsed2 = new Date(dtStr.replace(/\//g, "-"));
+        if (!isNaN(parsed2.getTime())) {
+          dateMs = parsed2.getTime() - 540 * 60000; // JSTからUTCに戻す
         }
       }
 
-      const isWin = (row["結果"] || "") !== "記録のみ";
+      var result = get(row, "結果");
+      var isWin = result !== "記録のみ";
 
       return {
-        id: dateMs + i, // ユニークID
-        time:        row["時刻"]     || "",
-        place:       row["場所"]     || "",
-        fact:        row["事実"]     || "",
-        action:      row["対応"]     || "",
-        monster:     row["敵属性"]   || "",
-        skill:       row["技名"]     || "",
-        monsterName: row["敵名"]     || "",
-        intensity:   parseInt(row["強度"]) || 7,
-        body:        row["身体反応"] || "",
-        quote:       row["捨て台詞"] || "",
-        fantasy:     row["妄想"]     || "",
-        trigger:     row["引き金"]   || "",
-        before:      row["前の感情"] || "",
-        music:       row["曲"]       || "",
-        title:       row["タイトル"] || "",
-        note:        row["補足"]     || "",
+        id: dateMs + i,
+        time:        get(row, "時刻"),
+        place:       get(row, "場所"),
+        fact:        get(row, "事実"),
+        action:      get(row, "対応"),
+        monster:     get(row, "敵属性"),
+        skill:       get(row, "技名"),
+        monsterName: get(row, "敵名"),
+        intensity:   parseInt(get(row, "強度")) || 7,
+        body:        get(row, "身体反応"),
+        quote:       get(row, "捨て台詞"),
+        fantasy:     get(row, "妄想"),
+        trigger:     get(row, "引き金"),
+        before:      get(row, "前の感情"),
+        music:       get(row, "曲"),
+        title:       get(row, "タイトル"),
+        note:        get(row, "補足"),
         reacted:     !isWin,
         date:        dateMs
       };
     });
 
-    // 日付の新しい順にソート
-    restored.sort((a, b) => b.date - a.date);
+    restored.sort(function(a, b) { return b.date - a.date; });
 
-    // logsを上書き
     logs = restored;
     lsSet("af_logs", logs);
 
-    // winsを再構築（勝利ログからポイント再計算）
-    wins = logs.filter(l => !l.reacted).map(l => ({
-      id: l.id,
-      date: l.date,
-      pts: WIN_BASE_PTS + calcBonus(l.intensity || 7),
-      logId: l.id
-    }));
+    wins = logs.filter(function(l) { return !l.reacted; }).map(function(l) {
+      return { id: l.id, date: l.date, pts: WIN_BASE_PTS + calcBonus(l.intensity || 7), logId: l.id };
+    });
     lsSet("af_wins", wins);
 
-    // UI更新
     renderLogs();
     updateHeader();
     renderHomeLoses();
 
-    alert("✅ " + restored.length + "件を復元しました！\n（ポイント消費・ショップは復元されません）");
+    alert("✅ " + restored.length + "件を復元しました！");
 
   } catch (e) {
     alert("復元失敗: " + e.message);
@@ -271,7 +314,6 @@ const ago = d => {
 };
 const rnd = a => a[Math.floor(Math.random() * a.length)];
 const s3 = a => { const c = [...a], r = []; for (let i = 0; i < Math.min(3, c.length); i++) { const j = Math.floor(Math.random() * (c.length - i)); r.push(c.splice(j, 1)[0]); } return r; };
-const esc = s => '"' + (s || "").replace(/"/g, '""').replace(/\r?\n/g, ' ') + '"';
 
 // ── SCREEN
 let currentScreen = "home";
@@ -679,18 +721,6 @@ function renderLogs() {
       '<span class="rtag" style="background:' + (l.reacted ? "var(--rlo)" : "rgba(72,180,114,.07)") + ';color:' + (l.reacted ? "#e08080" : "var(--grn)") + '">' + (l.reacted ? "次は勝つ" : "✓勝利") + '</span>' +
     '</div>';
   }).join("") || '<div style="text-align:center;color:var(--mu);padding:24px;font-size:13px">まだ記録がありません</div>';
-}
-function downloadCSV() {
-  const h = "日時,時刻,場所,事実,対応,敵属性,技名,強度,身体反応,捨て台詞,制約なく解消,引き金,前の感情,曲スタイル,タイトル,補足,結果,P";
-  const rows = logs.map(l => [
-    new Date(l.date + (new Date().getTimezoneOffset() + 540) * 60000).toLocaleString("ja-JP"), l.time, esc(l.place), esc(l.fact),
-    esc(l.action), esc(l.monster), esc(l.skill), l.intensity,
-    esc(l.body), esc(l.quote), esc(l.fantasy), esc(l.trigger), esc(l.before),
-    esc(l.music), esc(l.title), esc(l.note),
-    l.reacted ? "記録のみ" : "勝利", calcPts(l)
-  ].join(","));
-  const b = new Blob([[h, ...rows].join("\n"), "\uFEFF"], {type: "text/csv;charset=utf-8;"});
-  const a = document.createElement("a"); a.href = URL.createObjectURL(b); a.download = "hybrs_log.csv"; a.click();
 }
 
 // ══════════════════════════════════════════════════════
