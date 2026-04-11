@@ -460,13 +460,12 @@ html,body{height:100%;overflow:hidden;background:#0e0c0a;color:var(--tx)}
     </div></div>
   </div>
 
-  <!-- ★ 変更: ログ画面 — CSV + スプシ復元 に簡素化 -->
   <div class="screen" id="scr-logs">
-    <div class="shdr"><h2>勝利ログ</h2><p>CSVをGeminiに渡して漫画・小説・Suno歌詞に変換</p></div>
+    <div class="shdr"><h2>勝利ログ</h2></div>
     <div class="scroll"><div class="scon">
       <div style="display:flex;gap:7px">
-        <button class="btn" style="padding:11px" onclick="downloadCSV()">📥 CSV出力</button>
-        <button class="btn" style="padding:11px;color:var(--blu);border-color:rgba(106,159,216,.3)" id="btn-restore-gas" onclick="restoreFromGAS()">☁️ スプシから復元</button>
+        <button class="btn" style="padding:11px;color:var(--blu);border-color:rgba(106,159,216,.3)" id="btn-sync-gas" onclick="syncToGAS()">☁️ スプシに同期</button>
+        <button class="btn" style="padding:11px" id="btn-restore-gas" onclick="restoreFromGAS()">⬇ スプシから復元</button>
       </div>
       <div id="log-list" style="display:flex;flex-direction:column;gap:6px"></div>
     </div></div>
@@ -530,16 +529,12 @@ html,body{height:100%;overflow:hidden;background:#0e0c0a;color:var(--tx)}
         </div>
       </div>
 
-      <!-- ★ 変更: GAS設定 — シンプルに -->
       <div class="set-section">
         <div class="set-title">☁️ スプシ自動バックアップ</div>
         <div class="set-desc">GAS Web AppのURLを登録すると、記録のたびに自動でスプシに追記。データが飛んだらログ画面の「スプシから復元」で戻せます。</div>
         <div style="display:flex;flex-direction:column;gap:8px">
           <input class="sinp" id="gas-url-input" placeholder="https://script.google.com/macros/s/..." style="width:100%;font-size:11px">
-          <div style="display:flex;gap:8px">
-            <button class="btn pri" style="flex:1;font-size:12px;padding:9px" onclick="saveGasUrl()">💾 URLを保存</button>
-            <button class="btn" id="btn-bulk-gas" style="flex:1;font-size:12px;padding:9px" onclick="bulkSendToGAS()">📤 全ログ一括送信</button>
-          </div>
+          <button class="btn pri full" style="font-size:12px;padding:9px" onclick="saveGasUrl()">💾 URLを保存</button>
           <div id="gas-url-status" style="font-size:10px;color:var(--mu)"></div>
         </div>
       </div>
